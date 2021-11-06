@@ -21,14 +21,13 @@ import palabrasclaves.modelos.PalabraClave;
 import publicaciones.modelos.Publicacion;
 import tipos.modelos.Tipo;
 
-
 /**
  *
- * @author Cel
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ControladorPrincipal {
     public static void main(String[] args) {
-        //<editor-fold defaultstate="collapsed" desc="Sin intefaz gráfica">
+    //<editor-fold defaultstate="collapsed" desc="Sin intefaz gráfica">
         ArrayList<Grupo> grupos = new ArrayList<>();
 //        ArrayList<Alumno> alumnos = new ArrayList<>();
 //        ArrayList<Profesor> profesores = new ArrayList<>();
@@ -58,9 +57,11 @@ public class ControladorPrincipal {
             grupos.add(grupo5);
         if (!grupos.contains(grupo6))
             grupos.add(grupo6);
-
-//        for(Grupo g : grupos)
-//            g.mostrar();
+        
+        System.out.println("\n\n\tGrupos creados: \n\n");
+        
+        for(Grupo g : grupos)
+            g.mostrar();
 
         Autor alumno1 = new Alumno(1, "Apellido1", "Nombre1", "Clave1", "1");
         Autor alumno2 = new Alumno(2, "Apellido2", "Nombre2", "Clave2", "2");
@@ -117,10 +118,13 @@ public class ControladorPrincipal {
         if (!autores.contains(alumno8))
             autores.add(alumno8);
 
-
-//        for(Autor a : autores)
-//            a.mostrar();
-
+        System.out.println("\n\n\tAutores: \n\n");
+        
+       for(Autor a : autores)
+            a.mostrar();
+       
+       System.out.println("\n\n\t Comienzo Main Parte 3: \n\n");
+       
         /*Main parte 3*/
         /*
         1) Luego de crear grupos y autores, tomar 1 grupo y agregarle 2 autores
@@ -128,11 +132,11 @@ public class ControladorPrincipal {
         asignados. Verificar también que no se pueda agregar
         un mismo autor más de una vez, por más que sean en roles distintos.
         */
-        System.out.println("");
-        System.out.println("PARTE 1");
+        System.out.println("\n\t\tPARTE 1\n");
         grupo1.agregarMiembro(profesor1, Rol.ADMINISTRADOR);
         grupo1.agregarMiembro(profesor1, Rol.COLABORADOR); //autor repetido
         grupo1.agregarMiembro(alumno1, Rol.COLABORADOR);
+        System.out.println("\n\tGrupo Nº1: \n");
         grupo1.mostrar();
 
         /*
@@ -144,12 +148,12 @@ public class ControladorPrincipal {
         un mismo grupo más de una vez, por más que sean roles distintos.
         */
 
-        System.out.println("");
-        System.out.println("PARTE 2");
+        System.out.println("\n\t\tPARTE 2\n");
         profesor1.agregarGrupo(grupo2, Rol.COLABORADOR);
         profesor1.agregarGrupo(grupo2, Rol.ADMINISTRADOR); //grupo repetido
-        grupo2.quitarMiembro(profesor1);
+        System.out.println("\n\tProfesor Nº1: \n");
         profesor1.mostrar();
+        System.out.println("\n\tAlumno Nº1: \n");
         alumno1.mostrar();
 
         /*
@@ -159,8 +163,11 @@ public class ControladorPrincipal {
         */
 
         System.out.println("");
-        System.out.println("PARTE 3");
+        System.out.println("\n\t\tPARTE 3\n");
+        System.out.println("\n\tAntes de quitar el grupo\n");
+        grupo1.mostrar();
         grupo1.quitarMiembro(profesor1);
+        System.out.println("\n\tDespués de quitar el grupo\n");
         grupo1.mostrar();
 
         /*

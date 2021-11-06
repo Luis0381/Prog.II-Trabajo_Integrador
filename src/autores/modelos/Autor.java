@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public abstract class Autor {
     // Variables de instancia 
@@ -19,7 +19,7 @@ public abstract class Autor {
     private String nombres;
     private String clave;
     // Relacion entre clases
-    private ArrayList <MiembroEnGrupo> miembros = new ArrayList<>();
+    private ArrayList <MiembroEnGrupo> miembrosEnGrupo = new ArrayList<>();
     // Constructor
     public Autor(int dni, String apellidos, String nombres, String clave) {
         this.dni = dni;
@@ -38,7 +38,7 @@ public abstract class Autor {
         System.out.println("Clave: "+ clave);
         System.out.println("Pertenece a los siguientes grupos: ");
         if(this.tieneGrupos()){
-            for(MiembroEnGrupo unGrupo : this.miembros){
+            for(MiembroEnGrupo unGrupo : this.miembrosEnGrupo){
                 System.out.println(unGrupo.verGrupo().verNombre() + "\nSu Rol es: " + unGrupo.verRol().toString() + ".");
             }
         } else {
@@ -47,11 +47,11 @@ public abstract class Autor {
     }
 
     public ArrayList <MiembroEnGrupo> verGrupos(){
-        return miembros;
+        return miembrosEnGrupo;
     }
 
-    public void asignarGrupos(ArrayList<MiembroEnGrupo> grupos) {
-        this.miembros = grupos;
+    public void asignarGrupos(ArrayList<MiembroEnGrupo> miembroEnGrupo) {
+        this.miembrosEnGrupo = miembroEnGrupo;
     }
     
     /**
@@ -60,36 +60,57 @@ public abstract class Autor {
 //    public void agregarGrupo (Grupo grupo, Rol rol){
 //        MiembroEnGrupo unGrupo = new MiembroEnGrupo(this, grupo, rol);
 //        if(!this.tieneGrupos() == false){
-//            miembros.add(unGrupo);
+//            miembrosEnGrupo.add(unGrupo);
 //        }
 //        if (grupo.esSuperAdministradores()){
-//            if(!this.miembros.contains(unGrupo)){
+//            if(!this.miembrosEnGrupo.contains(unGrupo)){
 //                unGrupo.asignarRol(Rol.ADMINISTRADOR);
-//                this.miembros.add(unGrupo);
+//                this.miembrosEnGrupo.add(unGrupo);
 //                grupo.agregarMiembro(this, Rol.ADMINISTRADOR);
 //            }
-//        } else if(!this.miembros.contains(unGrupo)){
-//            this.miembros.add(unGrupo);
+//        } else if(!this.miembrosEnGrupo.contains(unGrupo)){
+//            this.miembrosEnGrupo.add(unGrupo);
 //            grupo.agregarMiembro(this, rol);
 //        }
 //    }
-        public void agregarGrupo(Grupo grupo, Rol rol){
-            MiembroEnGrupo unGrupo = new MiembroEnGrupo(this, grupo, rol);
+   
+        //FUNCIÓN AGREGAR GRUPO ANTERIOR
+//        public void agregarGrupo(Grupo grupo, Rol rol){
+//            MiembroEnGrupo unGrupo = new MiembroEnGrupo(this, grupo, rol);
+//
+//            if(!this.miembrosEnGrupo.contains(unGrupo)){      // NO ENTRABA AL IF USANDO ESTE CONTROL
+//                this.miembrosEnGrupo.add(unGrupo);
+//                grupo.agregarMiembro(this, rol);
+//            }
+//        }
+    
+    
+        
+        public void agregarGrupo(Grupo grupo, Rol rol) {
+        MiembroEnGrupo miembro = new MiembroEnGrupo(this, grupo, rol);
+        if (!this.contieneGrupo(grupo)) {
+            miembrosEnGrupo.add(miembro);
+            grupo.agregarMiembro(this, rol);
+        }
+    }
 
-            if(!this.miembros.contains(unGrupo)){
-                this.miembros.add(unGrupo);
-                grupo.agregarMiembro(this, rol);
+        public boolean contieneGrupo(Grupo grupo) {
+        for (MiembroEnGrupo a : miembrosEnGrupo) {
+            if (a.verGrupo().equals(grupo)) {
+                return true;
             }
         }
+        return false;
+    }
 
     
     /**
         Este metodo nos permite quitar autores de grupos
     */
     public void quitarGrupo(Grupo grupo){
-        for (MiembroEnGrupo unGrupo : miembros){
+        for (MiembroEnGrupo unGrupo : miembrosEnGrupo){
             if (unGrupo.verGrupo().equals(grupo)){
-                miembros.remove(unGrupo);
+                miembrosEnGrupo.remove(unGrupo);
                 grupo.quitarMiembro(this);
             }
         }
@@ -98,7 +119,7 @@ public abstract class Autor {
         Este metodo nos permite saber si un autor es superadministrador
     */
     public boolean esSuperAdministrador(){
-        for (MiembroEnGrupo unGrupo : miembros){
+        for (MiembroEnGrupo unGrupo : miembrosEnGrupo){
             if (unGrupo.verGrupo().esSuperAdministradores()){
                 return true;
             }
@@ -110,9 +131,9 @@ public abstract class Autor {
         Este metodo nos permite saber si un autor tiene grupos
     */
     public boolean tieneGrupos(){
-        if (this.miembros == null)
+        if (this.miembrosEnGrupo == null)
             return false;
-        else if (this.miembros.isEmpty())
+        else if (this.miembrosEnGrupo.isEmpty())
             return false;
         else
             return true;

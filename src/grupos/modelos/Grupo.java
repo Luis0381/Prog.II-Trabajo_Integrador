@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class Grupo {
     // Variables de instancia
@@ -71,28 +71,26 @@ public class Grupo {
 //    }
     public void agregarMiembro(Autor autor, Rol rol) {
 
-        MiembroEnGrupo miembro = new MiembroEnGrupo(autor, this, rol);
+        MiembroEnGrupo nuevoMiembro = new MiembroEnGrupo(autor, this, rol);
 
         if(this.esSuperAdministradores()){
-            miembro.asignarRol(Rol.ADMINISTRADOR);
+            //nuevoMiembro.asignarRol(Rol.ADMINISTRADOR);
+            rol = Rol.ADMINISTRADOR;
         }
 
-        if(!this.miembros.contains(miembro)){
-            this.miembros.add(miembro);
+        if(!this.miembros.contains(nuevoMiembro)){
+            this.miembros.add(nuevoMiembro);
             autor.agregarGrupo(this, rol);
         }
     }
 
     public void quitarMiembro(Autor miembro){
-
-        if(tieneMiembros()){
-            for(MiembroEnGrupo i: this.miembros){
+            for(MiembroEnGrupo i: miembros){
                  if(i.verAutor().equals(miembro)){
                      miembros.remove(i);
                      miembro.quitarGrupo(this);
                  }
             }
-        }
     }
 
     public boolean esSuperAdministradores(){
