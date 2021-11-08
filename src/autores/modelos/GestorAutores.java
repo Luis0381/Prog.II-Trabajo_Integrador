@@ -46,14 +46,14 @@ public class GestorAutores implements IGestorAutores {
                 a.asignarCargo(cargo);
                 a.asignarClave(clave);
                 return "Datos de Profesor modificados de forma EXITOSA!";
-            } else
-                return "ERROR al modificar los datos de su Profesor!";
+            }
         }
+        return "ERROR al modificar los datos de su Profesor!";
     }
 
     @Override
     public ArrayList<Profesor> verProfesores() {
-        private ArrayList<Profesor> profesores = new ArrayList<>();
+        ArrayList<Profesor> profesores = new ArrayList<>();
 
         for (Profesor a : autores) {
             profesores.add(a);
@@ -86,14 +86,14 @@ public class GestorAutores implements IGestorAutores {
                 a.asignarCx(cx);
                 a.asignarClave(clave);
                 return "Datos de Alumno modificados de forma EXITOSA!";
-            } else
-                return "ERROR al modificar los datos de su Alumno!";
+            }
         }
+        return "ERROR al modificar los datos de su Alumno!";
     }
 
     @Override
     public ArrayList<Alumno> verAlumnos() {
-        private ArrayList<Alumno> alumnos = new ArrayList<>();
+        ArrayList<Alumno> alumnos = new ArrayList<>();
 
         for (Alumno a : autores) {
             alumnos.add(a);
@@ -107,9 +107,8 @@ public class GestorAutores implements IGestorAutores {
         for (Autor a : autores) {
             if (a.equals(autor))
                 return true;
-            else
-                return false;
         }
+        return false;
     }
     // preguntar si sirve tambien autores.contains(autor)
 
@@ -120,11 +119,11 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public Autor verAutor(int dni) {
-        for (Autor a : autores)
-            if (a.verDni()==dni)
+        for (Autor a : autores) {
+            if (a.verDni() == dni)
                 return a;
-            else
-                return null;
+        }
+        return null;
     }
 }
 

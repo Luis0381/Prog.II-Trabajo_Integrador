@@ -28,7 +28,7 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public String nuevaPublicacion(String titulo, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
-        Publicacion nuevaPublicacion = new Publicacion(titulo, miembroEnGrupo,fechaPublicacion, tipo, idioma, lugar, palabrasClaves, enlace, resumen);
+        Publicacion nuevaPublicacion = new Publicacion(titulo, miembroEnGrupo, fechaPublicacion, tipo, idioma, lugar, palabrasClaves, enlace, resumen);
 
         if (publicaciones.contains(nuevaPublicacion) || titulo == null || miembroEnGrupo == null || fechaPublicacion == null || tipo == null || idioma == null || palabrasClaves == null || enlace == null || resumen == null)
             return "ERROR al agregar una nueva publicacion!";
@@ -50,66 +50,66 @@ public class GestorPublicaciones implements IGestorPublicaciones {
                 a.setPalabrasClaves(palabrasClaves);
                 a.setEnlace(enlace);
                 a.setResumen(resumen);
-                return "Datos de la publicacion modificados de forma EXITOSA!"
-            } else
-                return "ERROR al modificar los datos de la publicacion!";
+                return "Datos de la publicacion modificados de forma EXITOSA!";
+            }
         }
+        return "ERROR al modificar los datos de la publicacion!";
     }
 
     @Override
     public boolean hayPublicacionesConEstaPalabraClave(PalabraClave palabraClave) {
-        for (Publicacion a : publicaciones)
+        for (Publicacion a : publicaciones) {
             for (PalabraClave b : a.getPalabrasClaves()) {
                 if (b.equals(palabraClave))
                     return true;
-                else
-                    return false;
             }
+        }
+        return false;
     }
 
     @Override
     public boolean hayPublicacionesConEsteLugar(Lugar lugar) {
-        for (Publicacion a : publicaciones)
-           if (a.getUnLugar().equals(lugar))
-               return true;
-           else
-               return false;
+        for (Publicacion a : publicaciones) {
+            if (a.getUnLugar().equals(lugar))
+                return true;
+        }
+        return false;
     }
 
     @Override
     public boolean hayPublicacionesConEsteIdioma(Idioma idioma) {
         for (Publicacion a : publicaciones)
-            if (a.getUnIdioma().equals(idioma))
+            if (a.getUnIdioma().equals(idioma)) {
                 return true;
-            else
-                return false;
+            }
+        return false;
     }
 
     @Override
     public boolean hayPublicacionesConEsteTipo(Tipo tipo) {
-        for (Publicacion a : publicaciones)
+        for (Publicacion a : publicaciones) {
             if (a.getUnTipo().equals(tipo))
                 return true;
-            else
-                return false;
+        }
+        return false;
     }
 
     @Override
     public boolean hayPublicacionesConEsteAutor(Autor autor) {
-        for (Publicacion a : publicaciones)
+        for (Publicacion a : publicaciones) {
             if (a.getUnMiembroEnGrupo().verAutor().equals(autor))
                 return true;
-            else
-                return false;
+        }
+        return false;
     }
 
     @Override
     public boolean existeEstaPublicacion(Publicacion publicacion) {
-        for (Publicacion a : publicaciones)
+        for (Publicacion a : publicaciones) {
             if (a.equals(publicacion))
                 return true;
-            else
-                return false;
+        }
+        return false;
     }
 
     @Override
@@ -119,10 +119,10 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public Publicacion verPublicacion(String titulo) {
-        for (Publicacion a : publicaciones)
+        for (Publicacion a : publicaciones) {
             if (a.getTitulo().equals(titulo))
                 return a;
-            else
-                return null;
+        }
+        return null;
     }
 }

@@ -37,9 +37,9 @@ public class GestorGrupos implements IGestorGrupos {
             if (a.equals(grupo)) {
                 a.asignarDescripcion(descripcion);
                 return "Descripcion modificada de forma EXITOSA!";
-            } else
-                return "ERROR al modificar la descripcion!";
+            }
         }
+        return "ERROR al modificar la descripcion!";
     }
 
     @Override
@@ -49,14 +49,13 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public Grupo verGrupo(String nombre) {
-        Grupo nuevoGrupo = new Grupo(nombre);
+        Grupo nuevoGrupo = new Grupo(nombre,null);
 
         for (Grupo a : grupos) {
             if (a.equals(nuevoGrupo))
                 return nuevoGrupo;
-            else
-                return null;
         }
+        return null;
     }
 
     @Override
@@ -64,8 +63,7 @@ public class GestorGrupos implements IGestorGrupos {
         for (Grupo a : grupos) {
             if (a.equals(grupo))
                 return true;
-            else
-                return false;
         }
+        return false;
     }
 }

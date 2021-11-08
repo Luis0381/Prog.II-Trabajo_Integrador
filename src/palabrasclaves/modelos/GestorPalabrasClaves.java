@@ -44,9 +44,8 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
         for (PalabraClave a : palabrasClaves) {
             if (a.equals(nuevaPalabraClave))
                 return nuevaPalabraClave;
-            else
-                return null;
         }
+        return null;
     }
 }
 

@@ -42,9 +42,8 @@ public class GestorLugares implements IGestorLugares {
         for (Lugar a : lugares) {
             if (a.equals(nuevoLugar))
                 return nuevoLugar;
-            else
-                return null;
         }
+        return null;
     }
 }
 

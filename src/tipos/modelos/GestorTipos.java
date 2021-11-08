@@ -42,9 +42,8 @@ public class GestorTipos implements IGestorTipos {
         for (Tipo a : tipos) {
             if (a.equals(nuevoTipo))
                 return nuevoTipo;
-            else
-                return null;
         }
+        return null;
     }
 }
 

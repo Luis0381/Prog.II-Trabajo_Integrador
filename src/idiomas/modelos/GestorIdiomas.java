@@ -43,9 +43,8 @@ public class GestorIdiomas implements IGestorIdiomas {
         for (Idioma a : idiomas) {
             if (a.equals(nuevoIdioma))
                 return nuevoIdioma;
-            else
-                return null;
         }
+        return null;
     }
 }
 
