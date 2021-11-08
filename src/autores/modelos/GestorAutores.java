@@ -78,10 +78,9 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
-        Autor nuevoAlumno = new Alumno(apellidos, nombres, cx, clave, claveRepetida);
 
         for (Alumno a : autores) {
-            if (a.equals(nuevoAlumno)) {
+            if (a.equals(autor)) {
                 a.asignarApellidos(apellidos);
                 a.asignarNombres(nombres);
                 a.asignarCx(cx);

@@ -116,4 +116,44 @@ public class Publicacion {
     public void setResumen(String resumen) {
         this.resumen = resumen;
     }
+
+    public Tipo getUnTipo() {
+        return unTipo;
+    }
+
+    public void setUnTipo(Tipo unTipo) {
+        this.unTipo = unTipo;
+    }
+
+    public Idioma getUnIdioma() {
+        return unIdioma;
+    }
+
+    public void setUnIdioma(Idioma unIdioma) {
+        this.unIdioma = unIdioma;
+    }
+
+    public Lugar getUnLugar() {
+        return unLugar;
+    }
+
+    public void setUnLugar(Lugar unLugar) {
+        this.unLugar = unLugar;
+    }
+
+    public ArrayList<PalabraClave> getPalabrasClaves() {
+        return palabrasClaves;
+    }
+
+    public void setPalabrasClaves(ArrayList<PalabraClave> palabrasClaves) {
+        this.palabrasClaves = palabrasClaves;
+    }
+
+    public MiembroEnGrupo getUnMiembroEnGrupo() {
+        return unMiembroEnGrupo;
+    }
+
+    public void setUnMiembroEnGrupo(MiembroEnGrupo unMiembroEnGrupo) {
+        this.unMiembroEnGrupo = unMiembroEnGrupo;
+    }
 }
