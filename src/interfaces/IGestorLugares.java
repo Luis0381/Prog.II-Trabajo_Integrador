@@ -6,14 +6,16 @@
 package interfaces;
 
 import java.util.ArrayList;
+
 import lugares.modelos.Lugar;
 
 /**
- *
  * @author Luis Medina Raed
  */
 public interface IGestorLugares {
     public String nuevoLugar(String nombre);
+
     public ArrayList<Lugar> verLugares();
+
     public Lugar verLugar(String nombre);
 }
