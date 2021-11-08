@@ -30,5 +30,7 @@ public interface IGestorAutores {
 
     public ArrayList<Alumno> verAlumnos();
 
+    public ArrayList<Autor> verAutores();
+
     public Autor verAutor(int dni);
 }

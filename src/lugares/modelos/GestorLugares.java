@@ -1,8 +1,6 @@
 package lugares.modelos;
 
 import interfaces.IGestorLugares;
-import tipos.modelos.GestorTipos;
-import tipos.modelos.Tipo;
 
 import java.util.ArrayList;
 

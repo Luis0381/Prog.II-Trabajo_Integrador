@@ -1,7 +1,6 @@
 package palabrasclaves.modelos;
 
 import interfaces.IGestorPalabrasClaves;
-import tipos.modelos.Tipo;
 
 
 import java.util.ArrayList;

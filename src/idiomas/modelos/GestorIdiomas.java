@@ -1,9 +1,7 @@
 package idiomas.modelos;
 
 import interfaces.IGestorIdiomas;
-import interfaces.IGestorTipos;
-import tipos.modelos.GestorTipos;
-import tipos.modelos.Tipo;
+
 
 import java.util.ArrayList;
 
