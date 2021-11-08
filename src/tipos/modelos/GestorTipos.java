@@ -39,7 +39,7 @@ public class GestorTipos implements IGestorTipos {
     public Tipo verTipo(String nombre) {
         Tipo nuevoTipo = new Tipo(nombre);
 
-        for (Tipo a : tipos){
+        for (Tipo a : tipos) {
             if (a.equals(nuevoTipo))
                 return nuevoTipo;
             else
