@@ -53,40 +53,8 @@ public abstract class Autor {
     public void asignarGrupos(ArrayList<MiembroEnGrupo> miembroEnGrupo) {
         this.miembrosEnGrupo = miembroEnGrupo;
     }
-    
-    /**
-        Este metodo nos permite agregar autores a grupos
-    */
-//    public void agregarGrupo (Grupo grupo, Rol rol){
-//        MiembroEnGrupo unGrupo = new MiembroEnGrupo(this, grupo, rol);
-//        if(!this.tieneGrupos() == false){
-//            miembrosEnGrupo.add(unGrupo);
-//        }
-//        if (grupo.esSuperAdministradores()){
-//            if(!this.miembrosEnGrupo.contains(unGrupo)){
-//                unGrupo.asignarRol(Rol.ADMINISTRADOR);
-//                this.miembrosEnGrupo.add(unGrupo);
-//                grupo.agregarMiembro(this, Rol.ADMINISTRADOR);
-//            }
-//        } else if(!this.miembrosEnGrupo.contains(unGrupo)){
-//            this.miembrosEnGrupo.add(unGrupo);
-//            grupo.agregarMiembro(this, rol);
-//        }
-//    }
-   
-        //FUNCIÓN AGREGAR GRUPO ANTERIOR
-//        public void agregarGrupo(Grupo grupo, Rol rol){
-//            MiembroEnGrupo unGrupo = new MiembroEnGrupo(this, grupo, rol);
-//
-//            if(!this.miembrosEnGrupo.contains(unGrupo)){      // NO ENTRABA AL IF USANDO ESTE CONTROL
-//                this.miembrosEnGrupo.add(unGrupo);
-//                grupo.agregarMiembro(this, rol);
-//            }
-//        }
-    
-    
         
-        public void agregarGrupo(Grupo grupo, Rol rol) {
+    public void agregarGrupo(Grupo grupo, Rol rol) {
         MiembroEnGrupo miembro = new MiembroEnGrupo(this, grupo, rol);
         if (!this.contieneGrupo(grupo)) {
             miembrosEnGrupo.add(miembro);
@@ -94,7 +62,7 @@ public abstract class Autor {
         }
     }
 
-        public boolean contieneGrupo(Grupo grupo) {
+    public boolean contieneGrupo(Grupo grupo) {
         for (MiembroEnGrupo a : miembrosEnGrupo) {
             if (a.verGrupo().equals(grupo)) {
                 return true;
@@ -102,7 +70,6 @@ public abstract class Autor {
         }
         return false;
     }
-
     
     /**
         Este metodo nos permite quitar autores de grupos
