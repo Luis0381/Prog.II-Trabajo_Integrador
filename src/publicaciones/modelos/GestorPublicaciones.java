@@ -30,11 +30,12 @@ public class GestorPublicaciones implements IGestorPublicaciones {
     public String nuevaPublicacion(String titulo, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
         Publicacion nuevaPublicacion = new Publicacion(titulo, miembroEnGrupo,fechaPublicacion, tipo, idioma, lugar, palabrasClaves, enlace, resumen);
 
-        if (!publicaciones.contains(nuevaPublicacion) && titulo =/= null && miembroEnGrupo =/= null && fechaPublicacion =/= null && tipo =/= null && idioma =/= null && lugar =/= null && palabrasClaves =/= null && enlace =/= null && resumen =/= null) {
+        if (publicaciones.contains(nuevaPublicacion) || titulo == null || miembroEnGrupo == null || fechaPublicacion == null || tipo == null || idioma == null || palabrasClaves == null || enlace == null || resumen == null)
+            return "ERROR al agregar una nueva publicacion!";
+        else {
             publicaciones.add(nuevaPublicacion);
             return "Publicacion agregada de forma EXITOSA!";
-        } else
-            return "ERROR al agregar una nueva publicacion!";
+        }
     }
 
     @Override

@@ -25,19 +25,19 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public String nuevoAutor(int dni, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
-        Autor nuevoProfesor = new Profesor(dni, apellidos, nombres, cargo, clave, claveRepetida);
+        Autor nuevoProfesor = new Profesor(dni, apellidos, nombres, clave, cargo);
 
-        if (!autores.contains(nuevoProfesor) && dni =/=null && !apellidos.isEmpty() && !nombres.isEmpty() && cargo =/=
-        null && clave.equals(claveRepetida)){
+        if (autores.contains(nuevoProfesor) || dni != 0 || apellidos.isEmpty() || nombres.isEmpty() || cargo == null || !clave.equals(claveRepetida)) {
+            return "ERROR al agregar un nuevo Profesor!";
+        } else {
             autores.add(nuevoProfesor);
             return "Profesor agregado de forma EXITOSA!";
-        } else
-        return "ERROR al agregar un nuevo Profesor!";
+        }
     }
 
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
-        Autor nuevoProfesor = new Profesor(apellidos, nombres, cargo, clave, claveRepetida);
+        Autor nuevoProfesor = new Profesor(0, apellidos, nombres, clave, cargo);
 
         for (Profesor a : autores) {
             if (a.equals(nuevoProfesor)) {
@@ -66,14 +66,14 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public String nuevoAutor(int dni, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
-        Autor nuevoAlumno = new Alumno(dni, apellidos, nombres, cx, clave, claveRepetida);
+        Autor nuevoAlumno = new Alumno(dni, apellidos, nombres, clave, cx);
 
-        if (!autores.contains(nuevoAlumno) && dni =/=null && !apellidos.isEmpty() && !nombres.isEmpty() && cx =/=
-        null && clave.equals(claveRepetida)){
+        if (autores.contains(nuevoAlumno) || dni != 0 || apellidos.isEmpty() || nombres.isEmpty() || cx == null || !clave.equals(claveRepetida)) {
+            return "ERROR al agregar un nuevo Alumno!";
+        } else {
             autores.add(nuevoAlumno);
             return "Alumno agregado de forma EXITOSA!";
-        } else
-        return "ERROR al agregar un nuevo Alumno!";
+        }
     }
 
     @Override
