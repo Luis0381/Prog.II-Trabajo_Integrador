@@ -1,6 +1,7 @@
 package autores.modelos;
 
 
+import grupos.modelos.Grupo;
 import interfaces.IGestorAutores;
 
 
@@ -27,11 +28,11 @@ public class GestorAutores implements IGestorAutores {
     public String nuevoAutor(int dni, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
         Autor nuevoProfesor = new Profesor(dni, apellidos, nombres, clave, cargo);
 
-        if (autores.contains(nuevoProfesor) || dni != 0 || apellidos.isEmpty() || nombres.isEmpty() || cargo == null || !clave.equals(claveRepetida)) {
-            return "ERROR al agregar un nuevo Profesor!";
+        if (autores.contains(nuevoProfesor) || dni == 0 || apellidos.isEmpty() || nombres.isEmpty() || cargo == null || !clave.equals(claveRepetida)) {
+            return "\n\tERROR al agregar un nuevo Profesor!";
         } else {
             autores.add(nuevoProfesor);
-            return "Profesor agregado de forma EXITOSA!";
+            return "\n\tProfesor agregado de forma EXITOSA!";
         }
     }
 
@@ -39,14 +40,16 @@ public class GestorAutores implements IGestorAutores {
     public String modificarAutor(Autor autor, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
         Autor nuevoProfesor = new Profesor(0, apellidos, nombres, clave, cargo);
 
-        for (Profesor a : autores) {
-            if (a.equals(nuevoProfesor)) {
-                a.asignarApellidos(apellidos);
-                a.asignarNombres(nombres);
-                a.asignarCargo(cargo);
-                a.asignarClave(clave);
-                return "Datos de Profesor modificados de forma EXITOSA!";
-            }
+        for (Autor a : autores) {
+            if (a instanceof Profesor)
+                if (a.equals(nuevoProfesor)) {
+                    Profesor profesor = (Profesor) autor;
+                    profesor.asignarApellidos(apellidos);
+                    profesor.asignarNombres(nombres);
+                    profesor.asignarCargo(cargo);
+                    profesor.asignarClave(clave);
+                    return "Datos de Profesor modificados de forma EXITOSA!";
+                }
         }
         return "ERROR al modificar los datos de su Profesor!";
     }
@@ -55,8 +58,9 @@ public class GestorAutores implements IGestorAutores {
     public ArrayList<Profesor> verProfesores() {
         ArrayList<Profesor> profesores = new ArrayList<>();
 
-        for (Profesor a : autores) {
-            profesores.add(a);
+        for (Autor a : autores) {
+            if (a instanceof Profesor)
+                profesores.add((Profesor) a);
         }
 
         return profesores;
@@ -68,25 +72,27 @@ public class GestorAutores implements IGestorAutores {
     public String nuevoAutor(int dni, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
         Autor nuevoAlumno = new Alumno(dni, apellidos, nombres, clave, cx);
 
-        if (autores.contains(nuevoAlumno) || dni != 0 || apellidos.isEmpty() || nombres.isEmpty() || cx == null || !clave.equals(claveRepetida)) {
-            return "ERROR al agregar un nuevo Alumno!";
+        if (autores.contains(nuevoAlumno) || dni == 0 || apellidos.isEmpty() || nombres.isEmpty() || cx == null || !clave.equals(claveRepetida)) {
+            return "\n\tERROR al agregar un nuevo Alumno!";
         } else {
             autores.add(nuevoAlumno);
-            return "Alumno agregado de forma EXITOSA!";
+            return "\n\tAlumno agregado de forma EXITOSA!";
         }
     }
 
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
 
-        for (Alumno a : autores) {
-            if (a.equals(autor)) {
-                a.asignarApellidos(apellidos);
-                a.asignarNombres(nombres);
-                a.asignarCx(cx);
-                a.asignarClave(clave);
-                return "Datos de Alumno modificados de forma EXITOSA!";
-            }
+        for (Autor a : autores) {
+            if (a instanceof Alumno)
+                if (a.equals(autor)) {
+                    Alumno alumno = (Alumno) autor;
+                    alumno.asignarApellidos(apellidos);
+                    alumno.asignarNombres(nombres);
+                    alumno.asignarCx(cx);
+                    alumno.asignarClave(clave);
+                    return "Datos de Alumno modificados de forma EXITOSA!";
+                }
         }
         return "ERROR al modificar los datos de su Alumno!";
     }
@@ -95,8 +101,9 @@ public class GestorAutores implements IGestorAutores {
     public ArrayList<Alumno> verAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
 
-        for (Alumno a : autores) {
-            alumnos.add(a);
+        for (Autor a : autores) {
+            if (a instanceof Alumno)
+                alumnos.add((Alumno) a);
         }
 
         return alumnos;
@@ -124,6 +131,29 @@ public class GestorAutores implements IGestorAutores {
                 return a;
         }
         return null;
+    }
+
+    @Override
+    public void mostrarAlumnos() {
+        if (!verAlumnos().isEmpty()) {
+            for (Alumno a : verAlumnos())
+                a.mostrar();
+        }
+    }
+
+    @Override
+    public void mostrarProfesores() {
+        if (!verProfesores().isEmpty()) {
+            for (Profesor a : verProfesores())
+                a.mostrar();
+        }
+    }
+
+    @Override
+    public void mostrarAutores() {
+        if (!verAutores().isEmpty())
+            for (Autor a : autores)
+                a.mostrar();
     }
 }
 

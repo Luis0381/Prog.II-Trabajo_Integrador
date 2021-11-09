@@ -49,7 +49,7 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public Grupo verGrupo(String nombre) {
-        Grupo nuevoGrupo = new Grupo(nombre,null);
+        Grupo nuevoGrupo = new Grupo(nombre, null);
 
         for (Grupo a : grupos) {
             if (a.equals(nuevoGrupo))
@@ -65,5 +65,13 @@ public class GestorGrupos implements IGestorGrupos {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void mostrarGrupos() {
+        if (!grupos.isEmpty()) {
+            for (Grupo g : grupos)
+                g.mostrar();
+        }
     }
 }

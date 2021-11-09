@@ -22,4 +22,6 @@ public interface IGestorGrupos {
     public Grupo verGrupo(String nombre);
 
     public boolean existeEsteGrupo(Grupo grupo);
+
+    public void mostrarGrupos();
 }
