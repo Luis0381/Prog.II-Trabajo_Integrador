@@ -23,7 +23,7 @@ public class GestorLugares implements IGestorLugares {
     public String nuevoLugar(String nombre) {
         Lugar nuevoLugar = new Lugar(nombre);
 
-        if (!lugares.contains(nuevoLugar) || !nombre.isEmpty()) {
+        if (!lugares.contains(nuevoLugar) && (nombre != null) && (!nombre.trim().isEmpty())) {
             lugares.add(nuevoLugar);
             return "Lugar agregado de forma EXITOSA!";
         } else
@@ -38,13 +38,12 @@ public class GestorLugares implements IGestorLugares {
     @Override
     public Lugar verLugar(String nombre) {
         Lugar nuevoLugar = new Lugar(nombre);
-
+        if ((nombre == null) || (nombre.isEmpty()))
+            return null;
         for (Lugar a : lugares) {
-            if (a.equals(nuevoLugar))
-                return nuevoLugar;
+            if (a.verNombre().equals(nombre))
+                return a;
         }
         return null;
     }
 }
-
-// agregar metodos para printear todos los tipos y controlar

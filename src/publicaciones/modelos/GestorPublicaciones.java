@@ -30,7 +30,7 @@ public class GestorPublicaciones implements IGestorPublicaciones {
     public String nuevaPublicacion(String titulo, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
         Publicacion nuevaPublicacion = new Publicacion(titulo, miembroEnGrupo, fechaPublicacion, tipo, idioma, lugar, palabrasClaves, enlace, resumen);
 
-        if (publicaciones.contains(nuevaPublicacion) || titulo == null || miembroEnGrupo == null || fechaPublicacion == null || tipo == null || idioma == null || palabrasClaves == null || enlace == null || resumen == null)
+        if (publicaciones.contains(nuevaPublicacion) || titulo == null || titulo.trim().isEmpty() || miembroEnGrupo == null || miembroEnGrupo.verGrupo() == null || miembroEnGrupo.verAutor() == null || miembroEnGrupo.verRol() == null || fechaPublicacion == null || tipo == null || idioma == null || lugar == null || palabrasClaves == null || palabrasClaves.isEmpty() || enlace == null || enlace.trim().isEmpty() || resumen == null || resumen.trim().isEmpty())
             return "ERROR al agregar una nueva publicacion!";
         else {
             publicaciones.add(nuevaPublicacion);
@@ -40,27 +40,25 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public String modificarPublicacion(Publicacion publicacion, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
-        for (Publicacion a : publicaciones) {
-            if (a.equals(publicacion)) {
-                a.setUnMiembroEnGrupo(miembroEnGrupo);
-                a.setFechaPublicacion(fechaPublicacion);
-                a.setUnTipo(tipo);
-                a.setUnIdioma(idioma);
-                a.setUnLugar(lugar);
-                a.setPalabrasClaves(palabrasClaves);
-                a.setEnlace(enlace);
-                a.setResumen(resumen);
+            if (existeEstaPublicacion(publicacion) && miembroEnGrupo != null && miembroEnGrupo.verGrupo() != null && miembroEnGrupo.verAutor() != null && miembroEnGrupo.verRol() != null && fechaPublicacion != null && tipo != null && idioma != null && lugar != null && palabrasClaves != null && !palabrasClaves.isEmpty() && enlace != null && !enlace.trim().isEmpty() && resumen != null && !resumen.trim().isEmpty()) {
+                publicacion.setUnMiembroEnGrupo(miembroEnGrupo);
+                publicacion.setFechaPublicacion(fechaPublicacion);
+                publicacion.setUnTipo(tipo);
+                publicacion.setUnIdioma(idioma);
+                publicacion.setUnLugar(lugar);
+                publicacion.setPalabrasClaves(palabrasClaves);
+                publicacion.setEnlace(enlace);
+                publicacion.setResumen(resumen);
                 return "Datos de la publicacion modificados de forma EXITOSA!";
             }
-        }
         return "ERROR al modificar los datos de la publicacion!";
     }
 
     @Override
     public boolean hayPublicacionesConEstaPalabraClave(PalabraClave palabraClave) {
-        for (Publicacion a : publicaciones) {
-            for (PalabraClave b : a.getPalabrasClaves()) {
-                if (b.equals(palabraClave))
+        for(Publicacion publicacion : publicaciones) {
+            for(PalabraClave palabraclave : publicacion.getPalabrasClaves()) {
+                if (palabraClave.equals(palabraclave))
                     return true;
             }
         }
@@ -96,8 +94,9 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public boolean hayPublicacionesConEsteAutor(Autor autor) {
-        for (Publicacion a : publicaciones) {
-            if (a.getUnMiembroEnGrupo().verAutor().equals(autor))
+        for(Publicacion publicacion : publicaciones) {
+            MiembroEnGrupo miembroengrupo = publicacion.getUnMiembroEnGrupo();
+            if (autor.equals(miembroengrupo.verAutor()))
                 return true;
         }
         return false;
@@ -105,9 +104,13 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public boolean existeEstaPublicacion(Publicacion publicacion) {
-        for (Publicacion a : publicaciones) {
-            if (a.equals(publicacion))
-                return true;
+        if (publicacion == null)
+            return false;
+        else {
+            for (Publicacion a : publicaciones) {
+                if (a.equals(publicacion))
+                    return true;
+            }
         }
         return false;
     }
@@ -124,5 +127,12 @@ public class GestorPublicaciones implements IGestorPublicaciones {
                 return a;
         }
         return null;
+    }
+
+    @Override
+    public void mostrarPublicaciones() {
+        if (!verPublicaciones().isEmpty())
+            for (Publicacion a : publicaciones)
+                a.mostrar();
     }
 }

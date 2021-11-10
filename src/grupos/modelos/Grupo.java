@@ -35,7 +35,6 @@ public class Grupo {
         Este metodo nos permite mostrar un grupo
     */  
     public void mostrar(){
-        System.out.println("------------------------------");
         System.out.println("Nombre: "+ nombre);
         System.out.println("Descripcion: "+ descripcion);
         System.out.println("Los miembros del grupo son: ");

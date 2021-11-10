@@ -24,7 +24,7 @@ public class GestorIdiomas implements IGestorIdiomas {
     public String nuevoIdioma(String nombre) {
         Idioma nuevoIdioma = new Idioma(nombre);
 
-        if (!idiomas.contains(nuevoIdioma) || !nombre.isEmpty()) {
+        if (!idiomas.contains(nuevoIdioma) && (nombre != null) && (nombre.trim().isEmpty())) {
             idiomas.add(nuevoIdioma);
             return "Idioma agregado de forma EXITOSA!";
         } else
@@ -40,12 +40,12 @@ public class GestorIdiomas implements IGestorIdiomas {
     public Idioma verIdioma(String nombre) {
         Idioma nuevoIdioma = new Idioma(nombre);
 
+        if ((nombre==null) || (nombre.isEmpty()))
+            return null;
         for (Idioma a : idiomas) {
-            if (a.equals(nuevoIdioma))
+            if (a.verNombre().equals(nombre))
                 return nuevoIdioma;
         }
         return null;
     }
 }
-
-// agregar metodos para printear todos los tipos y controlar

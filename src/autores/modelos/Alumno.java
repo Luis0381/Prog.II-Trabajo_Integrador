@@ -26,24 +26,33 @@ public class Alumno extends Autor {
     // equals() & hashCode()
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.cx);
+        int hash = 7;
+        hash = 41 * hash + super.hashCode() + Objects.hashCode(this.cx);
         return hash;
     }
+
     @Override
     public boolean equals(Object obj) {
-        if(!super.equals(obj)){
-            if(getClass() != obj.getClass()){
+        if (!super.equals(obj)) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
                 return false;
             }
-            Alumno other = (Alumno) obj;
-            if(!Objects.equals(this.cx, other.cx)){
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final Alumno other = (Alumno) obj;
+            if (!Objects.equals(this.cx, other.cx)) {
                 return false;
             }
             return true;
         }
-        return true;
+        else
+            return true;
     }
+
     // Getters & Setters
     public String verCx() {
         return cx;

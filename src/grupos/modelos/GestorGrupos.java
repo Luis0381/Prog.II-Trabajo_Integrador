@@ -24,7 +24,7 @@ public class GestorGrupos implements IGestorGrupos {
     public String nuevoGrupo(String nombre, String descripcion) {
         Grupo nuevoGrupo = new Grupo(nombre, descripcion);
 
-        if (!grupos.contains(nuevoGrupo) || !nombre.isEmpty()) {
+        if (!grupos.contains(nuevoGrupo) && (nombre != null) && !nombre.trim().isEmpty()) {
             grupos.add(nuevoGrupo);
             return "Grupo agregado de forma EXITOSA!";
         } else
@@ -33,11 +33,12 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public String modificarGrupo(Grupo grupo, String descripcion) {
-        for (Grupo a : grupos) {
-            if (a.equals(grupo)) {
-                a.asignarDescripcion(descripcion);
-                return "Descripcion modificada de forma EXITOSA!";
+        if (this.existeEsteGrupo(grupo) && (descripcion != null)){
+            if (descripcion.isEmpty()) {
+                descripcion = null;
             }
+            grupo.asignarDescripcion(descripcion);
+            return "Grupo modificado de forma EXITOSA!";
         }
         return "ERROR al modificar la descripcion!";
     }
@@ -49,18 +50,19 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public Grupo verGrupo(String nombre) {
-        Grupo nuevoGrupo = new Grupo(nombre, null);
-
-        for (Grupo a : grupos) {
-            if (a.equals(nuevoGrupo))
-                return nuevoGrupo;
-        }
+        if ((nombre == null) || (nombre.isEmpty()))
+            return null;
+        for(Grupo a : grupos)
+            if (a.verNombre().equals(nombre))
+                return a;
         return null;
     }
 
     @Override
     public boolean existeEsteGrupo(Grupo grupo) {
-        for (Grupo a : grupos) {
+        if (grupo == null)
+            return false;
+        for(Grupo a : grupos) {
             if (a.equals(grupo))
                 return true;
         }

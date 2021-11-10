@@ -32,7 +32,6 @@ public abstract class Autor {
         Este metodo permite mostrar Autor
     */
     public void mostrar(){
-        System.out.println("------------------------------");
         System.out.println("Nombre y apellido: " + this.nombres +", " + this.apellidos + ".");
         System.out.println("DNI: "+ dni);
         System.out.println("Clave: "+ clave);
@@ -56,7 +55,7 @@ public abstract class Autor {
         
     public void agregarGrupo(Grupo grupo, Rol rol) {
         MiembroEnGrupo miembro = new MiembroEnGrupo(this, grupo, rol);
-        if (!this.contieneGrupo(grupo)) {
+        if (!this.contieneGrupo(grupo) && grupo != null && rol != null) {
             miembrosEnGrupo.add(miembro);
             grupo.agregarMiembro(this, rol);
         }
@@ -110,9 +109,10 @@ public abstract class Autor {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 43 * hash + this.dni;
+        hash = 11 * hash + this.dni;
         return hash;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -125,10 +125,7 @@ public abstract class Autor {
             return false;
         }
         final Autor other = (Autor) obj;
-        if (this.dni != other.dni) {
-            return false;
-        }
-        return true;
+        return this.dni == other.dni;
     }
     // Getters & Setters
     public int verDni() {

@@ -6,7 +6,9 @@ import lugares.modelos.Lugar;
 import palabrasclaves.modelos.PalabraClave;
 import tipos.modelos.Tipo;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,6 +28,8 @@ public class Publicacion {
     private Lugar unLugar;
     private ArrayList<PalabraClave> palabrasClaves;
     private MiembroEnGrupo unMiembroEnGrupo;
+
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/uuuu");
     
     // Constructor
     public Publicacion(String titulo, MiembroEnGrupo unMiembroEnGrupo, LocalDate fechaPublicacion, Tipo unTipo, Idioma unIdioma, Lugar unLugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
@@ -45,7 +49,7 @@ public class Publicacion {
         System.out.println("Titulo: " + this.titulo);
         System.out.println("Autor: " + this.unMiembroEnGrupo.verAutor().verApellidos() + ", " + this.unMiembroEnGrupo.verAutor().verNombres());
         System.out.println("Grupo: " + this.unMiembroEnGrupo.verGrupo().verNombre());
-        System.out.println("Fecha de Publicacion: " + this.fechaPublicacion);
+        System.out.println("Fecha de Publicacion: " + fechaPublicacion.format(formato));;
         System.out.println("Tipo: " + this.unTipo);
         System.out.println("Idioma: " + this.unIdioma);
         System.out.println("Lugar: " + this.unLugar);

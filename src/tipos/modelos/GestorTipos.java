@@ -22,8 +22,7 @@ public class GestorTipos implements IGestorTipos {
     @Override
     public String nuevoTipo(String nombre) {
         Tipo nuevoTipo = new Tipo(nombre);
-
-        if (!tipos.contains(nuevoTipo) || !nombre.isEmpty()) {
+        if (!tipos.contains(nuevoTipo) && (nombre != null) && !nombre.isEmpty()) {
             tipos.add(nuevoTipo);
             return "Tipo agregado de forma EXITOSA!";
         } else
@@ -38,13 +37,12 @@ public class GestorTipos implements IGestorTipos {
     @Override
     public Tipo verTipo(String nombre) {
         Tipo nuevoTipo = new Tipo(nombre);
-
+        if ((nombre == null) || (nombre.isEmpty()))
+            return null;
         for (Tipo a : tipos) {
-            if (a.equals(nuevoTipo))
+            if (a.verNombre().equals(nombre.trim())) //Puede ser equalsIgnoreCase
                 return nuevoTipo;
         }
         return null;
     }
 }
-
-// agregar metodos para printear todos los tipos y controlar

@@ -28,7 +28,7 @@ public class GestorAutores implements IGestorAutores {
     public String nuevoAutor(int dni, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
         Autor nuevoProfesor = new Profesor(dni, apellidos, nombres, clave, cargo);
 
-        if (autores.contains(nuevoProfesor) || dni == 0 || apellidos.isEmpty() || nombres.isEmpty() || cargo == null || !clave.equals(claveRepetida)) {
+        if (autores.contains(nuevoProfesor) || dni <= 0 || apellidos == null || apellidos.trim().isEmpty() || nombres == null || nombres.trim().isEmpty() || cargo == null || !clave.equals(claveRepetida)) {
             return "\n\tERROR al agregar un nuevo Profesor!";
         } else {
             autores.add(nuevoProfesor);
@@ -40,9 +40,9 @@ public class GestorAutores implements IGestorAutores {
     public String modificarAutor(Autor autor, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
         Autor nuevoProfesor = new Profesor(0, apellidos, nombres, clave, cargo);
 
-        for (Autor a : autores) {
-            if (a instanceof Profesor)
-                if (a.equals(nuevoProfesor)) {
+        if (existeEsteAutor(autor)) {
+            if (autor instanceof Profesor) {
+                if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cargo != null && clave.equals(claveRepetida)) {
                     Profesor profesor = (Profesor) autor;
                     profesor.asignarApellidos(apellidos);
                     profesor.asignarNombres(nombres);
@@ -50,6 +50,7 @@ public class GestorAutores implements IGestorAutores {
                     profesor.asignarClave(clave);
                     return "Datos de Profesor modificados de forma EXITOSA!";
                 }
+            }
         }
         return "ERROR al modificar los datos de su Profesor!";
     }
@@ -72,7 +73,7 @@ public class GestorAutores implements IGestorAutores {
     public String nuevoAutor(int dni, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
         Autor nuevoAlumno = new Alumno(dni, apellidos, nombres, clave, cx);
 
-        if (autores.contains(nuevoAlumno) || dni == 0 || apellidos.isEmpty() || nombres.isEmpty() || cx == null || !clave.equals(claveRepetida)) {
+        if (autores.contains(nuevoAlumno) || dni <= 0 || apellidos == null || apellidos.trim().isEmpty() || nombres == null || nombres.trim().isEmpty() || cx == null || cx.trim().isEmpty() || !clave.equals(claveRepetida)){
             return "\n\tERROR al agregar un nuevo Alumno!";
         } else {
             autores.add(nuevoAlumno);
@@ -83,9 +84,9 @@ public class GestorAutores implements IGestorAutores {
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
 
-        for (Autor a : autores) {
-            if (a instanceof Alumno)
-                if (a.equals(autor)) {
+        if (existeEsteAutor(autor)) {
+            if (autor instanceof Alumno)
+                if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cx != null && !cx.trim().isEmpty() && clave.equals(claveRepetida)) {
                     Alumno alumno = (Alumno) autor;
                     alumno.asignarApellidos(apellidos);
                     alumno.asignarNombres(nombres);
@@ -111,13 +112,16 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public boolean existeEsteAutor(Autor autor) {
-        for (Autor a : autores) {
-            if (a.equals(autor))
-                return true;
+        if (autor == null)
+            return false;
+        else {
+            for(Autor a : autores) {
+                if (a.equals(autor))
+                    return true;
+            }
+            return false;
         }
-        return false;
     }
-    // preguntar si sirve tambien autores.contains(autor)
 
     @Override
     public ArrayList<Autor> verAutores() {

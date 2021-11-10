@@ -24,8 +24,7 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
     @Override
     public String nuevaPalabraClave(String nombre) {
         PalabraClave nuevaPalabraClave = new PalabraClave(nombre);
-
-        if (!palabrasClaves.contains(nuevaPalabraClave) || !nombre.isEmpty()) {
+        if (!palabrasClaves.contains(nuevaPalabraClave) && nombre != null && (!nombre.trim().isEmpty())) {
             palabrasClaves.add(nuevaPalabraClave);
             return "Palabra Clave agregada de forma EXITOSA!";
         } else
@@ -39,14 +38,12 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
 
     @Override
     public PalabraClave verPalabraClave(String nombre) {
-        PalabraClave nuevaPalabraClave = new PalabraClave(nombre);
-
+        if ((nombre == null) || (nombre.isEmpty()))
+            return null;
         for (PalabraClave a : palabrasClaves) {
-            if (a.equals(nuevaPalabraClave))
-                return nuevaPalabraClave;
+            if (a.verNombre().equals(nombre))
+                return a;
         }
         return null;
     }
 }
-
-// agregar metodos para printear todos los tipos y controlar

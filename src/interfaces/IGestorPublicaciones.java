@@ -40,4 +40,6 @@ public interface IGestorPublicaciones {
     public ArrayList<Publicacion> verPublicaciones();
 
     public Publicacion verPublicacion(String titulo);
+
+    public void mostrarPublicaciones();
 }

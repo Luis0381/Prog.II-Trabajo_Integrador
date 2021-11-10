@@ -45,7 +45,6 @@ public class ControladorPrincipal {
         GestorGrupos GesGrupos = GestorGrupos.crear();
         GesGrupos.nuevoGrupo("Grupo 1", "Descripción 1");
         GesGrupos.nuevoGrupo("Grupo 1", "Descripción 1"); //nombre repetido
-        Grupo grupo1 = new Grupo("Grupo 1", "Descripción 1");
 //        if (!grupos.contains(grupo1))
 //            grupos.add(grupo1);
 //        if (!grupos.contains(grupo2))
@@ -64,8 +63,27 @@ public class ControladorPrincipal {
 
         System.out.println("");
         GestorAutores GesAutores = GestorAutores.crear();
-        System.out.println(GesAutores.nuevoAutor(1, "Apellido1", "Nombre1", "Clave1", "1", "1"));
-        System.out.println(GesAutores.nuevoAutor(1, "Apellido1", "Nombre1", "Clave1", "1", "1"));
+        System.out.println("\n\n\tAl agregar un alumno: \n\n");
+        System.out.println(GesAutores.nuevoAutor(1, "A", "B", "1", "1", "1"));
+        System.out.println("\n\n\tAl agregar un alumno con mismo DNI y distinto CX: \n\n");
+        System.out.println(GesAutores.nuevoAutor(1, "A", "B", "2", "1", "1")); //NO AGREGA
+        System.out.println("\n\n\tAl agregar un alumno con mismo CX y distinto DNI: \n\n");
+        System.out.println(GesAutores.nuevoAutor(2, "A", "B", "1", "1", "1")); //NO AGREGA
+        System.out.println("\n\n\tAl agregar un alumno sin poner correctamente la clave repetida: \n\n");
+        System.out.println(GesAutores.nuevoAutor(3, "A", "B", "3", "1", "2")); //NO AGREGA
+        System.out.println("\n\n\tAl agregar otro alumno normalmente \n\n");
+        System.out.println(GesAutores.nuevoAutor(4, "A", "B", "4", "4", "4"));
+        System.out.println("\n\n\tAl agregar un alumno con DNI negativo \n\n");
+        System.out.println(GesAutores.nuevoAutor(-5, "A", "B", "5", "4", "4")); //NO AGREGA
+        System.out.println("\n\n\tAl agregar un alumno con clave vacia \n\n");
+        System.out.println(GesAutores.nuevoAutor(11, "A", "B", "6", "", ""));
+        System.out.println("\n\n\tAl agregar un alumno con nombre vacio \n\n");
+        System.out.println(GesAutores.nuevoAutor(12, "A", "", "7", "1", "1")); //NO AGREGA
+        System.out.println("\n\n\tAl agregar un alumno con apellido vacio \n\n");
+        System.out.println(GesAutores.nuevoAutor(13, "A", "", "8", "1", "1")); //NO AGREGA
+        System.out.println("\n\n\tAl agregar un alumno con CX vacio \n\n");
+        System.out.println(GesAutores.nuevoAutor(14, "A", "B", "", "1", "1")); //NO AGREGA
+
 
 //        if (!autores.contains(alumno1))
 //            autores.add(alumno1);
@@ -81,9 +99,20 @@ public class ControladorPrincipal {
 //            autores.add(alumno6);
 
         System.out.println("");
+        System.out.println("\n\n\tAl agregar un profesor: \n\n");
         System.out.println(GesAutores.nuevoAutor(10, "Apellido10", "Nombre10", Cargo.TITULAR, "Clave10", "Clave10"));
+        System.out.println("\n\n\tAl agregar un profesor repetido: \n\n");
         System.out.println(GesAutores.nuevoAutor(10, "Apellido10", "Nombre10", Cargo.TITULAR, "Clave10", "Clave10"));
-        Autor profesor1 = new Profesor(10, "profesor1", "Nombre10", "Clave10", Cargo.TITULAR);
+        System.out.println("\n\n\tAl agregar un profesor con igual DNI a un alumno: \n\n");
+        System.out.println(GesAutores.nuevoAutor(1, "Apellido10", "Nombre10", Cargo.TITULAR, "Clave10", "Clave10"));
+        System.out.println("\n\n\tAl agregar un profesor con DNI negativo: \n\n");
+        System.out.println(GesAutores.nuevoAutor(-5, "Apellido10", "Nombre10", Cargo.TITULAR, "Clave10", "Clave10"));
+        System.out.println("\n\n\tAl agregar un profesor con apellido vacio: \n\n");
+        System.out.println(GesAutores.nuevoAutor(11, "", "Nombre10", Cargo.TITULAR, "Clave10", "Clave10"));
+        System.out.println("\n\n\tAl agregar un profesor con nombre vacio: \n\n");
+        System.out.println(GesAutores.nuevoAutor(12, "Apellido10", "", Cargo.TITULAR, "Clave10", "Clave10"));
+        System.out.println("\n\n\tAl agregar un profesor con clave vacio: \n\n");
+        System.out.println(GesAutores.nuevoAutor(14, "Apellido10", "Nombre10", Cargo.TITULAR, "", ""));
 //        if (!autores.contains(profesor1))
 //            autores.add(profesor1);
 //        if (!autores.contains(profesor2))
@@ -194,8 +223,12 @@ public class ControladorPrincipal {
 //        /*Main parte 3*/
 
         GestorTipos GesTipos = GestorTipos.crear();
-        GesTipos.nuevoTipo("Tipo 1");
-        GesTipos.nuevoTipo("Tipo 1");//nombre repetido
+        System.out.println("\n\n\tAl agregar un tipo: \n\n");
+        System.out.println(GesTipos.nuevoTipo("Tipo 1"));;
+        System.out.println("\n\n\tAl agregar un tipo repetido: \n\n");
+        System.out.println(GesTipos.nuevoTipo("Tipo 1"));;
+        System.out.println("\n\n\tAl agregar un tipo vacio: \n\n");
+        System.out.println(GesTipos.nuevoTipo(""));;
 
         System.out.println("\n\n\tTipos creados: \n\n");
         System.out.println(GesTipos.verTipos());
@@ -213,8 +246,12 @@ public class ControladorPrincipal {
 //            tipos.add(tipo6);
 
         GestorLugares GesLugares = GestorLugares.crear();
-        GesLugares.nuevoLugar("Lugar 1");
-        GesLugares.nuevoLugar("Lugar 1");//nombre repetido
+        System.out.println("\n\n\tAl agregar un lugar: \n\n");
+        System.out.println(GesLugares.nuevoLugar("Lugar 1"));
+        System.out.println("\n\n\tAl agregar un lugar repetido: \n\n");
+        System.out.println(GesLugares.nuevoLugar("Lugar 1"));//nombre repetido
+        System.out.println("\n\n\tAl agregar un lugar vacio: \n\n");
+        System.out.println(GesLugares.nuevoLugar(""));//nombre repetido
 
         System.out.println("\n\n\tLugares creados: \n\n");
         System.out.println(GesLugares.verLugares());
@@ -233,8 +270,12 @@ public class ControladorPrincipal {
 //            lugares.add(lugar6);
 
         GestorIdiomas GesIdiomas = GestorIdiomas.crear();
-        GesIdiomas.nuevoIdioma("Idioma 1");
-        GesIdiomas.nuevoIdioma("Idioma 1");//nombre repetido
+        System.out.println("\n\n\tAl agregar un idioma: \n\n");
+        System.out.println(GesIdiomas.nuevoIdioma("Idioma 1"));
+        System.out.println("\n\n\tAl agregar un idioma repetido: \n\n");
+        System.out.println(GesIdiomas.nuevoIdioma("Idioma 1"));//nombre repetido
+        System.out.println("\n\n\tAl agregar un idioma vacio: \n\n");
+        System.out.println(GesIdiomas.nuevoIdioma(""));//nombre repetido
 
         System.out.println("\n\n\tIdiomas creados: \n\n");
         System.out.println(GesIdiomas.verIdiomas());
@@ -253,8 +294,12 @@ public class ControladorPrincipal {
 
 
         GestorPalabrasClaves GesPalabraClave = GestorPalabrasClaves.crear();
-        GesPalabraClave.nuevaPalabraClave("PalabraClave1");
-        GesPalabraClave.nuevaPalabraClave("PalabraClave1"); //nombre repetido
+        System.out.println("\n\n\tAl agregar una palabra clave: \n\n");
+        System.out.println(GesPalabraClave.nuevaPalabraClave("PalabraClave1"));
+        System.out.println("\n\n\tAl agregar una palabra clave repetida: \n\n");
+        System.out.println(GesPalabraClave.nuevaPalabraClave("PalabraClave1")); //nombre repetido
+        System.out.println("\n\n\tAl agregar una palabra clave vacia: \n\n");
+        System.out.println(GesPalabraClave.nuevaPalabraClave("")); //nombre repetido
 
         System.out.println("\n\n\tPalabras Claves creadas: \n\n");
         System.out.println(GesPalabraClave.verPalabrasClaves());
@@ -273,10 +318,24 @@ public class ControladorPrincipal {
 //            palabrasClaves.add(palabraClave6);
 
 
-        GestorPublicaciones GesPublicaciones = GestorPublicaciones.crear();
-        GesPublicaciones.nuevaPublicacion("Título 1", new MiembroEnGrupo(profesor1, grupo1, Rol.ADMINISTRADOR), LocalDate.of(2020, 06, 24), "Tipo 1", "Idioma 1", "Lugar 1","Palabra 1", "Enlace 1", "Resumen 1");
+        //GENERADO OBJETOS
+        Grupo grupo1 = new Grupo("Grupo 1", "Descripción 1");
+        Autor profesor1 = new Profesor(10, "profesor1", "Nombre10", "Clave10", Cargo.TITULAR);
+        Tipo tipo1= new Tipo("Monografia");
+        Idioma idioma1= new Idioma("Español");
+        Lugar lugar1 = new Lugar ("Argentina");
+        ArrayList<PalabraClave> palabrasClaves = new ArrayList<>();
+        PalabraClave palabraClave1 = new PalabraClave("PalabraClave1");
+        palabrasClaves.add(palabraClave1);
 
-        GesPublicaciones.verPublicaciones();
+        GestorPublicaciones GesPublicaciones = GestorPublicaciones.crear();
+        System.out.println("\n\n\tAl agregar una publicacion: \n\n");
+        System.out.println(GesPublicaciones.nuevaPublicacion("Título 1", new MiembroEnGrupo(profesor1, grupo1, Rol.ADMINISTRADOR), LocalDate.of(2020, 06, 24), tipo1 , idioma1 , lugar1 , palabrasClaves , "http" , "hola"));
+        System.out.println("\n\n\tAl agregar una publicacion repetida; \n\n");
+        System.out.println(GesPublicaciones.nuevaPublicacion("Título 1", new MiembroEnGrupo(profesor1, grupo1, Rol.ADMINISTRADOR), LocalDate.of(2020, 06, 24), tipo1 , idioma1 , lugar1 , palabrasClaves , "http" , "hola"));
+
+        System.out.println("\n\n\tPublicaciones creadas: \n\n");
+        GesPublicaciones.mostrarPublicaciones();
 
 //        if (!publicaciones.contains(publicacion1))
 //            publicaciones.add(publicacion1);
