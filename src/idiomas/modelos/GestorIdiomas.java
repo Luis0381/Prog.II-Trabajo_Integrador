@@ -24,11 +24,12 @@ public class GestorIdiomas implements IGestorIdiomas {
     public String nuevoIdioma(String nombre) {
         Idioma nuevoIdioma = new Idioma(nombre);
 
-        if (!idiomas.contains(nuevoIdioma) && (nombre != null) && (nombre.trim().isEmpty())) {
+        if (idiomas.contains(nuevoIdioma) || nombre == null || nombre.trim().isEmpty()) {
+            return "ERROR al agregar un nuevo idioma!";
+        } else
             idiomas.add(nuevoIdioma);
             return "Idioma agregado de forma EXITOSA!";
-        } else
-            return "ERROR al agregar un nuevo idioma!";
+
     }
 
     @Override
