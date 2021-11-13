@@ -5,17 +5,25 @@
  */
 package principal.vistas;
 
+import interfaces.IControladorPrincipal;
+
 /**
  *
  * @author Luis Medina Raed
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    private IControladorPrincipal controlador;
+
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
+    public VentanaPrincipal(IControladorPrincipal controlador) {
         initComponents();
+        this.controlador = controlador;
+        this.setTitle(controlador.TITULO);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**

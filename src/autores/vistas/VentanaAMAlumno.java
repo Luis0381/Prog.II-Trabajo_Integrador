@@ -6,20 +6,26 @@
 package autores.vistas;
 
 import autores.modelos.Alumno;
+import interfaces.IControladorAMAlumno;
+
 import java.awt.Dialog;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 
 public class VentanaAMAlumno extends JDialog {    
     ArrayList<Alumno> alumnos = new ArrayList<>();
-    
+
+    private IControladorAMAlumno controlador;
     /**
      * Constructor
      * @param ventanaPadre ventana padre 
      */
-    public VentanaAMAlumno(Dialog ventanaPadre) {
-        super(ventanaPadre, true);
+    public VentanaAMAlumno(IControladorAMAlumno controlador) {
         initComponents();
+        this.controlador = controlador;
+        this.setTitle(controlador.TITULO_NUEVO);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
       
     /**

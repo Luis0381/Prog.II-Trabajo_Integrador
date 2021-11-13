@@ -9,20 +9,28 @@ import autores.modelos.Alumno;
 import autores.modelos.Cargo;
 import autores.modelos.ModeloComboCargos;
 import autores.modelos.Profesor;
+import interfaces.IControladorAMProfesor;
+
 import java.awt.Dialog;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 
 public class VentanaAMProfesor extends JDialog {
     ArrayList<Profesor> profesores = new ArrayList<>();
+
+    private IControladorAMProfesor controlador;
+
     /**
      * Constructor
      * @param ventanaPadre ventana padre
      */
-    public VentanaAMProfesor(Dialog ventanaPadre) {
-        super(ventanaPadre, true);
+    public VentanaAMProfesor(IControladorAMProfesor controlador) {
         initComponents();
         this.comboCargos.setModel(new ModeloComboCargos());
+        this.controlador = controlador;
+        this.setTitle(controlador.TITULO_NUEVO);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
         
     /**

@@ -5,18 +5,32 @@
  */
 package autores.vistas;
 
+import interfaces.IControladorAutores;
+import interfaces.IControladorPrincipal;
+
 /**
  *
  * @author Thomas
  */
 public class VentanaAutores extends javax.swing.JDialog {
 
+    private IControladorAutores controlador;
+
     /**
      * Creates new form VentanaAutores
      */
-    public VentanaAutores(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public VentanaAutores(IControladorAutores controlador) {
         initComponents();
+        this.controlador = controlador;
+        this.tablaAlumnos.setModel(modeloAlumnos);
+        this.tablaProfesores.setModel(modeloProfesores);
+        this.btnBorrarProfesor.setEnabled(false);
+        this.btnBorrarAlumno.setEnabled(false);
+        this.btnModificarProfesor.setEnabled(false);
+        this.btnModificarAlumno.setEnabled(false);
+        this.setTitle(controlador.TITULO);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
