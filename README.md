@@ -1,4 +1,4 @@
-# Parcial Nº1 de Programación 2 - Grupo 1
+# Trabajo Practico Nº5 de Programación 2 - Grupo 1
 
 ## 📚 Enunciado
 
