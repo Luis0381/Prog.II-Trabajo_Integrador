@@ -5,6 +5,8 @@
  */
 package autores.vistas;
 
+import autores.modelos.ModeloTablaAlumnos;
+import autores.modelos.ModeloTablaProfesor;
 import interfaces.IControladorAutores;
 import interfaces.IControladorPrincipal;
 
@@ -14,9 +16,11 @@ import javax.swing.*;
  *
  * @author Thomas
  */
-public class VentanaAutores extends javax.swing.JDialog {
+public class VentanaAutores extends javax.swing.JFrame {
 
     private IControladorAutores controlador;
+    private ModeloTablaAlumnos modeloAlumno = new ModeloTablaAlumnos();
+    private ModeloTablaProfesor modeloProfesor = new ModeloTablaProfesor();
 
     /**
      * Creates new form VentanaAutores
@@ -24,8 +28,8 @@ public class VentanaAutores extends javax.swing.JDialog {
     public VentanaAutores(IControladorAutores controlador) {
         initComponents();
         this.controlador = controlador;
-        this.tablaAlumnos.setModel(modeloAlumnos);
-        this.tablaProfesores.setModel(modeloProfesores);
+        this.tablaAlumnos.setModel(modeloAlumno);
+        this.tablaProfesores.setModel(modeloProfesor);
         this.btnBorrarProfesor.setEnabled(false);
         this.btnBorrarAlumno.setEnabled(false);
         this.btnModificarProfesor.setEnabled(false);
@@ -78,6 +82,11 @@ public class VentanaAutores extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtApellidosProfesor.setFont(new java.awt.Font("SF UI  Text", 0, 11)); // NOI18N
+        txtApellidosProfesor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidosProfesorKeyPressed(evt);
+            }
+        });
 
         jLabel3.setText("Apellidos: ");
 
@@ -175,9 +184,9 @@ public class VentanaAutores extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtApellidosAlumno.setFont(new java.awt.Font("SF UI  Text", 0, 11)); // NOI18N
-        txtApellidosAlumno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidosAlumnoActionPerformed(evt);
+        txtApellidosAlumno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidosAlumnoKeyPressed(evt);
             }
         });
 
@@ -260,9 +269,9 @@ public class VentanaAutores extends javax.swing.JDialog {
                     .addComponent(btnBuscarAlumno))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(67, 67, 67)
                         .addComponent(btnNuevoAlumno)
-                        .addGap(39, 39, 39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnModificarAlumno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBorrarAlumno))
@@ -302,85 +311,59 @@ public class VentanaAutores extends javax.swing.JDialog {
 
     private void btnBuscarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProfesorActionPerformed
         // TODO add your handling code here:
+        controlador.btnBuscarProfesorClic(evt);
     }//GEN-LAST:event_btnBuscarProfesorActionPerformed
 
     private void btnNuevoProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProfesorActionPerformed
         // TODO add your handling code here:
+        controlador.btnNuevoProfesorClic(evt);
     }//GEN-LAST:event_btnNuevoProfesorActionPerformed
 
     private void btnModificarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProfesorActionPerformed
         // TODO add your handling code here:
+        controlador.btnModificarProfesorClic(evt);
     }//GEN-LAST:event_btnModificarProfesorActionPerformed
 
     private void btnBorrarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarProfesorActionPerformed
         // TODO add your handling code here:
+        controlador.btnBorrarProfesorClic(evt);
     }//GEN-LAST:event_btnBorrarProfesorActionPerformed
 
     private void btnBuscarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAlumnoActionPerformed
         // TODO add your handling code here:
+        controlador.btnBuscarAlumnoClic(evt);
     }//GEN-LAST:event_btnBuscarAlumnoActionPerformed
 
     private void btnNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoAlumnoActionPerformed
         // TODO add your handling code here:
+        controlador.btnNuevoAlumnoClic(evt);
     }//GEN-LAST:event_btnNuevoAlumnoActionPerformed
 
     private void btnModificarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarAlumnoActionPerformed
         // TODO add your handling code here:
+        controlador.btnModificarAlumnoClic(evt);
     }//GEN-LAST:event_btnModificarAlumnoActionPerformed
 
     private void btnBorrarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarAlumnoActionPerformed
         // TODO add your handling code here:
+        controlador.btnBorrarAlumnoClic(evt);
     }//GEN-LAST:event_btnBorrarAlumnoActionPerformed
 
-    private void txtApellidosAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosAlumnoActionPerformed
+    private void txtApellidosProfesorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosProfesorKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidosAlumnoActionPerformed
+        controlador.txtApellidosProfesorPresionarTecla(evt);
+    }//GEN-LAST:event_txtApellidosProfesorKeyPressed
+
+    private void txtApellidosAlumnoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosAlumnoKeyPressed
+        // TODO add your handling code here:
+        controlador.txtApellidosAlumnoPresionarTecla(evt);
+    }//GEN-LAST:event_txtApellidosAlumnoKeyPressed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
+        controlador.btnVolverClic(evt);
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VentanaAutores dialog = new VentanaAutores(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     public IControladorAutores getControlador() {
         return controlador;

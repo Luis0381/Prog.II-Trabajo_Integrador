@@ -1,9 +1,6 @@
 package autores.controladores;
 
-import autores.modelos.Alumno;
-import autores.modelos.Cargo;
-import autores.modelos.GestorAutores;
-import autores.modelos.Profesor;
+import autores.modelos.*;
 import autores.vistas.VentanaAutores;
 import interfaces.IControladorAutores;
 import principal.controladores.ControladorVentanaPrincipal;
@@ -37,6 +34,74 @@ public class ControladorAutores implements IControladorAutores {
 
     public void ocultarVentana() {
         ventana.setVisible(false);
+    }
+
+    public void actualizarTablaProfesores(){
+        javax.swing.JTable TablaProfesor = ventana.getTablaProfesores();
+        TablaProfesor.setModel(new ModeloTablaProfesor());
+
+        javax.swing.JButton btnBorrarProfesor = ventana.getBtnBorrarProfesor();
+        javax.swing.JButton btnModificarProfesor = ventana.getBtnModificarProfesor();
+
+        if(TablaProfesor.getRowCount() == 0){
+            btnBorrarProfesor.setEnabled(false);
+            btnModificarProfesor.setEnabled(false);
+        }
+        else{
+            btnBorrarProfesor.setEnabled(true);
+            btnModificarProfesor.setEnabled(true);
+        }
+    }
+
+    public void filtrarTablaProfesores(String filtrarApellido){
+        javax.swing.JTable TablaProfesor = ventana.getTablaProfesores();
+        TablaProfesor.setModel(new ModeloTablaProfesor(filtrarApellido));
+
+        javax.swing.JButton btnBorrarProfesor = ventana.getBtnBorrarProfesor();
+        javax.swing.JButton btnModificarProfesor = ventana.getBtnModificarProfesor();
+
+        if(TablaProfesor.getRowCount() == 0){
+            btnBorrarProfesor.setEnabled(false);
+            btnModificarProfesor.setEnabled(false);
+        }
+        else{
+            btnBorrarProfesor.setEnabled(true);
+            btnModificarProfesor.setEnabled(true);
+        }
+    }
+
+    public void actualizarTablaAlumnos(){
+        javax.swing.JTable TablaAlumnos = ventana.getTablaAlumnos();
+        TablaAlumnos.setModel(new ModeloTablaAlumnos());
+
+        javax.swing.JButton btnBorrarAlumno = ventana.getBtnBorrarAlumno();
+        javax.swing.JButton btnModificarAlumno = ventana.getBtnModificarAlumno();
+
+        if(TablaAlumnos.getRowCount() == 0){
+            btnBorrarAlumno.setEnabled(false);
+            btnModificarAlumno.setEnabled(false);
+        }
+        else{
+            btnBorrarAlumno.setEnabled(true);
+            btnModificarAlumno.setEnabled(true);
+        }
+    }
+
+    public void filtrarTablaAlumnos(String filtrarApellido){
+        javax.swing.JTable TablaAlumnos = ventana.getTablaAlumnos();
+        TablaAlumnos.setModel(new ModeloTablaAlumnos(filtrarApellido));
+
+        javax.swing.JButton btnBorrarAlumno = ventana.getBtnBorrarAlumno();
+        javax.swing.JButton btnModificarAlumno = ventana.getBtnModificarAlumno();
+
+        if(TablaAlumnos.getRowCount() == 0){
+            btnBorrarAlumno.setEnabled(false);
+            btnModificarAlumno.setEnabled(false);
+        }
+        else{
+            btnBorrarAlumno.setEnabled(true);
+            btnModificarAlumno.setEnabled(true);
+        }
     }
 
     @Override

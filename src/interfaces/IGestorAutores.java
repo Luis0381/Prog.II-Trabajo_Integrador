@@ -42,5 +42,9 @@ public interface IGestorAutores {
 
     public void mostrarAutores();
 
+    public ArrayList<Alumno> buscarAlumnos(String apellidos);
+
+    public ArrayList<Profesor> buscarProfesores(String apellidos);
+
 
 }

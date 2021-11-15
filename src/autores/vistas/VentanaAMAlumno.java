@@ -161,21 +161,12 @@ public class VentanaAMAlumno extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarClic(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClic
-        int dni = 0;
-        if (!this.txtDNI.getText().trim().isEmpty())
-            dni = Integer.parseInt(this.txtDNI.getText().trim());
-        String apellidos = this.txtApellidos.getText().trim();
-        String nombres = this.txtNombres.getText().trim();
-        String cx = this.txtCX.getText().trim();
-        String clave = new String(this.passClave.getPassword());
-        Alumno alumno = new Alumno(dni, apellidos, nombres, clave, cx);
-        this.alumnos.add(alumno);
-        for(Alumno a : this.alumnos)
-            a.mostrar();
+        controlador.btnGuardarClic(evt);
     }//GEN-LAST:event_btnGuardarClic
 
     private void btnCancelarClic(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClic
         // TODO add your handling code here:
+        controlador.btnCancelarClic(evt);
     }//GEN-LAST:event_btnCancelarClic
 
     public IControladorAMAlumno getControlador() {

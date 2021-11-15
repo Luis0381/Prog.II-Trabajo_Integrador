@@ -141,9 +141,9 @@ public class GestorAutores implements IGestorAutores {
     public String borrarAutor(Autor dni) {
         if (this.existeEsteAutor(dni)) {
             autores.remove(dni);
-            return "Autor removido con EXITO!"
+            return "Autor removido con EXITO!";
         }
-        return "Autor Inexistente!"
+        return "Autor Inexistente!";
     }
 
     @Override
@@ -152,6 +152,34 @@ public class GestorAutores implements IGestorAutores {
             for (Alumno a : verAlumnos())
                 a.mostrar();
         }
+    }
+
+    @Override
+    public ArrayList<Alumno> buscarAlumnos(String apellidos) {
+        ArrayList<Alumno> alumnosBuscados = new ArrayList<>();
+        if (apellidos != null) {
+            for(Autor autor : autores) {
+                if (autor instanceof Alumno) {
+                    if (autor.verApellidos().toLowerCase().contains(apellidos.toLowerCase()))
+                        alumnosBuscados.add((Alumno)autor);
+                }
+            }
+        }
+        return alumnosBuscados;
+    }
+
+    @Override
+    public ArrayList<Profesor> buscarProfesores(String apellidos) {
+        ArrayList<Profesor> profesoresBuscados = new ArrayList<>();
+        if (apellidos != null) {
+            for(Autor autor : autores) {
+                if (autor instanceof Profesor) {
+                    if (autor.verApellidos().toLowerCase().contains(apellidos.toLowerCase()))
+                        profesoresBuscados.add((Profesor)autor);
+                }
+            }
+        }
+        return profesoresBuscados;
     }
 
     @Override
