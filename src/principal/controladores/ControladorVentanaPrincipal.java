@@ -2,6 +2,7 @@ package principal.controladores;
 
 
 import autores.controladores.ControladorAutores;
+import autores.vistas.VentanaAutores;
 import interfaces.IControladorPrincipal;
 import principal.vistas.VentanaPrincipal;
 
@@ -37,10 +38,7 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
     public void btnAutoresClic(ActionEvent evt) {
         ControladorAutores autores = ControladorAutores.crear();
 
-        if (ventana == null)
-            ventana = new VentanaPrincipal(this);
-        else
-            ventana.setVisible(true);
+        autores.mostrarVentana();
     }
 
     @Override

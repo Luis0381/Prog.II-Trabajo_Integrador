@@ -189,7 +189,7 @@ public class ControladorAutores implements IControladorAutores {
 
             instancia.mostrarVentana(instancia.TITULO_MODIFICAR);
         } else {
-            JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun profesor");
+            JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun alumno");
         }
     }
 

@@ -20,10 +20,6 @@ public class VentanaAMProfesor extends JDialog {
 
     private IControladorAMProfesor controlador;
 
-    /**
-     * Constructor
-     * @param ventanaPadre ventana padre
-     */
     public VentanaAMProfesor(IControladorAMProfesor controlador) {
         initComponents();
         this.comboCargos.setModel(new ModeloComboCargos());

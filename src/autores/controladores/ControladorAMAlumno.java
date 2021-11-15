@@ -1,11 +1,7 @@
 package autores.controladores;
 
-import autores.modelos.Alumno;
-import autores.modelos.Cargo;
-import autores.modelos.GestorAutores;
-import autores.modelos.ModeloComboCargos;
+import autores.modelos.*;
 import autores.vistas.VentanaAMAlumno;
-import autores.vistas.VentanaAutores;
 import interfaces.IControladorAMAlumno;
 
 import javax.swing.*;
@@ -27,6 +23,7 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
         return instancia;
     }
 
+
     public void mostrarVentana(String titulo) {
         if (ventana == null) {
             ventana = new VentanaAMAlumno(this);
@@ -41,6 +38,15 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
         ventana.setVisible(false);
     }
 
+    private static boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
+
     public void nuevoAlumno(){
         javax.swing.JTextField txtApellido = ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = ventana.getTxtNombres();
@@ -48,21 +54,29 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
         javax.swing.JPasswordField passClave = ventana.getPassClave();
         javax.swing.JPasswordField passClaveRepetida = ventana.getPassClaveRepetida();
         javax.swing.JTextField txtDNI = ventana.getTxtDNI();
+
+        String apellidos, nombres, clave, claveRepetida,cx;
+
         int dni = 0;
-        if (!txtDNI.getText().trim().isEmpty())
-            dni = Integer.parseInt(txtDNI.getText().trim());
-        String apellidos = txtApellido.getText().trim();
-        String nombres = txtNombre.getText().trim();
-        String clave = new String(passClave.getPassword());
-        String claveRepetida = new String(passClaveRepetida.getPassword());
-        String cx = txtCX.getText().trim();
+        if (!txtDNI.getText().trim().isEmpty()) {
+            if (isNumeric(txtDNI.getText().trim()))
+                dni = Integer.parseInt(txtDNI.getText().trim());
+        }
+
+        apellidos = txtApellido.getText().trim();
+        nombres = txtNombre.getText().trim();
+        clave = new String(passClave.getPassword());
+        claveRepetida = new String(passClaveRepetida.getPassword());
+        cx = txtCX.getText().trim();
         GestorAutores gestorAutor = GestorAutores.crear();
-
         String resultado = gestorAutor.nuevoAutor(dni, apellidos, nombres, cx, clave, claveRepetida);
-
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("\n\tAlumno agregado de forma EXITOSA!"))
+
+        if (resultado.equals("\n\tAlumno agregado de forma EXITOSA!")) {
+            ocultarVentana();
             limpiarCeldas();
+        }
+
         ControladorAutores controlAutor = ControladorAutores.crear();
         controlAutor.actualizarTablaAlumnos();
     }
@@ -76,8 +90,10 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
         javax.swing.JTextField txtDNI = ventana.getTxtDNI();
 
         int dni = 0;
-        if (!txtDNI.getText().trim().isEmpty())
-            dni = Integer.parseInt(txtDNI.getText().trim());
+        if (!txtDNI.getText().trim().isEmpty()) {
+            if (isNumeric(txtDNI.getText().trim()))
+                dni = Integer.parseInt(txtDNI.getText().trim());
+        }
         String apellidos = txtApellido.getText().trim();
         String nombres = txtNombre.getText().trim();
         String clave = new String(passClave.getPassword());
@@ -89,7 +105,7 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
         String resultado = gestorAutor.modificarAutor(new Alumno(dni, apellidos, nombres, clave, cx), apellidos, nombres, cx, clave, claveRepetida);
         JOptionPane.showMessageDialog(ventana, resultado);
 
-        if(resultado.equals("Datos de Alumno modificados de forma EXITOSA!")){
+        if(resultado.equals("Datos del Alumno modificados de forma EXITOSA!")){
             ocultarVentana();
             limpiarCeldas();
         }

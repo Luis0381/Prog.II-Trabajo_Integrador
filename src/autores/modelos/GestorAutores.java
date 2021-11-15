@@ -1,9 +1,8 @@
 package autores.modelos;
 
 
-import grupos.modelos.Grupo;
-import interfaces.IGestorAutores;
 
+import interfaces.IGestorAutores;
 
 import java.util.ArrayList;
 
@@ -38,18 +37,19 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
-        Autor nuevoProfesor = new Profesor(0, apellidos, nombres, clave, cargo);
 
         if (existeEsteAutor(autor)) {
-            if (autor instanceof Profesor) {
-                if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cargo != null && clave.equals(claveRepetida)) {
-                    Profesor profesor = (Profesor) autor;
-                    profesor.asignarApellidos(apellidos);
-                    profesor.asignarNombres(nombres);
-                    profesor.asignarCargo(cargo);
-                    profesor.asignarClave(clave);
-                    return "Datos de Profesor modificados de forma EXITOSA!";
+            for (Profesor p : verProfesores()) {
+                if (p.equals(autor)) {
+                    if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cargo != null && clave.equals(claveRepetida)) {
+                        p.asignarApellidos(apellidos);
+                        p.asignarNombres(nombres);
+                        p.asignarCargo(cargo);
+                        p.asignarClave(clave);
+                        return "Datos de Profesor modificados de forma EXITOSA!";
+                    }
                 }
+
             }
         }
         return "ERROR al modificar los datos de su Profesor!";
@@ -83,17 +83,19 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
-
         if (existeEsteAutor(autor)) {
-            if (autor instanceof Alumno)
-                if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cx != null && !cx.trim().isEmpty() && clave.equals(claveRepetida)) {
-                    Alumno alumno = (Alumno) autor;
-                    alumno.asignarApellidos(apellidos);
-                    alumno.asignarNombres(nombres);
-                    alumno.asignarCx(cx);
-                    alumno.asignarClave(clave);
-                    return "Datos de Alumno modificados de forma EXITOSA!";
+            for (Alumno a : verAlumnos()) {
+                if (a.equals(autor)) {
+                    if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cx != null && clave.equals(claveRepetida)) {
+                        a.asignarApellidos(apellidos);
+                        a.asignarNombres(nombres);
+                        a.asignarCx(cx);
+                        a.asignarClave(clave);
+                        return "Datos del Alumno modificados de forma EXITOSA!";
+                    }
                 }
+
+            }
         }
         return "ERROR al modificar los datos de su Alumno!";
     }
@@ -158,10 +160,10 @@ public class GestorAutores implements IGestorAutores {
     public ArrayList<Alumno> buscarAlumnos(String apellidos) {
         ArrayList<Alumno> alumnosBuscados = new ArrayList<>();
         if (apellidos != null) {
-            for(Autor autor : autores) {
+            for (Autor autor : autores) {
                 if (autor instanceof Alumno) {
                     if (autor.verApellidos().toLowerCase().contains(apellidos.toLowerCase()))
-                        alumnosBuscados.add((Alumno)autor);
+                        alumnosBuscados.add((Alumno) autor);
                 }
             }
         }
@@ -172,10 +174,10 @@ public class GestorAutores implements IGestorAutores {
     public ArrayList<Profesor> buscarProfesores(String apellidos) {
         ArrayList<Profesor> profesoresBuscados = new ArrayList<>();
         if (apellidos != null) {
-            for(Autor autor : autores) {
+            for (Autor autor : autores) {
                 if (autor instanceof Profesor) {
                     if (autor.verApellidos().toLowerCase().contains(apellidos.toLowerCase()))
-                        profesoresBuscados.add((Profesor)autor);
+                        profesoresBuscados.add((Profesor) autor);
                 }
             }
         }
