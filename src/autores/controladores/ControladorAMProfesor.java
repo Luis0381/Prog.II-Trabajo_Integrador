@@ -184,15 +184,6 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
         }
     }
 
-    public void comboBoxPresionarTecla(KeyEvent evt){
-        javax.swing.JComboBox comboBox = this.ventana.getComboCargos();
-        javax.swing.JPasswordField passClave = this.ventana.getPassClave();
-
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            passClave.requestFocus();
-        }
-    }
-
     @Override
     public void passClavePresionarTecla(KeyEvent evt) {
         javax.swing.JPasswordField passClave = this.ventana.getPassClave();

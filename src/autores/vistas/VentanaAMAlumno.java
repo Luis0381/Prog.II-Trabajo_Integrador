@@ -59,10 +59,20 @@ public class VentanaAMAlumno extends JDialog {
         jLabel1.setText("Apellidos:");
 
         txtApellidos.setToolTipText("Apellidos del profesor");
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyPressed(evt);
+            }
+        });
 
         jLabel2.setText("Nombres:");
 
         txtNombres.setToolTipText("Nombres del profesor");
+        txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombresKeyPressed(evt);
+            }
+        });
 
         btnGuardar.setMnemonic('G');
         btnGuardar.setText("Guardar");
@@ -78,8 +88,24 @@ public class VentanaAMAlumno extends JDialog {
         jLabel4.setText("Documento:");
 
         txtDNI.setToolTipText("Documento del profesor");
+        txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDNIKeyPressed(evt);
+            }
+        });
 
         txtCX.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtCX.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCXKeyPressed(evt);
+            }
+        });
+
+        passClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passClaveKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Clave:");
 
@@ -89,6 +115,12 @@ public class VentanaAMAlumno extends JDialog {
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarClic(evt);
+            }
+        });
+
+        passClaveRepetida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passClaveRepetidaKeyPressed(evt);
             }
         });
 
@@ -168,6 +200,36 @@ public class VentanaAMAlumno extends JDialog {
         // TODO add your handling code here:
         controlador.btnCancelarClic(evt);
     }//GEN-LAST:event_btnCancelarClic
+
+    private void txtDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDNIKeyPressed
+        // TODO add your handling code here:
+        controlador.txtDocumentoPresionarTecla(evt);
+    }//GEN-LAST:event_txtDNIKeyPressed
+
+    private void txtApellidosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyPressed
+        // TODO add your handling code here:
+        controlador.txtApellidosPresionarTecla(evt);
+    }//GEN-LAST:event_txtApellidosKeyPressed
+
+    private void txtNombresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyPressed
+        // TODO add your handling code here:
+        controlador.txtNombresPresionarTecla(evt);
+    }//GEN-LAST:event_txtNombresKeyPressed
+
+    private void txtCXKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCXKeyPressed
+        // TODO add your handling code here:
+        controlador.txtCXPresionarTecla(evt);
+    }//GEN-LAST:event_txtCXKeyPressed
+
+    private void passClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passClaveKeyPressed
+        // TODO add your handling code here:
+        controlador.passClavePresionarTecla(evt);
+    }//GEN-LAST:event_passClaveKeyPressed
+
+    private void passClaveRepetidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passClaveRepetidaKeyPressed
+        // TODO add your handling code here:
+        controlador.passRepetirClavePresionarTecla(evt);
+    }//GEN-LAST:event_passClaveRepetidaKeyPressed
 
     public IControladorAMAlumno getControlador() {
         return controlador;
