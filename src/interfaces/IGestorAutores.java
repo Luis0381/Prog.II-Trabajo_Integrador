@@ -34,9 +34,13 @@ public interface IGestorAutores {
 
     public Autor verAutor(int dni);
 
+    public String borrarAutor(Autor dni);
+
     public void mostrarAlumnos();
 
     public void mostrarProfesores();
 
     public void mostrarAutores();
+
+
 }

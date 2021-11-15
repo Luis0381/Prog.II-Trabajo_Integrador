@@ -8,6 +8,8 @@ package autores.vistas;
 import interfaces.IControladorAutores;
 import interfaces.IControladorPrincipal;
 
+import javax.swing.*;
+
 /**
  *
  * @author Thomas
@@ -378,6 +380,118 @@ public class VentanaAutores extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+
+    public IControladorAutores getControlador() {
+        return controlador;
+    }
+
+    public void setControlador(IControladorAutores controlador) {
+        this.controlador = controlador;
+    }
+
+    public JButton getBtnBorrarAlumno() {
+        return btnBorrarAlumno;
+    }
+
+    public void setBtnBorrarAlumno(JButton btnBorrarAlumno) {
+        this.btnBorrarAlumno = btnBorrarAlumno;
+    }
+
+    public JButton getBtnBorrarProfesor() {
+        return btnBorrarProfesor;
+    }
+
+    public void setBtnBorrarProfesor(JButton btnBorrarProfesor) {
+        this.btnBorrarProfesor = btnBorrarProfesor;
+    }
+
+    public JButton getBtnBuscarAlumno() {
+        return btnBuscarAlumno;
+    }
+
+    public void setBtnBuscarAlumno(JButton btnBuscarAlumno) {
+        this.btnBuscarAlumno = btnBuscarAlumno;
+    }
+
+    public JButton getBtnBuscarProfesor() {
+        return btnBuscarProfesor;
+    }
+
+    public void setBtnBuscarProfesor(JButton btnBuscarProfesor) {
+        this.btnBuscarProfesor = btnBuscarProfesor;
+    }
+
+    public JButton getBtnModificarAlumno() {
+        return btnModificarAlumno;
+    }
+
+    public void setBtnModificarAlumno(JButton btnModificarAlumno) {
+        this.btnModificarAlumno = btnModificarAlumno;
+    }
+
+    public JButton getBtnModificarProfesor() {
+        return btnModificarProfesor;
+    }
+
+    public void setBtnModificarProfesor(JButton btnModificarProfesor) {
+        this.btnModificarProfesor = btnModificarProfesor;
+    }
+
+    public JButton getBtnNuevoAlumno() {
+        return btnNuevoAlumno;
+    }
+
+    public void setBtnNuevoAlumno(JButton btnNuevoAlumno) {
+        this.btnNuevoAlumno = btnNuevoAlumno;
+    }
+
+    public JButton getBtnNuevoProfesor() {
+        return btnNuevoProfesor;
+    }
+
+    public void setBtnNuevoProfesor(JButton btnNuevoProfesor) {
+        this.btnNuevoProfesor = btnNuevoProfesor;
+    }
+
+    public JButton getBtnVolver() {
+        return btnVolver;
+    }
+
+    public void setBtnVolver(JButton btnVolver) {
+        this.btnVolver = btnVolver;
+    }
+
+    public JTable getTablaAlumnos() {
+        return tablaAlumnos;
+    }
+
+    public void setTablaAlumnos(JTable tablaAlumnos) {
+        this.tablaAlumnos = tablaAlumnos;
+    }
+
+    public JTable getTablaProfesores() {
+        return tablaProfesores;
+    }
+
+    public void setTablaProfesores(JTable tablaProfesores) {
+        this.tablaProfesores = tablaProfesores;
+    }
+
+    public JTextField getTxtApellidosAlumno() {
+        return txtApellidosAlumno;
+    }
+
+    public void setTxtApellidosAlumno(JTextField txtApellidosAlumno) {
+        this.txtApellidosAlumno = txtApellidosAlumno;
+    }
+
+    public JTextField getTxtApellidosProfesor() {
+        return txtApellidosProfesor;
+    }
+
+    public void setTxtApellidosProfesor(JTextField txtApellidosProfesor) {
+        this.txtApellidosProfesor = txtApellidosProfesor;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,6 +22,16 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
 
         return instancia;
     }
+    public void mostrarVentana() {
+        if (ventana == null)
+            ventana = new VentanaPrincipal(this);
+        else
+            ventana.setVisible(true);
+    }
+
+    public void ocultarVentana() {
+        ventana.setVisible(false);
+    }
 
     @Override
     public void btnAutoresClic(ActionEvent evt) {

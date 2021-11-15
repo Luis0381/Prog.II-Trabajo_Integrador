@@ -73,7 +73,7 @@ public class GestorAutores implements IGestorAutores {
     public String nuevoAutor(int dni, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
         Autor nuevoAlumno = new Alumno(dni, apellidos, nombres, clave, cx);
 
-        if (autores.contains(nuevoAlumno) || dni <= 0 || apellidos == null || apellidos.trim().isEmpty() || nombres == null || nombres.trim().isEmpty() || cx == null || cx.trim().isEmpty() || !clave.equals(claveRepetida)){
+        if (autores.contains(nuevoAlumno) || dni <= 0 || apellidos == null || apellidos.trim().isEmpty() || nombres == null || nombres.trim().isEmpty() || cx == null || cx.trim().isEmpty() || !clave.equals(claveRepetida)) {
             return "\n\tERROR al agregar un nuevo Alumno!";
         } else {
             autores.add(nuevoAlumno);
@@ -115,7 +115,7 @@ public class GestorAutores implements IGestorAutores {
         if (autor == null)
             return false;
         else {
-            for(Autor a : autores) {
+            for (Autor a : autores) {
                 if (a.equals(autor))
                     return true;
             }
@@ -135,6 +135,15 @@ public class GestorAutores implements IGestorAutores {
                 return a;
         }
         return null;
+    }
+
+    @Override
+    public String borrarAutor(Autor dni) {
+        if (this.existeEsteAutor(dni)) {
+            autores.remove(dni);
+            return "Autor removido con EXITO!"
+        }
+        return "Autor Inexistente!"
     }
 
     @Override

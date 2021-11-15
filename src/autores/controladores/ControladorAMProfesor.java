@@ -1,5 +1,6 @@
 package autores.controladores;
 
+import autores.vistas.VentanaAMAlumno;
 import autores.vistas.VentanaAMProfesor;
 import interfaces.IControladorAMProfesor;
 
@@ -10,15 +11,37 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
     private static ControladorAMProfesor instancia;
     private VentanaAMProfesor ventana;
 
-    private ControladorAMProfesor(){
+    private ControladorAMProfesor() {
         this.ventana = new VentanaAMProfesor(this);
     }
 
-    public static ControladorAMProfesor crear(){
+    public static ControladorAMProfesor crear() {
         if (instancia == null)
             instancia = new ControladorAMProfesor();
 
         return instancia;
+    }
+
+    public void mostrarVentana(String titulo) {
+        if (ventana == null) {
+            ventana = new VentanaAMProfesor(this);
+            ventana.setTitle(titulo);
+        } else {
+            ventana.setTitle(titulo);
+            ventana.setVisible(true);
+        }
+    }
+
+    public void ocultarVentana() {
+        ventana.setVisible(false);
+    }
+
+    public VentanaAMProfesor getVentana() {
+        return ventana;
+    }
+
+    public void setVentana(VentanaAMProfesor ventana) {
+        this.ventana = ventana;
     }
 
     @Override
