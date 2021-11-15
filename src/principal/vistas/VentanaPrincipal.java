@@ -24,6 +24,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setTitle(controlador.TITULO);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        btnIdiomas.setEnabled(false);
+        btnTipos.setEnabled(false);
+        btnLugares.setEnabled(false);
+        btnPalabrasClaves.setEnabled(false);
+        btnGrupos.setEnabled(false);
+        btnPublicaciones.setEnabled(false);
     }
 
     /**
@@ -45,9 +51,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
+        btnPalabrasClaves.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPalabrasClaves.setText("Palabras Claves");
 
+        btnGrupos.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnGrupos.setText("Grupos");
         btnGrupos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,6 +64,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnAutores.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnAutores.setText("Autores");
         btnAutores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,8 +72,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnLugares.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnLugares.setText("Lugares");
 
+        btnPublicaciones.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPublicaciones.setText("Publicaciones");
         btnPublicaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,10 +83,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnIdiomas.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnIdiomas.setText("Idiomas");
 
+        btnTipos.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnTipos.setText("Tipos");
 
+        btnSalir.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,14 +125,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTipos, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTipos, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnPublicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPublicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
