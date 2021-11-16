@@ -5,6 +5,9 @@ import interfaces.IGestorGrupos;
 
 import java.util.ArrayList;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class GestorGrupos implements IGestorGrupos {
     private static ArrayList<Grupo> grupos = new ArrayList<>();
     private static GestorGrupos gestor;
@@ -33,7 +36,7 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public String modificarGrupo(Grupo grupo, String descripcion) {
-        if (this.existeEsteGrupo(grupo) && (descripcion != null)){
+        if (this.existeEsteGrupo(grupo) && (descripcion != null)) {
             if (descripcion.isEmpty()) {
                 descripcion = null;
             }
@@ -52,7 +55,7 @@ public class GestorGrupos implements IGestorGrupos {
     public Grupo verGrupo(String nombre) {
         if ((nombre == null) || (nombre.isEmpty()))
             return null;
-        for(Grupo a : grupos)
+        for (Grupo a : grupos)
             if (a.verNombre().equals(nombre))
                 return a;
         return null;
@@ -62,7 +65,7 @@ public class GestorGrupos implements IGestorGrupos {
     public boolean existeEsteGrupo(Grupo grupo) {
         if (grupo == null)
             return false;
-        for(Grupo a : grupos) {
+        for (Grupo a : grupos) {
             if (a.equals(grupo))
                 return true;
         }

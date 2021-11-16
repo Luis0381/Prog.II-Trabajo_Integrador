@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- *
  * @author Thomas Mafut & Luis Medina Raed
  */
 public class Publicacion {
@@ -30,7 +29,7 @@ public class Publicacion {
     private MiembroEnGrupo unMiembroEnGrupo;
 
     DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/uuuu");
-    
+
     // Constructor
     public Publicacion(String titulo, MiembroEnGrupo unMiembroEnGrupo, LocalDate fechaPublicacion, Tipo unTipo, Idioma unIdioma, Lugar unLugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
         this.titulo = titulo;
@@ -43,25 +42,28 @@ public class Publicacion {
         this.enlace = enlace;
         this.resumen = resumen;
     }
+
     // Metodos
-    public void mostrar(){
+    public void mostrar() {
         System.out.println("------------------------------");
         System.out.println("Titulo: " + this.titulo);
         System.out.println("Autor: " + this.unMiembroEnGrupo.verAutor().verApellidos() + ", " + this.unMiembroEnGrupo.verAutor().verNombres());
         System.out.println("Grupo: " + this.unMiembroEnGrupo.verGrupo().verNombre());
-        System.out.println("Fecha de Publicacion: " + fechaPublicacion.format(formato));;
+        System.out.println("Fecha de Publicacion: " + fechaPublicacion.format(formato));
+        ;
         System.out.println("Tipo: " + this.unTipo);
         System.out.println("Idioma: " + this.unIdioma);
         System.out.println("Lugar: " + this.unLugar);
         System.out.println("");
         System.out.println("Sus palabras claves son: ");
-        for (PalabraClave palabraClave : palabrasClaves){
+        for (PalabraClave palabraClave : palabrasClaves) {
             System.out.println(palabraClave);
         }
         System.out.println("");
         System.out.println("Enlace: " + this.enlace);
         System.out.println("Resumen: " + this.resumen);
     }
+
     // equals() & hashCode()
     @Override
     public int hashCode() {

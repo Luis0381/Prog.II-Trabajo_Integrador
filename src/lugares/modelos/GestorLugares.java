@@ -4,6 +4,9 @@ import interfaces.IGestorLugares;
 
 import java.util.ArrayList;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class GestorLugares implements IGestorLugares {
     private static ArrayList<Lugar> lugares = new ArrayList<>();
     private static GestorLugares gestor;

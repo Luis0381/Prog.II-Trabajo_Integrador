@@ -4,6 +4,9 @@ import interfaces.IGestorTipos;
 
 import java.util.ArrayList;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class GestorTipos implements IGestorTipos {
     private static ArrayList<Tipo> tipos = new ArrayList<>();
     private static GestorTipos gestor;

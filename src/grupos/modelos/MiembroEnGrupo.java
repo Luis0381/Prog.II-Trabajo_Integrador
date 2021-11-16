@@ -2,10 +2,10 @@ package grupos.modelos;
 
 import autores.modelos.Autor;
 import autores.modelos.Profesor;
+
 import java.util.Objects;
 
 /**
- *
  * @author Thomas Mafut & Luis Medina Raed
  */
 public class MiembroEnGrupo {
@@ -13,6 +13,7 @@ public class MiembroEnGrupo {
     private Autor unAutor;
     private Grupo unGrupo;
     private Rol unRol;
+
     // Constructor
     public MiembroEnGrupo(Autor unAutor, Grupo unGrupo, Rol unRol) {
         this.unAutor = unAutor;
@@ -27,6 +28,7 @@ public class MiembroEnGrupo {
         hash = 47 * hash + Objects.hashCode(this.unAutor);
         return hash;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -44,6 +46,7 @@ public class MiembroEnGrupo {
         }
         return true;
     }
+
     // Getters & Setters
     public Autor verAutor() {
         return unAutor;

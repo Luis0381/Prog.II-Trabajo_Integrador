@@ -9,20 +9,33 @@ import principal.vistas.VentanaPrincipal;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class ControladorVentanaPrincipal implements IControladorPrincipal {
     private static ControladorVentanaPrincipal instancia;
     private VentanaPrincipal ventana;
 
+    /**
+     * Constructor
+     */
     private ControladorVentanaPrincipal() {
         this.ventana = new VentanaPrincipal(this);
     }
 
+    /**
+     * Crea una instancia de ControladorVentanaPrincipal
+     */
     public static ControladorVentanaPrincipal crear() {
         if (instancia == null)
             instancia = new ControladorVentanaPrincipal();
 
         return instancia;
     }
+
+    /**
+     * Muestra la ventana
+     */
     public void mostrarVentana() {
         if (ventana == null)
             ventana = new VentanaPrincipal(this);
@@ -30,10 +43,18 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
             ventana.setVisible(true);
     }
 
+    /**
+     * Oculta la ventana
+     */
     public void ocultarVentana() {
         ventana.setVisible(false);
     }
 
+    /**
+     * Acción que se ejecuta cuando se selecciona el botón Autores
+     *
+     * @param evt evento
+     */
     @Override
     public void btnAutoresClic(ActionEvent evt) {
         ControladorAutores autores = ControladorAutores.crear();
@@ -41,12 +62,16 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
         autores.mostrarVentana();
     }
 
+    /**
+     * Acción que se ejecuta cuando se selecciona el botón Salir
+     *
+     * @param evt evento
+     */
     @Override
     public void btnSalirClic(ActionEvent evt) {
-        String[] confirmacion = {"Si", "No"};
-        int opcion = JOptionPane.showOptionDialog(ventana, CONFIRMACION, "Esta seguro que desea salir?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, confirmacion, confirmacion[1]);
-
-        if (opcion == 0)
-            System.exit(0);
+        int opcion = JOptionPane.showOptionDialog(null, CONFIRMACION, TITULO, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Sí", "No"}, this);
+        if (opcion == JOptionPane.YES_OPTION) {
+            this.ventana.dispose();
+        }
     }
 }

@@ -11,14 +11,23 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class ControladorAMProfesor implements IControladorAMProfesor {
     private static ControladorAMProfesor instancia;
     private VentanaAMProfesor ventana;
 
+    /**
+     * Constructor
+     */
     private ControladorAMProfesor() {
         this.ventana = new VentanaAMProfesor(this);
     }
 
+    /**
+     * Crea una instancia de ControladorAMProfesor
+     */
     public static ControladorAMProfesor crear() {
         if (instancia == null)
             instancia = new ControladorAMProfesor();
@@ -26,6 +35,11 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
         return instancia;
     }
 
+    /**
+     * Muestra la ventana asignandole un titulo
+     *
+     * @param titulo Titulo de la ventana
+     */
     public void mostrarVentana(String titulo) {
         if (ventana == null) {
             ventana = new VentanaAMProfesor(this);
@@ -36,6 +50,9 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
         }
     }
 
+    /**
+     * Oculta la ventana
+     */
     public void ocultarVentana() {
         ventana.setVisible(false);
     }
@@ -48,15 +65,23 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
         this.ventana = ventana;
     }
 
-    private static boolean isNumeric(String cadena){
+    /**
+     * Verifica si una string es numerica
+     *
+     * @param cadena String que queremos verificar si es numerica
+     */
+    private static boolean isNumeric(String cadena) {
         try {
             Integer.parseInt(cadena);
             return true;
-        } catch (NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             return false;
         }
     }
 
+    /**
+     * Se encarga de limpiar los datos ingresados de las celdas presentadas en la ventana
+     */
     public void limpiarCeldas() {
         javax.swing.JTextField txtApellido = ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = ventana.getTxtNombres();
@@ -72,6 +97,9 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
         comboCargos.setSelectedItem(Cargo.ASOCIADO);
     }
 
+    /**
+     * Se encarga de la creación de un profesor
+     */
     public void nuevoProfesor() {
         javax.swing.JTextField txtApellido = ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = ventana.getTxtNombres();
@@ -108,6 +136,9 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
         controlAutor.actualizarTablaProfesores();
     }
 
+    /**
+     * Se encarga de la modificacion de un profesor
+     */
     public void modificarProfesor() {
         javax.swing.JTextField txtApellido = ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = ventana.getTxtNombres();
@@ -152,27 +183,27 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
     @Override
     public void txtApellidosPresionarTecla(KeyEvent evt) {
         javax.swing.JTextField txtApellido = this.ventana.getTxtApellidos();
-        javax.swing.JTextField txtDni = this.ventana.getTxtDNI();
-
+        javax.swing.JTextField txtNombre = this.ventana.getTxtNombres();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtApellido.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(ventana, "Ingrese un apellido");
             } else {
-                txtDni.requestFocus();
+                txtNombre.requestFocus();
             }
         }
     }
 
     @Override
     public void txtNombresPresionarTecla(KeyEvent evt) {
-        javax.swing.JTextField txtApellido = this.ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = this.ventana.getTxtNombres();
+        javax.swing.JComboBox comboBox = this.ventana.getComboCargos();
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtNombre.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(ventana, "Ingrese un nombre");
             } else {
-                txtApellido.requestFocus();
+                comboBox.requestFocus();
+                comboBox.showPopup();
             }
         }
     }
@@ -180,14 +211,13 @@ public class ControladorAMProfesor implements IControladorAMProfesor {
     @Override
     public void txtDocumentoPresionarTecla(KeyEvent evt) {
         javax.swing.JTextField txtDni = this.ventana.getTxtDNI();
-        javax.swing.JComboBox comboBox = this.ventana.getComboCargos();
+        javax.swing.JTextField txtApellido = this.ventana.getTxtApellidos();
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtDni.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(ventana, "Ingrese un DNI");
             } else {
-                comboBox.requestFocus();
-                comboBox.showPopup();
+                txtApellido.requestFocus();
             }
         }
     }

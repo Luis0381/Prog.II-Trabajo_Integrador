@@ -5,6 +5,9 @@ import interfaces.IGestorPalabrasClaves;
 
 import java.util.ArrayList;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class GestorPalabrasClaves implements IGestorPalabrasClaves {
     private static ArrayList<PalabraClave> palabrasClaves = new ArrayList<>();
     private static GestorPalabrasClaves gestor;

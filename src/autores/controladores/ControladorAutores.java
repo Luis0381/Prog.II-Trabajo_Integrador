@@ -10,14 +10,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class ControladorAutores implements IControladorAutores {
     private static ControladorAutores instancia;
     private VentanaAutores ventana;
 
+    /**
+     * Constructor
+     */
     public ControladorAutores() {
         this.ventana = new VentanaAutores(this);
     }
 
+    /**
+     * Crea una instancia de ControladorAutores
+     */
     public static ControladorAutores crear() {
         if (instancia == null)
             instancia = new ControladorAutores();
@@ -25,6 +34,9 @@ public class ControladorAutores implements IControladorAutores {
         return instancia;
     }
 
+    /**
+     * Muestra la ventana
+     */
     public void mostrarVentana() {
         if (ventana == null)
             ventana = new VentanaAutores(this);
@@ -32,77 +44,93 @@ public class ControladorAutores implements IControladorAutores {
             ventana.setVisible(true);
     }
 
+    /**
+     * Oculta la ventana
+     */
     public void ocultarVentana() {
         ventana.setVisible(false);
     }
 
-    public void actualizarTablaProfesores(){
+    /**
+     * Se encarga de actualizar los datos de la tabla de profesores
+     */
+    public void actualizarTablaProfesores() {
         javax.swing.JTable TablaProfesor = ventana.getTablaProfesores();
         TablaProfesor.setModel(new ModeloTablaProfesor());
 
         javax.swing.JButton btnBorrarProfesor = ventana.getBtnBorrarProfesor();
         javax.swing.JButton btnModificarProfesor = ventana.getBtnModificarProfesor();
 
-        if(TablaProfesor.getRowCount() == 0){
+        if (TablaProfesor.getRowCount() == 0) {
             btnBorrarProfesor.setEnabled(false);
             btnModificarProfesor.setEnabled(false);
-        }
-        else{
+        } else {
             btnBorrarProfesor.setEnabled(true);
             btnModificarProfesor.setEnabled(true);
         }
     }
 
-    public void filtrarTablaProfesores(String filtrarApellido){
+    /**
+     * Se encarga de filtrar la tabla de profesores segun un apellido ingresado por el usuario
+     *
+     * @param filtrarApellido Apellido ingresado por el usuario con el cual se filtrara la base de datos
+     */
+    public void filtrarTablaProfesores(String filtrarApellido) {
         javax.swing.JTable TablaProfesor = ventana.getTablaProfesores();
         TablaProfesor.setModel(new ModeloTablaProfesor(filtrarApellido));
 
         javax.swing.JButton btnBorrarProfesor = ventana.getBtnBorrarProfesor();
         javax.swing.JButton btnModificarProfesor = ventana.getBtnModificarProfesor();
 
-        if(TablaProfesor.getRowCount() == 0){
+        if (TablaProfesor.getRowCount() == 0) {
             btnBorrarProfesor.setEnabled(false);
             btnModificarProfesor.setEnabled(false);
-        }
-        else{
+        } else {
             btnBorrarProfesor.setEnabled(true);
             btnModificarProfesor.setEnabled(true);
         }
     }
 
-    public void actualizarTablaAlumnos(){
+    /**
+     * Se encarga de actualizar los datos de la tabla de profesores
+     */
+    public void actualizarTablaAlumnos() {
         javax.swing.JTable TablaAlumnos = ventana.getTablaAlumnos();
         TablaAlumnos.setModel(new ModeloTablaAlumnos());
 
         javax.swing.JButton btnBorrarAlumno = ventana.getBtnBorrarAlumno();
         javax.swing.JButton btnModificarAlumno = ventana.getBtnModificarAlumno();
 
-        if(TablaAlumnos.getRowCount() == 0){
+        if (TablaAlumnos.getRowCount() == 0) {
             btnBorrarAlumno.setEnabled(false);
             btnModificarAlumno.setEnabled(false);
-        }
-        else{
+        } else {
             btnBorrarAlumno.setEnabled(true);
             btnModificarAlumno.setEnabled(true);
         }
     }
 
-    public void filtrarTablaAlumnos(String filtrarApellido){
+    /**
+     * Se encarga de filtrar la tabla de profesores segun un apellido ingresado por el usuario
+     *
+     * @param filtrarApellido Apellido ingresado por el usuario con el cual se filtrara la base de datos
+     */
+    public void filtrarTablaAlumnos(String filtrarApellido) {
         javax.swing.JTable TablaAlumnos = ventana.getTablaAlumnos();
         TablaAlumnos.setModel(new ModeloTablaAlumnos(filtrarApellido));
 
         javax.swing.JButton btnBorrarAlumno = ventana.getBtnBorrarAlumno();
         javax.swing.JButton btnModificarAlumno = ventana.getBtnModificarAlumno();
 
-        if(TablaAlumnos.getRowCount() == 0){
+        if (TablaAlumnos.getRowCount() == 0) {
             btnBorrarAlumno.setEnabled(false);
             btnModificarAlumno.setEnabled(false);
-        }
-        else{
+        } else {
             btnBorrarAlumno.setEnabled(true);
             btnModificarAlumno.setEnabled(true);
         }
     }
+
 
     @Override
     public void btnNuevoProfesorClic(ActionEvent evt) {
@@ -198,11 +226,11 @@ public class ControladorAutores implements IControladorAutores {
         javax.swing.JTable TablaProfesores = ventana.getTablaProfesores();
         int alumnoElegido = TablaProfesores.getSelectedRow();
 
-        if(alumnoElegido != -1){
+        if (alumnoElegido != -1) {
             String[] botones = {"Si", "No"};
-            int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea eliminar el profesor seleccionado?", "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
+            int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea eliminar el profesor seleccionado?", "Eliminar Profesor", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
 
-            if(respuesta == 0){
+            if (respuesta == 0) {
                 int DNI = Integer.parseInt(TablaProfesores.getValueAt(alumnoElegido, 0).toString());
 
                 GestorAutores GesAutores = GestorAutores.crear();
@@ -210,13 +238,11 @@ public class ControladorAutores implements IControladorAutores {
 
                 actualizarTablaProfesores();
                 JOptionPane.showMessageDialog(ventana, resultado);
+            } else {
+                JOptionPane.showMessageDialog(ventana, "Operacion cancelada con EXITO");
             }
-            else{
-                JOptionPane.showMessageDialog(ventana, "Se ha cancelado la operación");
-            }
-        }
-        else
-            JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun profesor");
+        } else
+            JOptionPane.showMessageDialog(ventana, "Seleccione un profesor");
 
         actualizarTablaProfesores();
     }
@@ -226,10 +252,10 @@ public class ControladorAutores implements IControladorAutores {
         javax.swing.JTable TablaAlumnos = ventana.getTablaAlumnos();
         int alumnoElegido = TablaAlumnos.getSelectedRow();
 
-        if(alumnoElegido != -1){
+        if (alumnoElegido != -1) {
             String[] botones = {"Si", "No"};
-            int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea eliminar el alumno seleccionado?", "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
-            if(respuesta == 0){
+            int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea eliminar el alumno seleccionado?", "Eliminar Alumno", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
+            if (respuesta == 0) {
                 int DNI = Integer.parseInt(TablaAlumnos.getValueAt(alumnoElegido, 0).toString());
                 String CX = TablaAlumnos.getValueAt(alumnoElegido, 3).toString();
 
@@ -238,12 +264,10 @@ public class ControladorAutores implements IControladorAutores {
 
                 actualizarTablaAlumnos();
                 JOptionPane.showMessageDialog(ventana, resultado);
-            }
-            else
-                JOptionPane.showMessageDialog(ventana, "Se ha cancelado la operación");
-        }
-        else
-            JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun alumno");
+            } else
+                JOptionPane.showMessageDialog(ventana, "Operacion cancelada con EXITO");
+        } else
+            JOptionPane.showMessageDialog(ventana, "Seleccione un alumno");
 
         actualizarTablaAlumnos();
     }
@@ -270,7 +294,6 @@ public class ControladorAutores implements IControladorAutores {
         String apellidoBuscar = txtApellido.getText().trim();
 
         this.filtrarTablaAlumnos(apellidoBuscar);
-        txtApellido.setText("");
     }
 
     @Override
@@ -280,27 +303,23 @@ public class ControladorAutores implements IControladorAutores {
 
     @Override
     public void txtApellidosProfesorPresionarTecla(KeyEvent evt) {
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             javax.swing.JTextField txtApellido = this.ventana.getTxtApellidosProfesor();
             javax.swing.JButton btnBuscarProfesor = this.ventana.getBtnBuscarProfesor();
 
             btnBuscarProfesor.requestFocus();
             btnBuscarProfesor.doClick();
-
-            txtApellido.setText("");
         }
     }
 
     @Override
     public void txtApellidosAlumnoPresionarTecla(KeyEvent evt) {
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             javax.swing.JTextField txtApellido = this.ventana.getTxtApellidosAlumno();
             javax.swing.JButton btnBuscarAlumno = this.ventana.getBtnBuscarAlumno();
 
             btnBuscarAlumno.requestFocus();
             btnBuscarAlumno.doClick();
-
-            txtApellido.setText("");
         }
     }
 }

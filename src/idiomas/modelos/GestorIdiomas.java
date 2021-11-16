@@ -5,6 +5,9 @@ import interfaces.IGestorIdiomas;
 
 import java.util.ArrayList;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class GestorIdiomas implements IGestorIdiomas {
     private static ArrayList<Idioma> idiomas = new ArrayList<>();
     private static GestorIdiomas gestor;
@@ -28,7 +31,7 @@ public class GestorIdiomas implements IGestorIdiomas {
             return "ERROR al agregar un nuevo idioma!";
         } else
             idiomas.add(nuevoIdioma);
-            return "Idioma agregado de forma EXITOSA!";
+        return "Idioma agregado de forma EXITOSA!";
 
     }
 
@@ -41,7 +44,7 @@ public class GestorIdiomas implements IGestorIdiomas {
     public Idioma verIdioma(String nombre) {
         Idioma nuevoIdioma = new Idioma(nombre);
 
-        if ((nombre==null) || (nombre.isEmpty()))
+        if ((nombre == null) || (nombre.isEmpty()))
             return null;
         for (Idioma a : idiomas) {
             if (a.verNombre().equals(nombre))

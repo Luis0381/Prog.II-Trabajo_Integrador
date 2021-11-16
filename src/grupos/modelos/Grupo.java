@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- *
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class Grupo {
@@ -15,44 +14,45 @@ public class Grupo {
     private String descripcion;
     // Relacion entre clases
     private ArrayList<MiembroEnGrupo> miembros = new ArrayList<>();
+
     // Constructor
     public Grupo(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+
     // Metodos
-        public boolean tieneMiembros(){
+    public boolean tieneMiembros() {
         if (this.miembros == null) {
             return false;
         }
-        if (this.miembros.isEmpty()){
+        if (this.miembros.isEmpty()) {
             return false;
-        }
-        else
+        } else
             return true;
     }
+
     /**
-        Este metodo nos permite mostrar un grupo
-    */  
-    public void mostrar(){
-        System.out.println("Nombre: "+ nombre);
-        System.out.println("Descripcion: "+ descripcion);
+     * Este metodo nos permite mostrar un grupo
+     */
+    public void mostrar() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Descripcion: " + descripcion);
         System.out.println("Los miembros del grupo son: ");
-        if(tieneMiembros()){
-            for(MiembroEnGrupo unMiembroEnGrupo : miembros){
-            System.out.println(unMiembroEnGrupo.verAutor().verNombres()+ ", "+ unMiembroEnGrupo.verAutor().verApellidos() + " Rol: "+ unMiembroEnGrupo.verRol());
-        }
-        }
-            else
-            {
-                System.out.println("El grupo no tiene miembros.");       
+        if (tieneMiembros()) {
+            for (MiembroEnGrupo unMiembroEnGrupo : miembros) {
+                System.out.println(unMiembroEnGrupo.verAutor().verNombres() + ", " + unMiembroEnGrupo.verAutor().verApellidos() + " Rol: " + unMiembroEnGrupo.verRol());
             }
+        } else {
+            System.out.println("El grupo no tiene miembros.");
         }
-    public ArrayList <MiembroEnGrupo> verMiembros(){
+    }
+
+    public ArrayList<MiembroEnGrupo> verMiembros() {
         return miembros;
     }
 
-//    public void agregarMiembro (Autor autor, Rol rol){
+    //    public void agregarMiembro (Autor autor, Rol rol){
 //        MiembroEnGrupo unMiembroEnGrupo = new MiembroEnGrupo(autor, this, rol);
 //        if(this.tieneMiembros() == false){
 //            miembros = new ArrayList<>();
@@ -72,31 +72,30 @@ public class Grupo {
 
         MiembroEnGrupo nuevoMiembro = new MiembroEnGrupo(autor, this, rol);
 
-        if(this.esSuperAdministradores()){
+        if (this.esSuperAdministradores()) {
             //nuevoMiembro.asignarRol(Rol.ADMINISTRADOR);
             rol = Rol.ADMINISTRADOR;
         }
 
-        if(!this.miembros.contains(nuevoMiembro)){
+        if (!this.miembros.contains(nuevoMiembro)) {
             this.miembros.add(nuevoMiembro);
             autor.agregarGrupo(this, rol);
         }
     }
 
-    public void quitarMiembro(Autor miembro){
-            for(MiembroEnGrupo i: miembros){
-                 if(i.verAutor().equals(miembro)){
-                     miembros.remove(i);
-                     miembro.quitarGrupo(this);
-                 }
+    public void quitarMiembro(Autor miembro) {
+        for (MiembroEnGrupo i : miembros) {
+            if (i.verAutor().equals(miembro)) {
+                miembros.remove(i);
+                miembro.quitarGrupo(this);
             }
+        }
     }
 
-    public boolean esSuperAdministradores(){
-        if(this.nombre.equals("Super Administradores")){
+    public boolean esSuperAdministradores() {
+        if (this.nombre.equals("Super Administradores")) {
             return true;
-        }
-        else
+        } else
             return false;
     }
 
@@ -107,6 +106,7 @@ public class Grupo {
         hash = 97 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -124,16 +124,20 @@ public class Grupo {
         }
         return true;
     }
+
     // Getters & Setters
     public String verNombre() {
         return nombre;
     }
+
     public void asignarNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public String verDescripcion() {
         return descripcion;
     }
+
     public void asignarDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }

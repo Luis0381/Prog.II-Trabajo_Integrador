@@ -3,25 +3,27 @@ package lugares.modelos;
 import java.util.Objects;
 
 /**
- *
  * @author Thomas Mafut & Luis Medina Raed
  */
 public class Lugar {
     // Variables de instancia
     private String nombre;
+
     // Constructor
     public Lugar(String nombre) {
         this.nombre = nombre;
     }
+
     // Metodos
     @Override
     public String toString() {
         return nombre;
     }
 
-    public void mostrarLugar(){
+    public void mostrarLugar() {
         System.out.println(this.nombre);
     }
+
     // equals() & hashCode()
     @Override
     public int hashCode() {
@@ -47,7 +49,8 @@ public class Lugar {
         }
         return true;
     }
-    // Getters & Setters    
+
+    // Getters & Setters
     public String verNombre() {
         return nombre;
     }
