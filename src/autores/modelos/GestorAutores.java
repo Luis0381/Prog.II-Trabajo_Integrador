@@ -2,19 +2,30 @@ package autores.modelos;
 
 
 import grupos.modelos.Grupo;
+import grupos.modelos.MiembroEnGrupo;
 import interfaces.IGestorAutores;
-
 
 import java.util.ArrayList;
 
+/**
+ * @author Thomas Mafut & Luis Medina Raed
+ */
 public class GestorAutores implements IGestorAutores {
     private static ArrayList<Autor> autores = new ArrayList<>();
     private static GestorAutores gestor;
 
+    /**
+     * Constructor
+     */
     private GestorAutores() {
 
     }
 
+    /**
+     * Método que permite crear una instancia de GestorAutores
+     *
+     * @return GestorAutores
+     */
     public static GestorAutores crear() {
         if (gestor == null)
             gestor = new GestorAutores();
@@ -28,8 +39,23 @@ public class GestorAutores implements IGestorAutores {
     public String nuevoAutor(int dni, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
         Autor nuevoProfesor = new Profesor(dni, apellidos, nombres, clave, cargo);
 
-        if (autores.contains(nuevoProfesor) || dni <= 0 || apellidos == null || apellidos.trim().isEmpty() || nombres == null || nombres.trim().isEmpty() || cargo == null || !clave.equals(claveRepetida)) {
-            return "\n\tERROR al agregar un nuevo Profesor!";
+        if (autores.contains(nuevoProfesor)) {
+            return "\n\tEste Autor ya EXISTE!";
+        }
+        if (dni <= 0) {
+            return "\n\tRevise el DNI ingresado";
+        }
+        if (apellidos == null || apellidos.trim().isEmpty()) {
+            return "\n\tRevise los apellidos ingresados";
+        }
+        if (nombres == null || nombres.trim().isEmpty()) {
+            return "\n\tRevise los nombres ingresados";
+        }
+        if (cargo == null) {
+            return "\n\tRevise el cargo ingresado";
+        }
+        if (!clave.equals(claveRepetida)) {
+            return "\n\tLas contraseñas no coinciden!";
         } else {
             autores.add(nuevoProfesor);
             return "\n\tProfesor agregado de forma EXITOSA!";
@@ -38,18 +64,30 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, Cargo cargo, String clave, String claveRepetida) {
-        Autor nuevoProfesor = new Profesor(0, apellidos, nombres, clave, cargo);
 
         if (existeEsteAutor(autor)) {
-            if (autor instanceof Profesor) {
-                if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cargo != null && clave.equals(claveRepetida)) {
-                    Profesor profesor = (Profesor) autor;
-                    profesor.asignarApellidos(apellidos);
-                    profesor.asignarNombres(nombres);
-                    profesor.asignarCargo(cargo);
-                    profesor.asignarClave(clave);
-                    return "Datos de Profesor modificados de forma EXITOSA!";
+            for (Profesor p : verProfesores()) {
+                if (p.equals(autor)) {
+                    if (apellidos == null || apellidos.trim().isEmpty()) {
+                        return "\n\tRevise los apellidos ingresados";
+                    }
+                    if (nombres == null || nombres.trim().isEmpty()) {
+                        return "\n\tRevise los nombres ingresados";
+                    }
+                    if (cargo == null) {
+                        return "\n\tRevise el cargo ingresado";
+                    }
+                    if (!clave.equals(claveRepetida)) {
+                        return "\n\tLas contraseñas no coinciden!";
+                    } else {
+                        p.asignarApellidos(apellidos);
+                        p.asignarNombres(nombres);
+                        p.asignarCargo(cargo);
+                        p.asignarClave(clave);
+                        return "Datos de Profesor modificados de forma EXITOSA!";
+                    }
                 }
+
             }
         }
         return "ERROR al modificar los datos de su Profesor!";
@@ -73,8 +111,23 @@ public class GestorAutores implements IGestorAutores {
     public String nuevoAutor(int dni, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
         Autor nuevoAlumno = new Alumno(dni, apellidos, nombres, clave, cx);
 
-        if (autores.contains(nuevoAlumno) || dni <= 0 || apellidos == null || apellidos.trim().isEmpty() || nombres == null || nombres.trim().isEmpty() || cx == null || cx.trim().isEmpty() || !clave.equals(claveRepetida)){
-            return "\n\tERROR al agregar un nuevo Alumno!";
+        if (autores.contains(nuevoAlumno)) {
+            return "\n\tEste Autor ya EXISTE!";
+        }
+        if (dni <= 0) {
+            return "\n\tRevise el DNI ingresado";
+        }
+        if (apellidos == null || apellidos.trim().isEmpty()) {
+            return "\n\tRevise los apellidos ingresados";
+        }
+        if (nombres == null || nombres.trim().isEmpty()) {
+            return "\n\tRevise los nombres ingresados";
+        }
+        if (cx == null || cx.trim().isEmpty()) {
+            return "\n\tRevise el cargo ingresado";
+        }
+        if (!clave.equals(claveRepetida)) {
+            return "\n\tLas contraseñas no coinciden!";
         } else {
             autores.add(nuevoAlumno);
             return "\n\tAlumno agregado de forma EXITOSA!";
@@ -83,17 +136,30 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public String modificarAutor(Autor autor, String apellidos, String nombres, String cx, String clave, String claveRepetida) {
-
         if (existeEsteAutor(autor)) {
-            if (autor instanceof Alumno)
-                if (apellidos != null && !apellidos.trim().isEmpty() && nombres != null && !nombres.trim().isEmpty() && cx != null && !cx.trim().isEmpty() && clave.equals(claveRepetida)) {
-                    Alumno alumno = (Alumno) autor;
-                    alumno.asignarApellidos(apellidos);
-                    alumno.asignarNombres(nombres);
-                    alumno.asignarCx(cx);
-                    alumno.asignarClave(clave);
-                    return "Datos de Alumno modificados de forma EXITOSA!";
+            for (Alumno a : verAlumnos()) {
+                if (a.equals(autor)) {
+                    if (apellidos == null || apellidos.trim().isEmpty()) {
+                        return "\n\tRevise los apellidos ingresados";
+                    }
+                    if (nombres == null || nombres.trim().isEmpty()) {
+                        return "\n\tRevise los nombres ingresados";
+                    }
+                    if (cx == null || cx.trim().isEmpty()) {
+                        return "\n\tRevise el cargo ingresado";
+                    }
+                    if (!clave.equals(claveRepetida)) {
+                        return "\n\tLas contraseñas no coinciden!";
+                    } else {
+                        a.asignarApellidos(apellidos);
+                        a.asignarNombres(nombres);
+                        a.asignarCx(cx);
+                        a.asignarClave(clave);
+                        return "Datos del Alumno modificados de forma EXITOSA!";
+                    }
                 }
+
+            }
         }
         return "ERROR al modificar los datos de su Alumno!";
     }
@@ -115,7 +181,7 @@ public class GestorAutores implements IGestorAutores {
         if (autor == null)
             return false;
         else {
-            for(Autor a : autores) {
+            for (Autor a : autores) {
                 if (a.equals(autor))
                     return true;
             }
@@ -138,11 +204,59 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
+    public String borrarAutor(Autor dni) {
+        if (this.existeEsteAutor(dni)) {
+            autores.remove(dni);
+            return "Autor removido con EXITO!";
+        }
+        return "Autor Inexistente!";
+    }
+
+    @Override
     public void mostrarAlumnos() {
         if (!verAlumnos().isEmpty()) {
             for (Alumno a : verAlumnos())
                 a.mostrar();
         }
+    }
+
+    @Override
+    public ArrayList<Alumno> buscarAlumnos(String apellidos) {
+        ArrayList<Alumno> alumnosBuscados = new ArrayList<>();
+        if (apellidos != null) {
+            for (Autor autor : autores) {
+                if (autor instanceof Alumno) {
+                    if (autor.verApellidos().toLowerCase().contains(apellidos.toLowerCase()))
+                        alumnosBuscados.add((Alumno) autor);
+                }
+            }
+        }
+        return alumnosBuscados;
+    }
+
+    @Override
+    public ArrayList<Profesor> buscarProfesores(String apellidos) {
+        ArrayList<Profesor> profesoresBuscados = new ArrayList<>();
+        if (apellidos != null) {
+            for (Autor autor : autores) {
+                if (autor instanceof Profesor) {
+                    if (autor.verApellidos().toLowerCase().contains(apellidos.toLowerCase()))
+                        profesoresBuscados.add((Profesor) autor);
+                }
+            }
+        }
+        return profesoresBuscados;
+    }
+
+    @Override
+    public boolean hayAutoresConEsteGrupo(Grupo grupo) {
+        for(Autor autor : this.autores) {
+            for(MiembroEnGrupo a : autor.verGrupos()) {
+                if (a.verGrupo().equals(grupo))
+                    return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -160,4 +274,3 @@ public class GestorAutores implements IGestorAutores {
                 a.mostrar();
     }
 }
-

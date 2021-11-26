@@ -6,6 +6,7 @@
 package interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import palabrasclaves.modelos.PalabraClave;
 
@@ -15,7 +16,13 @@ import palabrasclaves.modelos.PalabraClave;
 public interface IGestorPalabrasClaves {
     public String nuevaPalabraClave(String nombre);
 
-    public ArrayList<PalabraClave> verPalabrasClaves();
-
     public PalabraClave verPalabraClave(String nombre);
+
+    public String borrarPalabraClave(PalabraClave palabraClave);
+
+    public List<PalabraClave> buscarPalabrasClaves(String nombre);
+
+    public List<PalabraClave> verPalabrasClaves();
+
+    public boolean existeEstaPalabraClave(PalabraClave palabraClave);
 }

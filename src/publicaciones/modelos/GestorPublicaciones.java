@@ -1,5 +1,6 @@
 package publicaciones.modelos;
 
+import autores.modelos.Alumno;
 import autores.modelos.Autor;
 import grupos.modelos.MiembroEnGrupo;
 import idiomas.modelos.Idioma;
@@ -10,6 +11,7 @@ import tipos.modelos.Tipo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestorPublicaciones implements IGestorPublicaciones {
     private static ArrayList<Publicacion> publicaciones = new ArrayList<>();
@@ -40,24 +42,24 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public String modificarPublicacion(Publicacion publicacion, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
-            if (existeEstaPublicacion(publicacion) && miembroEnGrupo != null && miembroEnGrupo.verGrupo() != null && miembroEnGrupo.verAutor() != null && miembroEnGrupo.verRol() != null && fechaPublicacion != null && tipo != null && idioma != null && lugar != null && palabrasClaves != null && !palabrasClaves.isEmpty() && enlace != null && !enlace.trim().isEmpty() && resumen != null && !resumen.trim().isEmpty()) {
-                publicacion.setUnMiembroEnGrupo(miembroEnGrupo);
-                publicacion.setFechaPublicacion(fechaPublicacion);
-                publicacion.setUnTipo(tipo);
-                publicacion.setUnIdioma(idioma);
-                publicacion.setUnLugar(lugar);
-                publicacion.setPalabrasClaves(palabrasClaves);
-                publicacion.setEnlace(enlace);
-                publicacion.setResumen(resumen);
-                return "Datos de la publicacion modificados de forma EXITOSA!";
-            }
+        if (existeEstaPublicacion(publicacion) && miembroEnGrupo != null && miembroEnGrupo.verGrupo() != null && miembroEnGrupo.verAutor() != null && miembroEnGrupo.verRol() != null && fechaPublicacion != null && tipo != null && idioma != null && lugar != null && palabrasClaves != null && !palabrasClaves.isEmpty() && enlace != null && !enlace.trim().isEmpty() && resumen != null && !resumen.trim().isEmpty()) {
+            publicacion.setUnMiembroEnGrupo(miembroEnGrupo);
+            publicacion.setFechaPublicacion(fechaPublicacion);
+            publicacion.setUnTipo(tipo);
+            publicacion.setUnIdioma(idioma);
+            publicacion.setUnLugar(lugar);
+            publicacion.setPalabrasClaves(palabrasClaves);
+            publicacion.setEnlace(enlace);
+            publicacion.setResumen(resumen);
+            return "Datos de la publicacion modificados de forma EXITOSA!";
+        }
         return "ERROR al modificar los datos de la publicacion!";
     }
 
     @Override
     public boolean hayPublicacionesConEstaPalabraClave(PalabraClave palabraClave) {
-        for(Publicacion publicacion : publicaciones) {
-            for(PalabraClave palabraclave : publicacion.getPalabrasClaves()) {
+        for (Publicacion publicacion : publicaciones) {
+            for (PalabraClave palabraclave : publicacion.getPalabrasClaves()) {
                 if (palabraClave.equals(palabraclave))
                     return true;
             }
@@ -94,7 +96,7 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public boolean hayPublicacionesConEsteAutor(Autor autor) {
-        for(Publicacion publicacion : publicaciones) {
+        for (Publicacion publicacion : publicaciones) {
             MiembroEnGrupo miembroengrupo = publicacion.getUnMiembroEnGrupo();
             if (autor.equals(miembroengrupo.verAutor()))
                 return true;
@@ -116,7 +118,7 @@ public class GestorPublicaciones implements IGestorPublicaciones {
     }
 
     @Override
-    public ArrayList<Publicacion> verPublicaciones() {
+    public List<Publicacion> verPublicaciones() {
         return publicaciones;
     }
 
@@ -134,5 +136,108 @@ public class GestorPublicaciones implements IGestorPublicaciones {
         if (!verPublicaciones().isEmpty())
             for (Publicacion a : publicaciones)
                 a.mostrar();
+    }
+
+    @Override
+    public String nuevaPublicacion(String titulo, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
+        Publicacion nuevaPublicacion = new Publicacion(titulo, miembroEnGrupo, fechaPublicacion, tipo, idioma, lugar, palabrasClaves, enlace, resumen);
+
+        if (publicaciones.contains(nuevaPublicacion)) {
+            return "\n\tEsta Publicacion ya EXISTE!";
+        }
+        if (titulo == null) {
+            return "\n\tIngrese un Titulo.";
+        }
+        if (miembroEnGrupo == null) {
+            return "\n\tEsta publicacion no tiene un grupo ingresado";
+        }
+        if (fechaPublicacion == null) {
+            return "\n\tFecha incorrecta";
+        }
+        if (tipo == null) {
+            return "\n\tIngrese un tipo.";
+        }
+        if (idioma == null) {
+            return "\n\tIngrese un idioma.";
+        }
+        if (lugar == null) {
+            return "\n\tIngrese un Lugar.";
+        }
+        if (palabrasClaves == null) {
+            return "\n\tIngrese al menos una palabra clave.";
+        }
+        if (enlace == null) {
+            return "\n\tIngrese un enlace.";
+        }
+        if (resumen == null) {
+            return "\n\tIngrese el resumen.";
+        } else {
+            publicaciones.add(nuevaPublicacion);
+            return "\n\tPublicacion agregada de forma EXITOSA!";
+        }
+    }
+
+    @Override
+    public String modificarPublicacion(Publicacion publicacion, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
+        if (existeEstaPublicacion(publicacion))
+            for (Publicacion a : publicaciones) {
+                if (a.equals(publicacion)) {
+                    if (miembroEnGrupo == null) {
+                        return "\n\tEsta publicacion no tiene un grupo ingresado";
+                    }
+                    if (fechaPublicacion == null) {
+                        return "\n\tFecha incorrecta";
+                    }
+                    if (tipo == null) {
+                        return "\n\tIngrese un tipo.";
+                    }
+                    if (idioma == null) {
+                        return "\n\tIngrese un idioma.";
+                    }
+                    if (lugar == null) {
+                        return "\n\tIngrese un Lugar.";
+                    }
+                    if (palabrasClaves == null) {
+                        return "\n\tIngrese al menos una palabra clave.";
+                    }
+                    if (enlace == null) {
+                        return "\n\tIngrese un enlace.";
+                    }
+                    if (resumen == null) {
+                        return "\n\tIngrese el resumen.";
+                    } else {
+                        a.setUnMiembroEnGrupo(miembroEnGrupo);
+                        a.setFechaPublicacion(fechaPublicacion);
+                        a.setUnTipo(tipo);
+                        a.setUnIdioma(idioma);
+                        a.setUnLugar(lugar);
+                        a.setPalabrasClaves(palabrasClaves);
+                        a.setEnlace(enlace);
+                        a.setResumen(resumen);
+                    }
+                }
+            }
+        return "\n\tPublicacion agregada de forma EXITOSA!";
+    }
+
+    @Override
+    public String borrarPublicacion(Publicacion publicacion) {
+        if (this.existeEstaPublicacion(publicacion)) {
+            publicaciones.remove(publicacion);
+            return "Publicacion removida con EXITO!";
+        }
+        return "Publicacion Inexistente!";
+    }
+
+    @Override
+    public List<Publicacion> buscarPublicaciones(String titulo) {
+        ArrayList<Publicacion> publicacionesBuscadas = new ArrayList<>();
+        if (titulo.toLowerCase() != null) {
+            for (Publicacion a : publicaciones) {
+                if (a.getTitulo().toLowerCase().contains(titulo.toLowerCase().trim()))
+                    publicacionesBuscadas.add(a);
+            }
+        }
+        return publicacionesBuscadas;
     }
 }

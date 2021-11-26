@@ -6,10 +6,10 @@ import lugares.modelos.Lugar;
 import palabrasclaves.modelos.PalabraClave;
 import tipos.modelos.Tipo;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,7 +32,7 @@ public class Publicacion {
     DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/uuuu");
     
     // Constructor
-    public Publicacion(String titulo, MiembroEnGrupo unMiembroEnGrupo, LocalDate fechaPublicacion, Tipo unTipo, Idioma unIdioma, Lugar unLugar, ArrayList<PalabraClave> palabrasClaves, String enlace, String resumen) {
+    public Publicacion(String titulo, MiembroEnGrupo unMiembroEnGrupo, LocalDate fechaPublicacion, Tipo unTipo, Idioma unIdioma, Lugar unLugar, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
         this.titulo = titulo;
         this.unMiembroEnGrupo = unMiembroEnGrupo;
         this.fechaPublicacion = fechaPublicacion;
@@ -149,7 +149,7 @@ public class Publicacion {
         return palabrasClaves;
     }
 
-    public void setPalabrasClaves(ArrayList<PalabraClave> palabrasClaves) {
+    public void setPalabrasClaves(List<PalabraClave> palabrasClaves) {
         this.palabrasClaves = palabrasClaves;
     }
 

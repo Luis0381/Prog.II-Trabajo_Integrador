@@ -11,6 +11,7 @@ import idiomas.modelos.Idioma;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import lugares.modelos.Lugar;
 import palabrasclaves.modelos.PalabraClave;
@@ -37,9 +38,17 @@ public interface IGestorPublicaciones {
 
     public boolean existeEstaPublicacion(Publicacion publicacion);
 
-    public ArrayList<Publicacion> verPublicaciones();
-
     public Publicacion verPublicacion(String titulo);
 
     public void mostrarPublicaciones();
+
+    public String nuevaPublicacion(String titulo, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, List<PalabraClave> palabrasClaves, String enlace, String resumen);
+
+    public String modificarPublicacion(Publicacion publicacion, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, List<PalabraClave> palabrasClaves, String enlace, String resumen);
+
+    public String borrarPublicacion(Publicacion publicacion);
+
+    public List<Publicacion> buscarPublicaciones(String titulo);
+
+    public List<Publicacion> verPublicaciones();
 }

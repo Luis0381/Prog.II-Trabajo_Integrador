@@ -1,8 +1,10 @@
 package lugares.modelos;
 
 import interfaces.IGestorLugares;
+import tipos.modelos.Tipo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestorLugares implements IGestorLugares {
     private static ArrayList<Lugar> lugares = new ArrayList<>();
@@ -31,8 +33,21 @@ public class GestorLugares implements IGestorLugares {
     }
 
     @Override
-    public ArrayList<Lugar> verLugares() {
+    public List<Lugar> verLugares() {
         return lugares;
+    }
+
+    @Override
+    public boolean existeEsteLugar(Lugar lugar) {
+        if (lugar == null)
+            return false;
+        else {
+            for (Lugar a : lugares) {
+                if (a.equals(lugar))
+                    return true;
+            }
+            return false;
+        }
     }
 
     @Override
@@ -45,5 +60,26 @@ public class GestorLugares implements IGestorLugares {
                 return a;
         }
         return null;
+    }
+
+    @Override
+    public String borrarLugar(Lugar lugar) {
+        if (this.existeEsteLugar(lugar)) {
+            lugares.remove(lugar);
+            return "Lugar removido con EXITO!";
+        }
+        return "Lugar Inexistente!";
+    }
+
+    @Override
+    public List<Lugar> buscarLugares(String nombre) {
+        ArrayList<Lugar> lugaresBuscados = new ArrayList<>();
+        if (nombre.toLowerCase() != null) {
+            for (Lugar a : lugares) {
+                if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                    lugaresBuscados.add(a);
+            }
+        }
+        return lugaresBuscados;
     }
 }

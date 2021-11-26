@@ -1,9 +1,11 @@
 package grupos.modelos;
 
 import interfaces.IGestorGrupos;
+import tipos.modelos.Tipo;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestorGrupos implements IGestorGrupos {
     private static ArrayList<Grupo> grupos = new ArrayList<>();
@@ -44,7 +46,7 @@ public class GestorGrupos implements IGestorGrupos {
     }
 
     @Override
-    public ArrayList<Grupo> verGrupos() {
+    public List<Grupo> verGrupos() {
         return grupos;
     }
 
@@ -75,5 +77,26 @@ public class GestorGrupos implements IGestorGrupos {
             for (Grupo g : grupos)
                 g.mostrar();
         }
+    }
+
+    @Override
+    public String borrarGrupo(Grupo grupo) {
+        if (this.existeEsteGrupo(grupo)) {
+            grupos.remove(grupo);
+            return "Grupo removido con EXITO!";
+        }
+        return "Grupo Inexistente!";
+    }
+
+    @Override
+    public List<Grupo> buscarGrupos(String nombre) {
+        ArrayList<Grupo> gruposBuscados = new ArrayList<>();
+        if (nombre.toLowerCase() != null) {
+            for (Grupo a : grupos) {
+                if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                    gruposBuscados.add(a);
+            }
+        }
+        return gruposBuscados;
     }
 }

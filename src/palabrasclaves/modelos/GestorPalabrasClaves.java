@@ -1,9 +1,11 @@
 package palabrasclaves.modelos;
 
 import interfaces.IGestorPalabrasClaves;
+import tipos.modelos.Tipo;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestorPalabrasClaves implements IGestorPalabrasClaves {
     private static ArrayList<PalabraClave> palabrasClaves = new ArrayList<>();
@@ -32,8 +34,21 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
     }
 
     @Override
-    public ArrayList<PalabraClave> verPalabrasClaves() {
+    public List<PalabraClave> verPalabrasClaves() {
         return palabrasClaves;
+    }
+
+    @Override
+    public boolean existeEstaPalabraClave(PalabraClave palabraClave) {
+        if (palabraClave == null)
+            return false;
+        else {
+            for (PalabraClave a : palabrasClaves) {
+                if (a.equals(palabraClave))
+                    return true;
+            }
+            return false;
+        }
     }
 
     @Override
@@ -45,5 +60,26 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
                 return a;
         }
         return null;
+    }
+
+    @Override
+    public String borrarPalabraClave(PalabraClave palabraClave) {
+        if (this.existeEstaPalabraClave(palabraClave)) {
+            palabrasClaves.remove(palabraClave);
+            return "Palabra clave removida con EXITO!";
+        }
+        return "Palabra clave Inexistente!";
+    }
+
+    @Override
+    public List<PalabraClave> buscarPalabrasClaves(String nombre) {
+        ArrayList<PalabraClave> palabrasBuscadas = new ArrayList<>();
+        if (nombre.toLowerCase() != null) {
+            for (PalabraClave a : palabrasClaves) {
+                if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                    palabrasBuscadas.add(a);
+            }
+        }
+        return palabrasBuscadas;
     }
 }

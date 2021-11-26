@@ -3,9 +3,10 @@ package tipos.modelos;
 import interfaces.IGestorTipos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestorTipos implements IGestorTipos {
-    private static ArrayList<Tipo> tipos = new ArrayList<>();
+    private static List<Tipo> tipos;
     private static GestorTipos gestor;
 
     private GestorTipos() {
@@ -30,7 +31,7 @@ public class GestorTipos implements IGestorTipos {
     }
 
     @Override
-    public ArrayList<Tipo> verTipos() {
+    public List<Tipo> verTipos() {
         return tipos;
     }
 
@@ -44,5 +45,39 @@ public class GestorTipos implements IGestorTipos {
                 return nuevoTipo;
         }
         return null;
+    }
+
+    @Override
+    public String borrarTipo(Tipo tipo) {
+        if (this.existeEsteTipo(tipo)) {
+            tipos.remove(tipo);
+            return "Tipo removido con EXITO!";
+        }
+        return "Tipo Inexistente!";
+    }
+
+    @Override
+    public List<Tipo> buscarTipos(String nombre) {
+        ArrayList<Tipo> tiposBuscados = new ArrayList<>();
+        if (nombre.toLowerCase() != null) {
+            for (Tipo a : tipos) {
+                    if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                        tiposBuscados.add(a);
+            }
+        }
+        return tiposBuscados;
+    }
+
+    @Override
+    public boolean existeEsteTipo(Tipo tipo) {
+        if (tipo == null)
+            return false;
+        else {
+            for (Tipo a : tipos) {
+                if (a.equals(tipo))
+                    return true;
+            }
+            return false;
+        }
     }
 }
