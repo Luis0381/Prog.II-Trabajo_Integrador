@@ -6,23 +6,23 @@
 package idiomas.vistas;
 
 import idiomas.modelos.Idioma;
+import interfaces.IControladorAIdiomas;
+
 import java.awt.Dialog;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 
 public class VentanaAIdioma extends JDialog {
-   ArrayList<Idioma> idiomas = new ArrayList<>();
-   
-    /**
-     * Constructor 
-     * @param ventanaPadre ventana padre
-     */        
-    public VentanaAIdioma(Dialog ventanaPadre) {
-        super(ventanaPadre, true);
+    private IControladorAIdiomas controlador;
+
+    public VentanaAIdioma(IControladorAIdiomas controlador) {
         initComponents();
+        this.controlador = controlador;
+        this.setTitle(controlador.TITULO);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,6 +35,7 @@ public class VentanaAIdioma extends JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Idiomas");
@@ -53,6 +54,13 @@ public class VentanaAIdioma extends JDialog {
             }
         });
 
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarClic(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,6 +74,8 @@ public class VentanaAIdioma extends JDialog {
                         .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar)))
                 .addContainerGap())
         );
@@ -76,8 +86,10 @@ public class VentanaAIdioma extends JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar))
                 .addContainerGap())
         );
 
@@ -85,15 +97,16 @@ public class VentanaAIdioma extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarClic(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClic
-        String nombre = this.txtNombre.getText().trim();
-        Idioma idioma = new Idioma(nombre);
-        this.idiomas.add(idioma);
-        for(Idioma i : this.idiomas)
-            System.out.println(i);
+        controlador.btnGuardarClic(evt);
     }//GEN-LAST:event_btnGuardarClic
+
+    private void btnCancelarClic(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClic
+        controlador.btnCancelarClic(evt);
+    }//GEN-LAST:event_btnCancelarClic
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField txtNombre;
