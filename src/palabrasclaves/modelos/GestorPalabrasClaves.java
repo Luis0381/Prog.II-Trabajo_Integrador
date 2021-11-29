@@ -28,13 +28,13 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
 
     @Override
     public String nuevaPalabraClave(String nombre) {
-        PalabraClave nuevaPalabraClave = new PalabraClave(nombre);
-
-        if (nombre != null && (!nombre.trim().isEmpty())) {
-            palabrasClaves.add(nuevaPalabraClave);
-            return "Palabra Clave agregada de forma EXITOSA!";
-        } else
-            return "ERROR al agregar una nueva palabra clave!";
+        if ((nombre == null) || (nombre.trim().isEmpty()))
+            return "Verifique el nombre ingresado";
+        PalabraClave palabraClave = new PalabraClave(nombre);
+        if (palabrasClaves.contains(palabraClave))
+            return "Ya existe esta palabra clave!";
+        palabrasClaves.add(palabraClave);
+        return "Palabras claves añadidas con EXITO!";
     }
 
     @Override

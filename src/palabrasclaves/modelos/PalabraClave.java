@@ -41,11 +41,9 @@ public class PalabraClave {
             return false;
         }
         final PalabraClave other = (PalabraClave) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        return true;
+        return this.nombre.trim().equalsIgnoreCase(other.nombre.trim());
     }
+
     // Getters & Setters
     public String verNombre() {
         return nombre;

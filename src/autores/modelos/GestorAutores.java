@@ -1,6 +1,7 @@
 package autores.modelos;
 
 
+import grupos.modelos.ComparatorNombre;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
 import interfaces.IGestorAutores;
@@ -8,6 +9,7 @@ import interfaces.IGestorPublicaciones;
 import publicaciones.modelos.GestorPublicaciones;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -168,14 +170,14 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public ArrayList<Alumno> verAlumnos() {
+    public List<Alumno> verAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
 
         for (Autor a : autores) {
             if (a instanceof Alumno)
                 alumnos.add((Alumno) a);
         }
-
+        Collections.sort(alumnos, new ComparatorApellidoyNombre());
         return alumnos;
     }
 
@@ -194,6 +196,7 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public List<Autor> verAutores() {
+        Collections.sort(autores, new ComparatorApellidoyNombre());
         return autores;
     }
 
@@ -235,7 +238,7 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public ArrayList<Alumno> buscarAlumnos(String apellidos) {
+    public List<Alumno> buscarAlumnos(String apellidos) {
         ArrayList<Alumno> alumnosBuscados = new ArrayList<>();
         if (apellidos != null) {
             for (Autor autor : autores) {
@@ -245,11 +248,12 @@ public class GestorAutores implements IGestorAutores {
                 }
             }
         }
+        Collections.sort(alumnosBuscados, new ComparatorApellidoyNombre());
         return alumnosBuscados;
     }
 
     @Override
-    public ArrayList<Profesor> buscarProfesores(String apellidos) {
+    public List<Profesor> buscarProfesores(String apellidos) {
         ArrayList<Profesor> profesoresBuscados = new ArrayList<>();
         if (apellidos != null) {
             for (Autor autor : autores) {
@@ -259,6 +263,7 @@ public class GestorAutores implements IGestorAutores {
                 }
             }
         }
+        Collections.sort(profesoresBuscados, new ComparatorApellidoyNombre());
         return profesoresBuscados;
     }
 
