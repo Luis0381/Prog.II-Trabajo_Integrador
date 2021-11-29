@@ -25,13 +25,13 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public String nuevoGrupo(String nombre, String descripcion) {
-        Grupo nuevoGrupo = new Grupo(nombre, descripcion);
-
-        if (!grupos.contains(nuevoGrupo) && (nombre != null) && !nombre.trim().isEmpty()) {
-            grupos.add(nuevoGrupo);
-            return "Grupo agregado de forma EXITOSA!";
-        } else
-            return "ERROR al agregar un nuevo grupo!";
+        Grupo grupo = new Grupo(nombre, descripcion);
+        if ((nombre == null) || (nombre.trim().isEmpty()))
+            return "Verifique el nombre ingresado!";
+        if (grupos.contains(grupo))
+            return "Este grupo ya existe!";
+        grupos.add(grupo);
+        return "Grupo agregado de forma EXITOSA!";
     }
 
     @Override
@@ -76,7 +76,7 @@ public class GestorGrupos implements IGestorGrupos {
     @Override
     public void mostrarGrupos() {
         if (!grupos.isEmpty()) {
-            for (Grupo g : grupos)
+            for (Grupo g : verGrupos())
                 g.mostrar();
         }
     }

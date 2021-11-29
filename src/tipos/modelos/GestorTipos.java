@@ -1,6 +1,8 @@
 package tipos.modelos;
 
+import interfaces.IGestorPublicaciones;
 import interfaces.IGestorTipos;
+import publicaciones.modelos.GestorPublicaciones;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,12 +25,13 @@ public class GestorTipos implements IGestorTipos {
 
     @Override
     public String nuevoTipo(String nombre) {
-        Tipo nuevoTipo = new Tipo(nombre);
-        if (!tipos.contains(nuevoTipo) && (nombre != null) && !nombre.isEmpty()) {
-            tipos.add(nuevoTipo);
-            return "Tipo agregado de forma EXITOSA!";
-        } else
-            return "ERROR al agregar un nuevo tipo!";
+        if ((nombre == null) || (nombre.trim().isEmpty()))
+            return "Verifique el nombre ingresado";
+        Tipo tipo = new Tipo(nombre);
+        if (this.tipos.contains(tipo))
+            return "Este tipo ya existe!";
+        this.tipos.add(tipo);
+        return "Tipo agregado de forma EXITOSA!";
     }
 
     @Override
@@ -46,15 +49,17 @@ public class GestorTipos implements IGestorTipos {
                 return tipo;
         }
         return null;
-    }    
+    }
 
     @Override
     public String borrarTipo(Tipo tipo) {
-        if (this.existeEsteTipo(tipo)) {
-            tipos.remove(tipo);
-            return "Tipo removido con EXITO!";
-        }
-        return "Tipo Inexistente!";
+        if (!this.existeEsteTipo(tipo))
+            return "Este tipo no existe!";
+        IGestorPublicaciones gesPublicaciones= GestorPublicaciones.crear();
+        if (gesPublicaciones.hayPublicacionesConEsteTipo(tipo))
+            return "Hay al menos una publicacion con este tipo!";
+        this.tipos.remove(tipo);
+        return "Tipo removido con EXITO!";
     }
 
     @Override

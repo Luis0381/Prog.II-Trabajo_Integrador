@@ -25,14 +25,18 @@ public class GestorLugares implements IGestorLugares {
     }
 
     @Override
-    public String nuevoLugar(String nombre) {
-        Lugar nuevoLugar = new Lugar(nombre);
-
-        if (!lugares.contains(nuevoLugar) && (nombre != null) && (!nombre.trim().isEmpty())) {
-            lugares.add(nuevoLugar);
-            return "Lugar agregado de forma EXITOSA!";
-        } else
-            return "ERROR al agregar un nuevo lugar!";
+    public String nuevoLugar(String nombre){
+        if ((nombre != null) && (!nombre.isEmpty())) {
+            Lugar lugar = new Lugar(nombre);
+            if(!lugares.contains(lugar)) {
+                lugares.add(lugar);
+                return "Lugar añadido con EXITO!";
+            }
+            else
+                return "Ya existe un lugar con ese nombre";
+        }
+        else
+            return "Verifique el nombre ingresado!";
     }
 
     @Override
@@ -73,7 +77,6 @@ public class GestorLugares implements IGestorLugares {
         IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
         if (gesPublicaciones.hayPublicacionesConEsteLugar(lugar))
             return "Hay al menos una publicacion con este lugar!!";
-
         lugares.remove(lugar);
         return "Lugar removido con EXITO!";
     }

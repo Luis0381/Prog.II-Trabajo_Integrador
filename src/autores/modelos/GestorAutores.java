@@ -212,8 +212,8 @@ public class GestorAutores implements IGestorAutores {
     @Override
     public String borrarAutor(Autor autor) {
         if (this.existeEsteAutor(autor)) {
-            IGestorPublicaciones gp = GestorPublicaciones.crear();
-                if (gp.hayPublicacionesConEsteAutor(autor))
+            IGestorPublicaciones gestorPublicaciones = GestorPublicaciones.crear();
+                if (gestorPublicaciones.hayPublicacionesConEsteAutor(autor))
                     return "Hay al menos una publicacion con este autor!";
                 else {
                     this.autores.remove(autor);
