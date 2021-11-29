@@ -3,10 +3,11 @@ package tipos.modelos;
 import interfaces.IGestorTipos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GestorTipos implements IGestorTipos {
-    private static List<Tipo> tipos;
+    private List<Tipo> tipos = new ArrayList<>();
     private static GestorTipos gestor;
 
     private GestorTipos() {
@@ -32,20 +33,20 @@ public class GestorTipos implements IGestorTipos {
 
     @Override
     public List<Tipo> verTipos() {
+        Collections.sort(tipos, new ComparatorNombre());
         return tipos;
     }
 
     @Override
     public Tipo verTipo(String nombre) {
-        Tipo nuevoTipo = new Tipo(nombre);
         if ((nombre == null) || (nombre.isEmpty()))
             return null;
-        for (Tipo a : tipos) {
-            if (a.verNombre().equals(nombre.trim())) //Puede ser equalsIgnoreCase
-                return nuevoTipo;
+        for(Tipo tipo : this.tipos) {
+            if (tipo.verNombre().equalsIgnoreCase(nombre.trim()))
+                return tipo;
         }
         return null;
-    }
+    }    
 
     @Override
     public String borrarTipo(Tipo tipo) {
@@ -58,13 +59,14 @@ public class GestorTipos implements IGestorTipos {
 
     @Override
     public List<Tipo> buscarTipos(String nombre) {
-        ArrayList<Tipo> tiposBuscados = new ArrayList<>();
-        if (nombre.toLowerCase() != null) {
-            for (Tipo a : tipos) {
-                    if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
-                        tiposBuscados.add(a);
-            }
+        List<Tipo> tiposBuscados = new ArrayList<>();
+        if (nombre == null)
+            return tiposBuscados;
+        for(Tipo tipo : this.tipos) {
+            if (tipo.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                tiposBuscados.add(tipo);
         }
+        Collections.sort(tiposBuscados, new ComparatorNombre());
         return tiposBuscados;
     }
 
@@ -72,12 +74,11 @@ public class GestorTipos implements IGestorTipos {
     public boolean existeEsteTipo(Tipo tipo) {
         if (tipo == null)
             return false;
-        else {
-            for (Tipo a : tipos) {
-                if (a.equals(tipo))
-                    return true;
-            }
-            return false;
+       
+        for(Tipo t : this.tipos) {
+            if (t.equals(tipo))
+                return true;
         }
+        return false;
     }
 }

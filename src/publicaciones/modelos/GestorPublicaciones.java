@@ -11,10 +11,11 @@ import tipos.modelos.Tipo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GestorPublicaciones implements IGestorPublicaciones {
-    private static ArrayList<Publicacion> publicaciones = new ArrayList<>();
+    private static List<Publicacion> publicaciones = new ArrayList<>();
     private static GestorPublicaciones gestor;
 
     private GestorPublicaciones() {
@@ -119,6 +120,7 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public List<Publicacion> verPublicaciones() {
+        Collections.sort(publicaciones, new ComparatorNombre());
         return publicaciones;
     }
 
@@ -231,13 +233,17 @@ public class GestorPublicaciones implements IGestorPublicaciones {
 
     @Override
     public List<Publicacion> buscarPublicaciones(String titulo) {
-        ArrayList<Publicacion> publicacionesBuscadas = new ArrayList<>();
-        if (titulo.toLowerCase() != null) {
-            for (Publicacion a : publicaciones) {
-                if (a.getTitulo().toLowerCase().contains(titulo.toLowerCase().trim()))
-                    publicacionesBuscadas.add(a);
+        List<Publicacion> publicacionesBuscadas = new ArrayList<>();
+        for(Publicacion p: publicaciones){
+            if(p.getTitulo().contains(titulo)){
+                if(p.getTitulo().compareTo(titulo) >= 0){
+                    publicacionesBuscadas.add(p);
+                }
             }
         }
+        Collections.sort(publicaciones, new ComparatorNombre());
         return publicacionesBuscadas;
     }
 }
+
+

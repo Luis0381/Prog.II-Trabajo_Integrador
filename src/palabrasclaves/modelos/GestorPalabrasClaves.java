@@ -1,14 +1,17 @@
 package palabrasclaves.modelos;
 
 import interfaces.IGestorPalabrasClaves;
+import interfaces.IGestorPublicaciones;
+import publicaciones.modelos.GestorPublicaciones;
 import tipos.modelos.Tipo;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GestorPalabrasClaves implements IGestorPalabrasClaves {
-    private static ArrayList<PalabraClave> palabrasClaves = new ArrayList<>();
+    private static List<PalabraClave> palabrasClaves = new ArrayList<>();
     private static GestorPalabrasClaves gestor;
 
     private GestorPalabrasClaves() {
@@ -26,7 +29,8 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
     @Override
     public String nuevaPalabraClave(String nombre) {
         PalabraClave nuevaPalabraClave = new PalabraClave(nombre);
-        if (!palabrasClaves.contains(nuevaPalabraClave) && nombre != null && (!nombre.trim().isEmpty())) {
+
+        if (nombre != null && (!nombre.trim().isEmpty())) {
             palabrasClaves.add(nuevaPalabraClave);
             return "Palabra Clave agregada de forma EXITOSA!";
         } else
@@ -35,6 +39,7 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
 
     @Override
     public List<PalabraClave> verPalabrasClaves() {
+        Collections.sort(palabrasClaves, new ComparatorNombre());
         return palabrasClaves;
     }
 
@@ -64,22 +69,25 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
 
     @Override
     public String borrarPalabraClave(PalabraClave palabraClave) {
-        if (this.existeEstaPalabraClave(palabraClave)) {
-            palabrasClaves.remove(palabraClave);
-            return "Palabra clave removida con EXITO!";
-        }
-        return "Palabra clave Inexistente!";
+        if (!this.existeEstaPalabraClave(palabraClave))
+            return "Esta palabra clave es INEXISTENTE!";
+        IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
+        if (gesPublicaciones.hayPublicacionesConEstaPalabraClave(palabraClave))
+            return "Hay al menos una publicacion con esta palabra clave!";
+        palabrasClaves.remove(palabraClave);
+        return "Palabra Clave removida con EXITO!";
     }
 
     @Override
     public List<PalabraClave> buscarPalabrasClaves(String nombre) {
-        ArrayList<PalabraClave> palabrasBuscadas = new ArrayList<>();
+        List<PalabraClave> palabrasBuscadas = new ArrayList<>();
         if (nombre.toLowerCase() != null) {
             for (PalabraClave a : palabrasClaves) {
                 if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
                     palabrasBuscadas.add(a);
             }
         }
+        Collections.sort(palabrasClaves, new ComparatorNombre());
         return palabrasBuscadas;
     }
 }

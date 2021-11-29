@@ -4,14 +4,17 @@ package autores.modelos;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
 import interfaces.IGestorAutores;
+import interfaces.IGestorPublicaciones;
+import publicaciones.modelos.GestorPublicaciones;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Thomas Mafut & Luis Medina Raed
  */
 public class GestorAutores implements IGestorAutores {
-    private static ArrayList<Autor> autores = new ArrayList<>();
+    private List<Autor> autores = new ArrayList<>();
     private static GestorAutores gestor;
 
     /**
@@ -190,7 +193,7 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public ArrayList<Autor> verAutores() {
+    public List<Autor> verAutores() {
         return autores;
     }
 
@@ -204,12 +207,23 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public String borrarAutor(Autor dni) {
-        if (this.existeEsteAutor(dni)) {
-            autores.remove(dni);
-            return "Autor removido con EXITO!";
-        }
-        return "Autor Inexistente!";
+    public String borrarAutor(Autor autor) {
+        if (this.existeEsteAutor(autor)) {
+            IGestorPublicaciones gp = GestorPublicaciones.crear();
+                if (gp.hayPublicacionesConEsteAutor(autor))
+                    return "Hay al menos una publicacion con este autor!";
+                else {
+                    this.autores.remove(autor);
+                    if (autor instanceof Profesor) {
+                        return "Profesor removido con EXITO!";
+                    }
+                    else {
+                        return "Alumno removido con EXITO!";
+                    }
+                }
+            }
+        else
+            return "El autor no existe!";
     }
 
     @Override

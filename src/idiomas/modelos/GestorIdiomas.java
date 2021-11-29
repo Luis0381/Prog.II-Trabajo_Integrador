@@ -1,14 +1,17 @@
 package idiomas.modelos;
 
 import interfaces.IGestorIdiomas;
+import interfaces.IGestorPublicaciones;
+import publicaciones.modelos.GestorPublicaciones;
 import tipos.modelos.Tipo;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GestorIdiomas implements IGestorIdiomas {
-    private static ArrayList<Idioma> idiomas = new ArrayList<>();
+    private static List<Idioma> idiomas = new ArrayList<>();
     private static GestorIdiomas gestor;
 
     private GestorIdiomas() {
@@ -31,11 +34,11 @@ public class GestorIdiomas implements IGestorIdiomas {
         } else
             idiomas.add(nuevoIdioma);
             return "Idioma agregado de forma EXITOSA!";
-
     }
 
     @Override
-    public ArrayList<Idioma> verIdiomas() {
+    public List<Idioma> verIdiomas() {
+        Collections.sort(idiomas, new ComparatorNombre());
         return idiomas;
     }
 
@@ -55,7 +58,6 @@ public class GestorIdiomas implements IGestorIdiomas {
     @Override
     public Idioma verIdioma(String nombre) {
         Idioma nuevoIdioma = new Idioma(nombre);
-
         if ((nombre==null) || (nombre.isEmpty()))
             return null;
         for (Idioma a : idiomas) {
@@ -67,22 +69,25 @@ public class GestorIdiomas implements IGestorIdiomas {
 
     @Override
     public String borrarIdioma(Idioma idioma) {
-        if (this.existeEsteIdioma(idioma)) {
-            idiomas.remove(idioma);
-            return "Idioma removido con EXITO!";
-        }
-        return "Idioma Inexistente!";
+        if (!this.existeEsteIdioma(idioma))
+            return "Este idioma es INEXISTENTE!";
+        IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
+        if (gesPublicaciones.hayPublicacionesConEsteIdioma(idioma))
+            return "Hay al menos una publicacion con este idioma!";
+        this.idiomas.remove(idioma);
+        return "Idioma removido con EXITO!";
     }
 
     @Override
     public List<Idioma> buscarIdiomas(String nombre) {
-        ArrayList<Idioma> idiomasBuscados = new ArrayList<>();
-        if (nombre.toLowerCase() != null) {
-            for (Idioma a : idiomas) {
-                if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
-                    idiomasBuscados.add(a);
-            }
+        List<Idioma> idiomasBuscados = new ArrayList<>();
+        if (nombre == null)
+            return idiomasBuscados;
+        for(Idioma idioma : idiomas) {
+            if (idioma.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                idiomasBuscados.add(idioma);
         }
+        Collections.sort(idiomasBuscados, new ComparatorNombre());
         return idiomasBuscados;
     }
 }

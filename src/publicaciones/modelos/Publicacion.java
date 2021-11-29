@@ -26,7 +26,7 @@ public class Publicacion {
     private Tipo unTipo;
     private Idioma unIdioma;
     private Lugar unLugar;
-    private ArrayList<PalabraClave> palabrasClaves;
+    private List<PalabraClave> palabrasClaves;
     private MiembroEnGrupo unMiembroEnGrupo;
 
     DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/uuuu");
@@ -145,7 +145,7 @@ public class Publicacion {
         this.unLugar = unLugar;
     }
 
-    public ArrayList<PalabraClave> getPalabrasClaves() {
+    public List<PalabraClave> getPalabrasClaves() {
         return palabrasClaves;
     }
 

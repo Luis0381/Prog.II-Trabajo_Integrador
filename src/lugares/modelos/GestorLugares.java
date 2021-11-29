@@ -1,13 +1,16 @@
 package lugares.modelos;
 
 import interfaces.IGestorLugares;
+import interfaces.IGestorPublicaciones;
+import publicaciones.modelos.GestorPublicaciones;
 import tipos.modelos.Tipo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GestorLugares implements IGestorLugares {
-    private static ArrayList<Lugar> lugares = new ArrayList<>();
+    private static List<Lugar> lugares = new ArrayList<>();
     private static GestorLugares gestor;
 
     private GestorLugares() {
@@ -34,6 +37,7 @@ public class GestorLugares implements IGestorLugares {
 
     @Override
     public List<Lugar> verLugares() {
+        Collections.sort(lugares, new ComparatorNombre());
         return lugares;
     }
 
@@ -64,11 +68,14 @@ public class GestorLugares implements IGestorLugares {
 
     @Override
     public String borrarLugar(Lugar lugar) {
-        if (this.existeEsteLugar(lugar)) {
-            lugares.remove(lugar);
-            return "Lugar removido con EXITO!";
-        }
-        return "Lugar Inexistente!";
+        if (!this.existeEsteLugar(lugar))
+            return "Este lugar es INEXISTENTE!";
+        IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
+        if (gesPublicaciones.hayPublicacionesConEsteLugar(lugar))
+            return "Hay al menos una publicacion con este lugar!!";
+
+        lugares.remove(lugar);
+        return "Lugar removido con EXITO!";
     }
 
     @Override
@@ -80,6 +87,7 @@ public class GestorLugares implements IGestorLugares {
                     lugaresBuscados.add(a);
             }
         }
+        Collections.sort(lugares, new ComparatorNombre());
         return lugaresBuscados;
     }
 }

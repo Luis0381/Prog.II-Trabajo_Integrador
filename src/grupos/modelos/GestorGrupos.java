@@ -1,14 +1,15 @@
 package grupos.modelos;
 
+import autores.modelos.GestorAutores;
 import interfaces.IGestorGrupos;
-import tipos.modelos.Tipo;
-
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+
+
 public class GestorGrupos implements IGestorGrupos {
-    private static ArrayList<Grupo> grupos = new ArrayList<>();
+    private static List<Grupo> grupos = new ArrayList<>();
     private static GestorGrupos gestor;
 
     private GestorGrupos() {
@@ -47,6 +48,7 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public List<Grupo> verGrupos() {
+        Collections.sort(grupos, new ComparatorNombre());
         return grupos;
     }
 
@@ -81,22 +83,26 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public String borrarGrupo(Grupo grupo) {
-        if (this.existeEsteGrupo(grupo)) {
-            grupos.remove(grupo);
-            return "Grupo removido con EXITO!";
-        }
-        return "Grupo Inexistente!";
+        GestorAutores gesAutores = GestorAutores.crear();
+        if (!this.existeEsteGrupo(grupo))
+            return "Este grupo no existe!";
+        if (gesAutores.hayAutoresConEsteGrupo(grupo))
+            return "Hay autores que pertenecen a este grupo!";
+        grupos.remove(grupo);
+        return "Autor removido con EXITO!";
     }
 
     @Override
     public List<Grupo> buscarGrupos(String nombre) {
-        ArrayList<Grupo> gruposBuscados = new ArrayList<>();
-        if (nombre.toLowerCase() != null) {
-            for (Grupo a : grupos) {
-                if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
-                    gruposBuscados.add(a);
-            }
+        List<Grupo> gruposBuscados = new ArrayList<>();
+        if (nombre == null)
+            return gruposBuscados;
+
+        for(Grupo grupo : grupos) {
+            if (grupo.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                gruposBuscados.add(grupo);
         }
+        Collections.sort(gruposBuscados, new ComparatorNombre());
         return gruposBuscados;
     }
 }
