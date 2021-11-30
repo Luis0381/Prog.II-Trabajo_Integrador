@@ -26,7 +26,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnGrupos.setEnabled(false);
         btnPublicaciones.setEnabled(false);
         btnTipos.setEnabled(false);
-        btnIdiomas.setEnabled(false);
+        btnAutores.setEnabled(false);
         btnLugares.setEnabled(false);
         btnPalabrasClaves.setEnabled(false);
     }

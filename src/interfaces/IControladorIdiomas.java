@@ -13,7 +13,7 @@ public interface IControladorIdiomas {
      *
      * @param evt evento
      */
-    public void btnNuevaClic(ActionEvent evt);
+    public void btnNuevoClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Borrar

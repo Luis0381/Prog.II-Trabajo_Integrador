@@ -1,8 +1,7 @@
 package principal.controladores;
 
 
-import autores.controladores.ControladorAutores;
-import autores.vistas.VentanaAutores;
+
 import idiomas.controladores.ControladorIdiomas;
 import interfaces.IControladorPrincipal;
 import principal.vistas.VentanaPrincipal;

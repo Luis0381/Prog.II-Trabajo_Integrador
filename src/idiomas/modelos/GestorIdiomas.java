@@ -6,6 +6,7 @@ import publicaciones.modelos.GestorPublicaciones;
 import tipos.modelos.Tipo;
 
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 public class GestorIdiomas implements IGestorIdiomas {
     private static List<Idioma> idiomas = new ArrayList<>();
     private static GestorIdiomas gestor;
+
+    private static final String NOMBRE_ARCHIVO = "Idiomas.txt";
 
     private GestorIdiomas() {
 
@@ -23,6 +26,55 @@ public class GestorIdiomas implements IGestorIdiomas {
             gestor = new GestorIdiomas();
 
         return gestor;
+    }
+
+    private String leerArchivo(){
+        File file = this.obtenerArchivoPalabrasClave();
+        if (file != null) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String cadena;
+                while((cadena = br.readLine()) != null) {
+                    Idioma a = new Idioma(cadena);
+                    this.verIdiomas().add(a);
+                }
+                Collections.sort(idiomas, new ComparatorNombre());
+                return "Se leyo  el archivo correctamente";
+            }
+            catch(NullPointerException | IOException ioe) {
+                return "No se pudo leer el archivo";
+            }
+        }
+        else
+            return "No se pudo crear el archivo";
+    }
+
+    public String escribirArchivo(){
+        try {
+            FileWriter fw = new FileWriter(NOMBRE_ARCHIVO);
+            if(!this.verIdiomas().isEmpty()){
+                for(Idioma a: this.verIdiomas()){
+                    fw.write(a.verNombre());
+                    fw.write("\n");
+                }
+            }
+            fw.close();
+            return "Se han guardado todas las palabras claves con exito";
+        }
+        catch(IOException e1) {
+            return "Ha ocurrido un error al guardar los datos";
+        }
+    }
+
+    private File obtenerArchivoPalabrasClave(){
+        File file = new File(NOMBRE_ARCHIVO);
+        try {
+            if (!file.exists())
+                file.createNewFile();
+            return file;
+        }
+        catch(IOException e) {
+            return null;
+        }
     }
 
     @Override

@@ -5,22 +5,46 @@
  */
 package idiomas.vistas;
 
+import idiomas.controladores.ControladorIdiomas;
 import idiomas.modelos.Idioma;
 import interfaces.IControladorAIdiomas;
 
 import java.awt.Dialog;
 import java.util.ArrayList;
-import javax.swing.JDialog;
+import javax.swing.*;
 
 public class VentanaAIdioma extends JDialog {
     private IControladorAIdiomas controlador;
 
     public VentanaAIdioma(IControladorAIdiomas controlador) {
-        initComponents();
         this.controlador = controlador;
-        this.setTitle(controlador.TITULO);
+        initComponents();
+        this.setTitle(IControladorAIdiomas.TITULO);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public void setBtnGuardar(JButton btnGuardar) {
+        this.btnGuardar = btnGuardar;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
     }
 
     /**
