@@ -53,6 +53,8 @@ public class ControladorAIdiomas implements IControladorAIdiomas {
 
     @Override
     public void btnCancelarClic(ActionEvent evt) {
+        javax.swing.JTextField txtNombre = ventana.getTxtNombre();
+        txtNombre.setText("");
         this.ocultarVentana();
     }
 
