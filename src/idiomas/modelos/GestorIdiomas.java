@@ -18,7 +18,7 @@ public class GestorIdiomas implements IGestorIdiomas {
     private static final String NOMBRE_ARCHIVO = "Idiomas.txt";
 
     private GestorIdiomas() {
-
+        this.leerArchivo();
     }
 
     public static GestorIdiomas crear() {
@@ -29,7 +29,7 @@ public class GestorIdiomas implements IGestorIdiomas {
     }
 
     private String leerArchivo(){
-        File file = this.obtenerArchivoPalabrasClave();
+        File file = this.obtenerArchivoIdioma();
         if (file != null) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String cadena;
@@ -58,14 +58,14 @@ public class GestorIdiomas implements IGestorIdiomas {
                 }
             }
             fw.close();
-            return "Se han guardado todas las palabras claves con exito";
+            return "Se han guardado todas los idiomas con EXITO!";
         }
         catch(IOException e1) {
-            return "Ha ocurrido un error al guardar los datos";
+            return "ERROR al guardar los datos";
         }
     }
 
-    private File obtenerArchivoPalabrasClave(){
+    private File obtenerArchivoIdioma(){
         File file = new File(NOMBRE_ARCHIVO);
         try {
             if (!file.exists())

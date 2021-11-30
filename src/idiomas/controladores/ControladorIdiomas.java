@@ -41,27 +41,33 @@ public class ControladorIdiomas implements IControladorIdiomas {
     public void actualizarTablaIdiomas(){
         javax.swing.JTable tablaIdiomas = this.ventana.getTablaIdiomas();
         javax.swing.JButton btnBorrarIdioma= this.ventana.getBtnEliminar();
-
+        javax.swing.JButton btnBuscarIdioma= this.ventana.getBtnBuscar();
+        
+         btnBuscarIdioma.setEnabled(true);
         tablaIdiomas.setModel(new ModeloTablaIdiomas());
 
         if(tablaIdiomas.getRowCount() == 0){
             btnBorrarIdioma.setEnabled(false);
         }
-        else
+        else{
             btnBorrarIdioma.setEnabled(true);
+        }
     }
 
     private void filtrarTablaIdiomas(String nombreFiltrar){
         javax.swing.JTable tablaIdiomas = this.ventana.getTablaIdiomas();
-        javax.swing.JButton btnEliminarIdioma = this.ventana.getBtnEliminar();
+        javax.swing.JButton btnBorrarIdioma = this.ventana.getBtnEliminar();
+        javax.swing.JButton btnBuscarIdioma= this.ventana.getBtnBuscar();
 
         tablaIdiomas.setModel(new ModeloTablaIdiomas(nombreFiltrar));
+        btnBuscarIdioma.setEnabled(true);
 
         if(tablaIdiomas.getRowCount() == 0){
-            btnEliminarIdioma.setEnabled(false);
+            btnBorrarIdioma.setEnabled(false);
         }
-        else
-            btnEliminarIdioma.setEnabled(true);
+        else{
+            btnBorrarIdioma.setEnabled(true);
+        }
     }
 
 
@@ -72,7 +78,7 @@ public class ControladorIdiomas implements IControladorIdiomas {
     }
 
     @Override
-    public void btnBorrarClic(ActionEvent evt) {
+    public void btnEliminarClic(ActionEvent evt) {
         javax.swing.JTable tablaIdiomas = this.ventana.getTablaIdiomas();
         int filaElegida = tablaIdiomas.getSelectedRow();
 
@@ -91,7 +97,7 @@ public class ControladorIdiomas implements IControladorIdiomas {
             }
         }
         else{
-            JOptionPane.showMessageDialog(ventana, "No ha seleccionado ninguna palabra clave");
+            JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun idioma");
         }
     }
 
@@ -106,7 +112,7 @@ public class ControladorIdiomas implements IControladorIdiomas {
 
             JOptionPane.showMessageDialog(ventana, resultado);
 
-            if(resultado.equals("Se han guardado todas las palabras claves con exito")){
+            if(resultado.equals("Se han guardado todas los idiomas con EXITO!")){
                 this.ocultarVentana();
             }
         }
@@ -118,7 +124,6 @@ public class ControladorIdiomas implements IControladorIdiomas {
         String nombreBuscar = txtNombre.getText().trim();
 
         this.filtrarTablaIdiomas(nombreBuscar);
-        txtNombre.setText("");
     }
 
     @Override
@@ -136,8 +141,6 @@ public class ControladorIdiomas implements IControladorIdiomas {
             javax.swing.JButton btnBuscar = this.ventana.getBtnBuscar();
 
             btnBuscar.doClick();
-
-            txtNombre.setText("");
         }
     }
 }

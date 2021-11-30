@@ -130,9 +130,6 @@
         <Property name="text" type="java.lang.String" value="Autores"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAutoresActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLugares">
       <Properties>
@@ -160,6 +157,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Idiomas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIdiomasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTipos">
       <Properties>
@@ -187,7 +187,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Parcial N&#xba;1 de Programaci&#xf3;n II - Grupo 1"/>
+        <Property name="text" type="java.lang.String" value="Trabajo Practico N&#xba;7 de Programaci&#xf3;n II - Grupo 1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

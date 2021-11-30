@@ -43,10 +43,11 @@ public class ControladorAIdiomas implements IControladorAIdiomas {
         String resultado = gesIdiomas.nuevoIdioma(nombre);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Se creo y guardo la palabra clave")){
+        if(resultado.equals("Idioma agregado de forma EXITOSA!")){
             txtNombre.setText("");
             ControladorIdiomas controlIdioma = ControladorIdiomas.crear();
             controlIdioma.actualizarTablaIdiomas();
+            this.ocultarVentana();
         }
     }
 

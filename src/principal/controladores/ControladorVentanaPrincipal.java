@@ -58,7 +58,6 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
     @Override
     public void btnIdiomasClic(ActionEvent evt) {
         ControladorIdiomas idiomas = ControladorIdiomas.crear();
-
         idiomas.mostrarVentana();
     }
 
@@ -72,6 +71,8 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
         int opcion = JOptionPane.showOptionDialog(null, CONFIRMACION, TITULO, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Sí", "No"}, this);
         if (opcion == JOptionPane.YES_OPTION) {
             this.ventana.dispose();
+            ControladorIdiomas idiomas = ControladorIdiomas.crear();
+            idiomas.getVentana().dispose();
         }
     }
 }

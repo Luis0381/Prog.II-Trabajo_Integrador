@@ -20,7 +20,7 @@ public interface IControladorIdiomas {
      *
      * @param evt evento
      */
-    public void btnBorrarClic(ActionEvent evt);
+    public void btnEliminarClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Volver
