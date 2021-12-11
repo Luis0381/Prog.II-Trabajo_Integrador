@@ -9,6 +9,7 @@ import principal.vistas.VentanaPrincipal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import tipos.controladores.ControladorTipos;
 
 /**
  * @author Thomas Mafut & Luis Medina Raed
@@ -75,7 +76,8 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
 
     @Override
     public void btnTiposClic(ActionEvent evt) {
-
+        ControladorTipos tipos = ControladorTipos.crear();
+        tipos.mostrarVentana();
     }
 
     @Override

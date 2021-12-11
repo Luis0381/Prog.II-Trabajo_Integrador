@@ -2,6 +2,11 @@ package tipos.modelos;
 
 import interfaces.IGestorPublicaciones;
 import interfaces.IGestorTipos;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import publicaciones.modelos.GestorPublicaciones;
 
 import java.util.ArrayList;
@@ -11,6 +16,8 @@ import java.util.List;
 public class GestorTipos implements IGestorTipos {
     private List<Tipo> tipos = new ArrayList<>();
     private static GestorTipos gestor;
+    
+    private static final String NOMBRE_ARCHIVO = "Tipos.txt";
 
     private GestorTipos() {
 
@@ -21,6 +28,55 @@ public class GestorTipos implements IGestorTipos {
             gestor = new GestorTipos();
 
         return gestor;
+    }
+    
+        private String leerArchivo(){
+        File file = this.obtenerArchivoIdioma();
+        if (file != null) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String cadena;
+                while((cadena = br.readLine()) != null) {
+                    Tipo a = new Tipo(cadena);
+                    this.verTipos().add(a);
+                }
+                Collections.sort(tipos, new ComparatorNombre());
+                return "Se leyo  el archivo correctamente";
+            }
+            catch(NullPointerException | IOException ioe) {
+                return "No se pudo leer el archivo";
+            }
+        }
+        else
+            return "No se pudo crear el archivo";
+    }
+
+    public String escribirArchivo(){
+        try {
+            FileWriter fw = new FileWriter(NOMBRE_ARCHIVO);
+            if(!this.verTipos().isEmpty()){
+                for(Tipo a: this.verTipos()){
+                    fw.write(a.verNombre());
+                    fw.write("\n");
+                }
+            }
+            fw.close();
+            return "Se han guardado todas los tipos con EXITO!";
+        }
+        catch(IOException e1) {
+            return "ERROR al guardar los datos";
+        }
+    }
+
+    private File obtenerArchivoIdioma(){
+        File file = new File(NOMBRE_ARCHIVO);
+        try {
+            if (!file.exists())
+                file.createNewFile();
+            return file;
+        }
+        catch(IOException e) {
+            return null;
+        }
     }
 
     @Override
@@ -71,7 +127,7 @@ public class GestorTipos implements IGestorTipos {
             if (tipo.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
                 tiposBuscados.add(tipo);
         }
-        Collections.sort(tiposBuscados, new ComparatorNombre());
+        Collections.sort(tiposBuscados, new tipos.modelos.ComparatorNombre());
         return tiposBuscados;
     }
 
