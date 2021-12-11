@@ -4,6 +4,7 @@ package principal.controladores;
 
 import idiomas.controladores.ControladorIdiomas;
 import interfaces.IControladorPrincipal;
+import lugares.controladores.ControladorLugares;
 import principal.vistas.VentanaPrincipal;
 
 import javax.swing.*;
@@ -50,6 +51,17 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
         ventana.setVisible(false);
     }
 
+    @Override
+    public void btnPalabrasClavesClic(ActionEvent evt) {
+
+    }
+
+    @Override
+    public void btnLugaresClic(ActionEvent evt) {
+        ControladorLugares lugares = ControladorLugares.crear();
+        lugares.mostrarVentana();
+    }
+
     /**
      * Acción que se ejecuta cuando se selecciona el botón Autores
      *
@@ -59,6 +71,26 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
     public void btnIdiomasClic(ActionEvent evt) {
         ControladorIdiomas idiomas = ControladorIdiomas.crear();
         idiomas.mostrarVentana();
+    }
+
+    @Override
+    public void btnTiposClic(ActionEvent evt) {
+
+    }
+
+    @Override
+    public void btnGruposClic(ActionEvent evt) {
+
+    }
+
+    @Override
+    public void btnAutoresClic(ActionEvent evt) {
+
+    }
+
+    @Override
+    public void btnPublicacionesClic(ActionEvent evt) {
+
     }
 
     /**

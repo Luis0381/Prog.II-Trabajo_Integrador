@@ -1,25 +1,26 @@
-package idiomas.controladores;
+package lugares.controladores;
 
-import idiomas.modelos.GestorIdiomas;
-import idiomas.vistas.VentanaAIdioma;
-import interfaces.IControladorAIdiomas;
+
+import interfaces.IControladorALugares;
+import lugares.modelos.GestorLugares;
+import lugares.vistas.VentanaALugar;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class ControladorAIdiomas implements IControladorAIdiomas {
-    private static ControladorAIdiomas instancia;
-    private VentanaAIdioma ventana;
+public class ControladorALugares implements IControladorALugares {
+    private static ControladorALugares instancia;
+    private VentanaALugar ventana;
 
-    private ControladorAIdiomas() {
-        this.ventana = new VentanaAIdioma(this);
+    private ControladorALugares() {
+        this.ventana = new VentanaALugar(this);
     }
 
 
-    public static ControladorAIdiomas crear(){
+    public static ControladorALugares crear(){
         if (instancia == null)
-            instancia = new ControladorAIdiomas();
+            instancia = new ControladorALugares();
 
         return instancia;
     }
@@ -38,14 +39,14 @@ public class ControladorAIdiomas implements IControladorAIdiomas {
 
         String nombre = txtNombre.getText().trim();
 
-        GestorIdiomas gesIdiomas = GestorIdiomas.crear();
-        String resultado = gesIdiomas.nuevoIdioma(nombre);
+        GestorLugares gesLugares = GestorLugares.crear();
+        String resultado = gesLugares.nuevoLugar(nombre);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Idioma agregado de forma EXITOSA!")){
+        if(resultado.equals("Lugar agregado de forma EXITOSA!")){
             txtNombre.setText("");
-            ControladorIdiomas controlIdioma = ControladorIdiomas.crear();
-            controlIdioma.actualizarTablaIdiomas();
+            ControladorLugares controlLugar = ControladorLugares.crear();
+            controlLugar.actualizarTablaLugares();
             this.ocultarVentana();
         }
     }

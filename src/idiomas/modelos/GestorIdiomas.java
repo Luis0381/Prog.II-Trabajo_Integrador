@@ -139,7 +139,7 @@ public class GestorIdiomas implements IGestorIdiomas {
             if (idioma.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
                 idiomasBuscados.add(idioma);
         }
-        Collections.sort(idiomasBuscados, new ComparatorNombre());
+        Collections.sort(idiomasBuscados, new idiomas.modelos.ComparatorNombre());
         return idiomasBuscados;
     }
 }

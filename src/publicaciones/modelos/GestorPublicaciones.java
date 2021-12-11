@@ -179,22 +179,6 @@ public class GestorPublicaciones implements IGestorPublicaciones {
     }
 
     @Override
-    public Publicacion verPublicacion(String titulo) {
-        for (Publicacion a : publicaciones) {
-            if (a.getTitulo().equals(titulo))
-                return a;
-        }
-        return null;
-    }
-
-    @Override
-    public void mostrarPublicaciones() {
-        if (!verPublicaciones().isEmpty())
-            for (Publicacion a : publicaciones)
-                a.mostrar();
-    }
-
-    @Override
     public String borrarPublicacion(Publicacion publicacion) {
         if (this.existeEstaPublicacion(publicacion)) {
             publicaciones.remove(publicacion);
@@ -215,6 +199,20 @@ public class GestorPublicaciones implements IGestorPublicaciones {
         }
         Collections.sort(publicaciones, new ComparatorNombre());
         return publicacionesBuscadas;
+    }
+
+    public Publicacion verPublicacion(String titulo) {
+        for (Publicacion a : publicaciones) {
+            if (a.getTitulo().equals(titulo))
+                return a;
+        }
+        return null;
+    }
+
+    public void mostrarPublicaciones() {
+        if (!verPublicaciones().isEmpty())
+            for (Publicacion a : publicaciones)
+                a.mostrar();
     }
 }
 

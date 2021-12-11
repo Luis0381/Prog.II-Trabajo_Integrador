@@ -230,11 +230,13 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public void mostrarAlumnos() {
-        if (!verAlumnos().isEmpty()) {
-            for (Alumno a : verAlumnos())
-                a.mostrar();
-        }
+    public String agregarGrupos(Autor autor, List<MiembroEnGrupo> grupos) {
+        return null;
+    }
+
+    @Override
+    public String quitarGrupos(Autor autor, List<MiembroEnGrupo> grupos) {
+        return null;
     }
 
     @Override
@@ -278,7 +280,13 @@ public class GestorAutores implements IGestorAutores {
         return false;
     }
 
-    @Override
+    public void mostrarAlumnos() {
+        if (!verAlumnos().isEmpty()) {
+            for (Alumno a : verAlumnos())
+                a.mostrar();
+        }
+    }
+
     public void mostrarProfesores() {
         if (!verProfesores().isEmpty()) {
             for (Profesor a : verProfesores())
@@ -286,7 +294,6 @@ public class GestorAutores implements IGestorAutores {
         }
     }
 
-    @Override
     public void mostrarAutores() {
         if (!verAutores().isEmpty())
             for (Autor a : autores)

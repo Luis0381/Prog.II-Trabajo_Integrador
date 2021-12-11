@@ -47,6 +47,16 @@ public class GestorGrupos implements IGestorGrupos {
     }
 
     @Override
+    public String agregarMiembros(Grupo grupo, List<MiembroEnGrupo> miembros) {
+        return null;
+    }
+
+    @Override
+    public String quitarMiembros(Grupo grupo, List<MiembroEnGrupo> miembros) {
+        return null;
+    }
+
+    @Override
     public List<Grupo> verGrupos() {
         Collections.sort(grupos, new ComparatorNombre());
         return grupos;
@@ -74,11 +84,8 @@ public class GestorGrupos implements IGestorGrupos {
     }
 
     @Override
-    public void mostrarGrupos() {
-        if (!grupos.isEmpty()) {
-            for (Grupo g : verGrupos())
-                g.mostrar();
-        }
+    public String actualizarGrupos() {
+        return null;
     }
 
     @Override
@@ -105,4 +112,12 @@ public class GestorGrupos implements IGestorGrupos {
         Collections.sort(gruposBuscados, new ComparatorNombre());
         return gruposBuscados;
     }
+
+    public void mostrarGrupos() {
+        if (!grupos.isEmpty()) {
+            for (Grupo g : verGrupos())
+                g.mostrar();
+        }
+    }
+
 }

@@ -3,8 +3,8 @@ package lugares.modelos;
 import interfaces.IGestorLugares;
 import interfaces.IGestorPublicaciones;
 import publicaciones.modelos.GestorPublicaciones;
-import tipos.modelos.Tipo;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,8 +13,10 @@ public class GestorLugares implements IGestorLugares {
     private static List<Lugar> lugares = new ArrayList<>();
     private static GestorLugares gestor;
 
-    private GestorLugares() {
+    private static final String NOMBRE_ARCHIVO = "Lugares.txt";
 
+    private GestorLugares() {
+        this.leerArchivo();
     }
 
     public static GestorLugares crear() {
@@ -24,19 +26,64 @@ public class GestorLugares implements IGestorLugares {
         return gestor;
     }
 
-    @Override
-    public String nuevoLugar(String nombre){
-        if ((nombre != null) && (!nombre.isEmpty())) {
-            Lugar lugar = new Lugar(nombre);
-            if(!lugares.contains(lugar)) {
-                lugares.add(lugar);
-                return "Lugar añadido con EXITO!";
+    private String leerArchivo(){
+        File file = this.obtenerArchivoLugar();
+        if (file != null) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String cadena;
+                while((cadena = br.readLine()) != null) {
+                    Lugar a = new Lugar(cadena);
+                    this.verLugares().add(a);
+                }
+                Collections.sort(lugares, new lugares.modelos.ComparatorNombre());
+                return "Se leyo  el archivo correctamente";
             }
-            else
-                return "Ya existe un lugar con ese nombre";
+            catch(NullPointerException | IOException ioe) {
+                return "No se pudo leer el archivo";
+            }
         }
         else
-            return "Verifique el nombre ingresado!";
+            return "No se pudo crear el archivo";
+    }
+
+    public String escribirArchivo(){
+        try {
+            FileWriter fw = new FileWriter(NOMBRE_ARCHIVO);
+            if(!this.verLugares().isEmpty()){
+                for(Lugar a: this.verLugares()){
+                    fw.write(a.verNombre());
+                    fw.write("\n");
+                }
+            }
+            fw.close();
+            return "Se han guardado todos los lugares con EXITO!";
+        }
+        catch(IOException e1) {
+            return "ERROR al guardar los datos";
+        }
+    }
+
+    private File obtenerArchivoLugar(){
+        File file = new File(NOMBRE_ARCHIVO);
+        try {
+            if (!file.exists())
+                file.createNewFile();
+            return file;
+        }
+        catch(IOException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public String nuevoLugar(String nombre){
+        Lugar nuevoLugar = new Lugar(nombre);
+
+        if (lugares.contains(nuevoLugar) || nombre == null || nombre.trim().isEmpty()) {
+            return "ERROR al agregar un nuevo lugar!";
+        } else
+            lugares.add(nuevoLugar);
+        return "Lugar agregado de forma EXITOSA!";
     }
 
     @Override
@@ -65,7 +112,7 @@ public class GestorLugares implements IGestorLugares {
             return null;
         for (Lugar a : lugares) {
             if (a.verNombre().equals(nombre))
-                return a;
+                return nuevoLugar;
         }
         return null;
     }
@@ -83,14 +130,14 @@ public class GestorLugares implements IGestorLugares {
 
     @Override
     public List<Lugar> buscarLugares(String nombre) {
-        ArrayList<Lugar> lugaresBuscados = new ArrayList<>();
-        if (nombre.toLowerCase() != null) {
-            for (Lugar a : lugares) {
-                if (a.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
-                    lugaresBuscados.add(a);
-            }
+        List<Lugar> lugaresBuscados = new ArrayList<>();
+        if (nombre == null)
+            return lugaresBuscados;
+        for(Lugar lugar : lugares) {
+            if (lugar.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
+                lugaresBuscados.add(lugar);
         }
-        Collections.sort(lugares, new ComparatorNombre());
+        Collections.sort(lugaresBuscados, new lugares.modelos.ComparatorNombre());
         return lugaresBuscados;
     }
 }

@@ -2,9 +2,7 @@ package idiomas.controladores;
 
 import idiomas.modelos.GestorIdiomas;
 import idiomas.modelos.ModeloTablaIdiomas;
-import idiomas.vistas.VentanaAIdioma;
 import idiomas.vistas.VentanaIdiomas;
-import interfaces.IControladorAIdiomas;
 import interfaces.IControladorIdiomas;
 
 import javax.swing.*;
@@ -43,7 +41,7 @@ public class ControladorIdiomas implements IControladorIdiomas {
         javax.swing.JButton btnBorrarIdioma= this.ventana.getBtnEliminar();
         javax.swing.JButton btnBuscarIdioma= this.ventana.getBtnBuscar();
         
-         btnBuscarIdioma.setEnabled(true);
+        btnBuscarIdioma.setEnabled(true);
         tablaIdiomas.setModel(new ModeloTablaIdiomas());
 
         if(tablaIdiomas.getRowCount() == 0){
