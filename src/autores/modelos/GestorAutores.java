@@ -1,22 +1,18 @@
 package autores.modelos;
 
 
-import grupos.modelos.ComparatorNombre;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
 import interfaces.IGestorAutores;
-import interfaces.IGestorPublicaciones;
-import publicaciones.modelos.GestorPublicaciones;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * @author Thomas Mafut & Luis Medina Raed
  */
 public class GestorAutores implements IGestorAutores {
-    private List<Autor> autores = new ArrayList<>();
+    private static ArrayList<Autor> autores = new ArrayList<>();
     private static GestorAutores gestor;
 
     /**
@@ -170,14 +166,14 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public List<Alumno> verAlumnos() {
+    public ArrayList<Alumno> verAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
 
         for (Autor a : autores) {
             if (a instanceof Alumno)
                 alumnos.add((Alumno) a);
         }
-        Collections.sort(alumnos, new ComparatorApellidoyNombre());
+
         return alumnos;
     }
 
@@ -195,8 +191,7 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public List<Autor> verAutores() {
-        Collections.sort(autores, new ComparatorApellidoyNombre());
+    public ArrayList<Autor> verAutores() {
         return autores;
     }
 
@@ -210,23 +205,17 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public String borrarAutor(Autor autor) {
-        if (this.existeEsteAutor(autor)) {
-            IGestorPublicaciones gestorPublicaciones = GestorPublicaciones.crear();
-                if (gestorPublicaciones.hayPublicacionesConEsteAutor(autor))
-                    return "Hay al menos una publicacion con este autor!";
-                else {
-                    this.autores.remove(autor);
-                    if (autor instanceof Profesor) {
-                        return "Profesor removido con EXITO!";
-                    }
-                    else {
-                        return "Alumno removido con EXITO!";
-                    }
-                }
-            }
-        else
-            return "El autor no existe!";
+    public boolean hayAutoresConEsteGrupo(Grupo grupo) {
+        return false;
+    }
+
+    @Override
+    public String borrarAutor(Autor dni) {
+        if (this.existeEsteAutor(dni)) {
+            autores.remove(dni);
+            return "Autor removido con EXITO!";
+        }
+        return "Autor Inexistente!";
     }
 
     @Override
@@ -240,7 +229,7 @@ public class GestorAutores implements IGestorAutores {
     }
 
     @Override
-    public List<Alumno> buscarAlumnos(String apellidos) {
+    public ArrayList<Alumno> buscarAlumnos(String apellidos) {
         ArrayList<Alumno> alumnosBuscados = new ArrayList<>();
         if (apellidos != null) {
             for (Autor autor : autores) {
@@ -250,12 +239,11 @@ public class GestorAutores implements IGestorAutores {
                 }
             }
         }
-        Collections.sort(alumnosBuscados, new ComparatorApellidoyNombre());
         return alumnosBuscados;
     }
 
     @Override
-    public List<Profesor> buscarProfesores(String apellidos) {
+    public ArrayList<Profesor> buscarProfesores(String apellidos) {
         ArrayList<Profesor> profesoresBuscados = new ArrayList<>();
         if (apellidos != null) {
             for (Autor autor : autores) {
@@ -265,27 +253,9 @@ public class GestorAutores implements IGestorAutores {
                 }
             }
         }
-        Collections.sort(profesoresBuscados, new ComparatorApellidoyNombre());
         return profesoresBuscados;
     }
 
-    @Override
-    public boolean hayAutoresConEsteGrupo(Grupo grupo) {
-        for(Autor autor : this.autores) {
-            for(MiembroEnGrupo a : autor.verGrupos()) {
-                if (a.verGrupo().equals(grupo))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    public void mostrarAlumnos() {
-        if (!verAlumnos().isEmpty()) {
-            for (Alumno a : verAlumnos())
-                a.mostrar();
-        }
-    }
 
     public void mostrarProfesores() {
         if (!verProfesores().isEmpty()) {
@@ -294,9 +264,18 @@ public class GestorAutores implements IGestorAutores {
         }
     }
 
+
     public void mostrarAutores() {
         if (!verAutores().isEmpty())
             for (Autor a : autores)
                 a.mostrar();
     }
+
+    public void mostrarAlumnos() {
+        if (!verAlumnos().isEmpty()) {
+            for (Alumno a : verAlumnos())
+                a.mostrar();
+        }
+    }
 }
+

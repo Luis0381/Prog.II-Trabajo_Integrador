@@ -2,6 +2,7 @@ package principal.controladores;
 
 
 
+import autores.controladores.ControladorAutores;
 import idiomas.controladores.ControladorIdiomas;
 import interfaces.IControladorPrincipal;
 import lugares.controladores.ControladorLugares;
@@ -87,7 +88,8 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
 
     @Override
     public void btnAutoresClic(ActionEvent evt) {
-
+        ControladorAutores autores = ControladorAutores.crear();
+        autores.mostrarVentana();
     }
 
     @Override

@@ -3,26 +3,28 @@ package autores.modelos;
 import java.util.Objects;
 
 /**
- *
  * @author Thomas Mafut & Luis Medina Raed
  */
 public class Alumno extends Autor {
     // Variables de instancia  
     private String cx;
+
     // Constructor
     public Alumno(int dni, String apellidos, String nombres, String clave, String cx) {
         super(dni, apellidos, nombres, clave);
         this.cx = cx;
     }
     // Metodos
+
     /**
-        Este metodo permite mostrar Alumno
-    */
+     * Este metodo permite mostrar Alumno
+     */
     @Override
-    public void mostrar(){
+    public void mostrar() {
         super.mostrar();
         System.out.println("CX: " + this.cx);
     }
+
     // equals() & hashCode()
     @Override
     public int hashCode() {
@@ -48,8 +50,7 @@ public class Alumno extends Autor {
                 return false;
             }
             return true;
-        }
-        else
+        } else
             return true;
     }
 
@@ -57,6 +58,7 @@ public class Alumno extends Autor {
     public String verCx() {
         return cx;
     }
+
     public void asignarCx(String cx) {
         this.cx = cx;
     }

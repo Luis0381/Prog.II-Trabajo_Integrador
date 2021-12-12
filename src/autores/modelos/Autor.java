@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- *
- * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ * @author Thomas Mafut & Luis Medina Raed
  */
 public abstract class Autor {
     // Variables de instancia 
@@ -19,7 +18,8 @@ public abstract class Autor {
     private String nombres;
     private String clave;
     // Relacion entre clases
-    private ArrayList <MiembroEnGrupo> miembrosEnGrupo = new ArrayList<>();
+    private ArrayList<MiembroEnGrupo> miembrosEnGrupo = new ArrayList<>();
+
     // Constructor
     public Autor(int dni, String apellidos, String nombres, String clave) {
         this.dni = dni;
@@ -28,16 +28,17 @@ public abstract class Autor {
         this.clave = clave;
     }
     // Metodos
+
     /**
-        Este metodo permite mostrar Autor
-    */
-    public void mostrar(){
-        System.out.println("Nombre y apellido: " + this.nombres +", " + this.apellidos + ".");
-        System.out.println("DNI: "+ dni);
-        System.out.println("Clave: "+ clave);
+     * Este metodo permite mostrar Autor
+     */
+    public void mostrar() {
+        System.out.println("Nombre y apellido: " + this.nombres + ", " + this.apellidos + ".");
+        System.out.println("DNI: " + dni);
+        System.out.println("Clave: " + clave);
         System.out.println("Pertenece a los siguientes grupos: ");
-        if(this.tieneGrupos()){
-            for(MiembroEnGrupo unGrupo : this.miembrosEnGrupo){
+        if (this.tieneGrupos()) {
+            for (MiembroEnGrupo unGrupo : this.miembrosEnGrupo) {
                 System.out.println(unGrupo.verGrupo().verNombre() + "\nSu Rol es: " + unGrupo.verRol().toString() + ".");
             }
         } else {
@@ -45,14 +46,21 @@ public abstract class Autor {
         }
     }
 
-    public ArrayList <MiembroEnGrupo> verGrupos(){
+
+    public ArrayList<MiembroEnGrupo> verGrupos() {
         return miembrosEnGrupo;
     }
 
     public void asignarGrupos(ArrayList<MiembroEnGrupo> miembroEnGrupo) {
         this.miembrosEnGrupo = miembroEnGrupo;
     }
-        
+
+    /**
+     * Agrega el grupo
+     *
+     * @param grupo grupo a agregar
+     * @param rol   rol del autor en el grupo
+     */
     public void agregarGrupo(Grupo grupo, Rol rol) {
         MiembroEnGrupo miembro = new MiembroEnGrupo(this, grupo, rol);
         if (!this.contieneGrupo(grupo) && grupo != null && rol != null) {
@@ -69,34 +77,37 @@ public abstract class Autor {
         }
         return false;
     }
-    
+
     /**
-        Este metodo nos permite quitar autores de grupos
-    */
-    public void quitarGrupo(Grupo grupo){
-        for (MiembroEnGrupo unGrupo : miembrosEnGrupo){
-            if (unGrupo.verGrupo().equals(grupo)){
+     * Quita el grupo al cual pertenece el autor
+     *
+     * @param grupo grupo a quitar
+     */
+    public void quitarGrupo(Grupo grupo) {
+        for (MiembroEnGrupo unGrupo : miembrosEnGrupo) {
+            if (unGrupo.verGrupo().equals(grupo)) {
                 miembrosEnGrupo.remove(unGrupo);
                 grupo.quitarMiembro(this);
             }
         }
     }
+
     /**
-        Este metodo nos permite saber si un autor es superadministrador
-    */
-    public boolean esSuperAdministrador(){
-        for (MiembroEnGrupo unGrupo : miembrosEnGrupo){
-            if (unGrupo.verGrupo().esSuperAdministradores()){
+     * Este metodo nos permite saber si un autor es superadministrador
+     */
+    public boolean esSuperAdministrador() {
+        for (MiembroEnGrupo unGrupo : miembrosEnGrupo) {
+            if (unGrupo.verGrupo().esSuperAdministradores()) {
                 return true;
             }
         }
-            return false;
+        return false;
     }
 
     /**
-        Este metodo nos permite saber si un autor tiene grupos
-    */
-    public boolean tieneGrupos(){
+     * Este metodo nos permite saber si un autor tiene grupos
+     */
+    public boolean tieneGrupos() {
         if (this.miembrosEnGrupo == null)
             return false;
         else if (this.miembrosEnGrupo.isEmpty())
@@ -127,28 +138,36 @@ public abstract class Autor {
         final Autor other = (Autor) obj;
         return this.dni == other.dni;
     }
+
     // Getters & Setters
     public int verDni() {
         return dni;
     }
+
     public void asignarDni(int dni) {
         this.dni = dni;
     }
+
     public String verApellidos() {
         return apellidos;
     }
+
     public void asignarApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
+
     public String verNombres() {
         return nombres;
     }
+
     public void asignarNombres(String nombres) {
         this.nombres = nombres;
     }
+
     public String verClave() {
         return clave;
     }
+
     public void asignarClave(String clave) {
         this.clave = clave;
     }
