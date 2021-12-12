@@ -6,6 +6,7 @@ import autores.controladores.ControladorAutores;
 import idiomas.controladores.ControladorIdiomas;
 import interfaces.IControladorPrincipal;
 import lugares.controladores.ControladorLugares;
+import palabrasclaves.controladores.ControladorPalabrasClaves;
 import principal.vistas.VentanaPrincipal;
 
 import javax.swing.*;
@@ -55,7 +56,8 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
 
     @Override
     public void btnPalabrasClavesClic(ActionEvent evt) {
-
+        ControladorPalabrasClaves palabrasClaves = ControladorPalabrasClaves.crear();
+        palabrasClaves.mostrarVentana();
     }
 
     @Override
@@ -107,8 +109,7 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
         int opcion = JOptionPane.showOptionDialog(null, CONFIRMACION, TITULO, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Sí", "No"}, this);
         if (opcion == JOptionPane.YES_OPTION) {
             this.ventana.dispose();
-            ControladorIdiomas idiomas = ControladorIdiomas.crear();
-            idiomas.getVentana().dispose();
+            System.exit(0);
         }
     }
 }

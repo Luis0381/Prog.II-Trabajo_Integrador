@@ -25,7 +25,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setVisible(true);
         btnGrupos.setEnabled(false);
         btnPublicaciones.setEnabled(false);
-        btnPalabrasClaves.setEnabled(false);
     }
 
     /**
@@ -54,6 +53,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         btnPalabrasClaves.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnPalabrasClaves.setText("Palabras Claves");
+        btnPalabrasClaves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPalabrasClavesActionPerformed(evt);
+            }
+        });
 
         btnGrupos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnGrupos.setText("Grupos");
@@ -217,6 +221,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         controlador.btnAutoresClic(evt);
     }//GEN-LAST:event_btnAutoresActionPerformed
+
+    private void btnPalabrasClavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPalabrasClavesActionPerformed
+        // TODO add your handling code here:
+        controlador.btnPalabrasClavesClic(evt);
+    }//GEN-LAST:event_btnPalabrasClavesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
