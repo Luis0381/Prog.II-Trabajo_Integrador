@@ -18,7 +18,7 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
     private static final String NOMBRE_ARCHIVO = "PalabrasClaves.txt";
 
     private GestorPalabrasClaves() {
-
+        this.leerArchivo();
     }
 
     public static GestorPalabrasClaves crear() {

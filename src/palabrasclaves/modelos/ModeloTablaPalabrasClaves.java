@@ -46,4 +46,10 @@ public class ModeloTablaPalabrasClaves extends AbstractTableModel {
     public String getColumnName(int columna) {
         return this.nombresColumnas.get(columna);
     }
+
+    public PalabraClave verPalabraClave(int fila){
+        GestorPalabrasClaves GPC = GestorPalabrasClaves.crear();
+
+        return GPC.verPalabraClave(getValueAt(fila, 0).toString());
+    }
 }

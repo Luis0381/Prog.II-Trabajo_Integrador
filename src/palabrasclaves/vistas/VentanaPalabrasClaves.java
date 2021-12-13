@@ -13,9 +13,8 @@ import interfaces.IControladorTipos;
 
 import javax.swing.*;
 import palabrasclaves.modelos.GestorPalabrasClaves;
+import palabrasclaves.modelos.ModeloTablaPalabrasClaves;
 import tipos.modelos.GestorTipos;
-import tipos.modelos.ModeloTablaTipos;
-
 /**
  *
  * @author Thomas
@@ -30,7 +29,7 @@ public class VentanaPalabrasClaves extends JDialog {
         this.controlador = controlador;
         initComponents();
         this.setTitle(IControladorPalabrasClaves.TITULO);
-        this.tablaPalabrasClaves.setModel(new ModeloTablaTipos());
+        this.tablaPalabrasClaves.setModel(new ModeloTablaPalabrasClaves());
         if(tablaPalabrasClaves.getRowCount() == 0){
             this.btnEliminar.setEnabled(false);
             this.btnBuscar.setEnabled(false);

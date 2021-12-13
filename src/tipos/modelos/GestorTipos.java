@@ -20,7 +20,7 @@ public class GestorTipos implements IGestorTipos {
     private static final String NOMBRE_ARCHIVO = "Tipos.txt";
 
     private GestorTipos() {
-
+        this.leerArchivo();
     }
 
     public static GestorTipos crear() {

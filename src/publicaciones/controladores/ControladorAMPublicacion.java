@@ -72,7 +72,7 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
         this.ventana.getComboGrupo().setModel(new ModeloComboGrupos());
         if(this.ventana.getComboGrupo().getItemCount() == 0 && titulo.equals(TITULO_NUEVA)){
             mostrar = false;
-            JOptionPane.showMessageDialog(ventana, "El profesor logueado actualmente no posee ningun grupo.\nNo puede crear una publicacion.");
+            JOptionPane.showMessageDialog(ventana, "El profesor logueado actualmente no se encuentra en ningun grupo, por lo que no puede crear una publicacion");
         }
         this.ventana.getComboTipo().setModel(new ModeloComboTipos());
         this.ventana.getTablaPalabrasClave().setModel(new ModeloTablaPalabrasClaves());
@@ -98,43 +98,38 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
     }
     
     private void nuevaPublicacion(){
-        //Leer datos
         String titulo = ventana.getTxtTitulo().getText().trim();
         String enlace = ventana.getTxtEnlace().getText().trim();
         ModeloComboTipos modeloTipos = (ModeloComboTipos)ventana.getComboTipo().getModel();
         ModeloComboIdiomas modeloIdiomas = (ModeloComboIdiomas)ventana.getComboIdioma().getModel();
         ModeloComboGrupos modeloGrupos = (ModeloComboGrupos)ventana.getComboGrupo().getModel();
-        //Tomo como profesor logueado al primero en orden alfabetico. A partir de el creo el autor
         GestorAutores autores = GestorAutores.crear();
-        MiembroEnGrupo autor = new MiembroEnGrupo(autores.verProfesores().get(0), modeloGrupos.obtenerGrupo(), Rol.COLABORADOR);        
+        MiembroEnGrupo autor = new MiembroEnGrupo(autores.verProfesores().get(0), modeloGrupos.obtenerGrupo(), Rol.COLABORADOR);
         ModeloComboLugares modeloLugares = (ModeloComboLugares)ventana.getComboLugar().getModel();
         int[] palabrasClaveElegidas = ventana.getTablaPalabrasClave().getSelectedRows();
         List<PalabraClave> palabrasClave = new ArrayList<>();
-        GestorPalabrasClaves gesPalabrasClaves = GestorPalabrasClaves.crear();
+        GestorPalabrasClaves gpc = GestorPalabrasClaves.crear();
         for(int filaElegida: palabrasClaveElegidas){
             String palabraClave = ventana.getTablaPalabrasClave().getValueAt(filaElegida, 0).toString();
-            palabrasClave.add(gesPalabrasClaves.verPalabraClave(palabraClave));
+            palabrasClave.add(gpc.verPalabraClave(palabraClave));
         }
-        
+
         String resumen = ventana.getTxtResumen().getText().trim();
         Date d = ventana.getSelectorFecha().getCalendar().getTime();
         LocalDate fechaPublicacion = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        //Crear Publicacion
         GestorPublicaciones gPublicaciones = GestorPublicaciones.crear();
         String resultado = gPublicaciones.nuevaPublicacion(titulo, autor, fechaPublicacion, modeloTipos.obtenerTipo(), modeloIdiomas.obtenerIdioma(), modeloLugares.obtenerLugar(), palabrasClave, enlace, resumen);
-        
         JOptionPane.showMessageDialog(ventana, resultado);
         
         if(resultado.equals(IGestorPublicaciones.EXITO)){
             this.ocultar();
             this.limpiar();
+            ControladorPublicaciones publicaciones = ControladorPublicaciones.crear();
+            publicaciones.actualizarTablaPublicaciones();
         }
-        ControladorPublicaciones publicaciones = ControladorPublicaciones.crear();
-        publicaciones.actualizarTablaPublicaciones();
     }
     
     private void modificarPublicacion(){
-        //Leer datos
         String titulo = ventana.getTxtTitulo().getText().trim();
         String enlace = ventana.getTxtEnlace().getText().trim();
         ModeloComboTipos modeloTipos = (ModeloComboTipos)ventana.getComboTipo().getModel();
@@ -143,30 +138,28 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
         ModeloComboLugares modeloLugares = (ModeloComboLugares)ventana.getComboLugar().getModel();
         int[] palabrasClaveElegidas = ventana.getTablaPalabrasClave().getSelectedRows();
         List<PalabraClave> palabrasClave = new ArrayList<>();
-        GestorPalabrasClaves gesPalabrasClaves = GestorPalabrasClaves.crear();
+        GestorPalabrasClaves gpc = GestorPalabrasClaves.crear();
         for(int filaElegida: palabrasClaveElegidas){
             String palabraClave = ventana.getTablaPalabrasClave().getValueAt(filaElegida, 0).toString();
-            palabrasClave.add(gesPalabrasClaves.verPalabraClave(palabraClave));
+            palabrasClave.add(gpc.verPalabraClave(palabraClave));
         }
-        
+
         String resumen = ventana.getTxtResumen().getText().trim();
         Date d = ventana.getSelectorFecha().getCalendar().getTime();
         LocalDate fechaPublicacion = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-        //Modificar publicacion
         GestorPublicaciones gPublicaciones = GestorPublicaciones.crear();
         Publicacion publicacion = gPublicaciones.verPublicacion(titulo);
         MiembroEnGrupo autor = publicacion.getAutor();
-        autor.verGrupo();
+        autor.asignarGrupo(modeloGrupos.obtenerGrupo());
         String resultado = gPublicaciones.modificarPublicacion(publicacion, autor, fechaPublicacion, modeloTipos.obtenerTipo(), modeloIdiomas.obtenerIdioma(), modeloLugares.obtenerLugar(), palabrasClave, enlace, resumen);
-        
+
         JOptionPane.showMessageDialog(ventana, resultado);
         
         if(resultado.equals(IGestorPublicaciones.EXITO)){
             this.ocultar();
+            ControladorPublicaciones publicaciones = ControladorPublicaciones.crear();
+            publicaciones.actualizarTablaPublicaciones();
         }
-        ControladorPublicaciones publicaciones = ControladorPublicaciones.crear();
-        publicaciones.actualizarTablaPublicaciones();
     }
     
     @Override
@@ -187,7 +180,20 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
 
     @Override
     public void txtTituloPresionarTecla(KeyEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c)) {
+            switch(c) {
+                case KeyEvent.VK_ENTER:
+                    this.btnGuardarClic(null);
+                    break;
+                case KeyEvent.VK_BACK_SPACE:
+                case KeyEvent.VK_DELETE:
+                case KeyEvent.VK_SPACE:
+                    break;
+                default:
+                    evt.consume();
+            }
+        }
     }
 
     @Override

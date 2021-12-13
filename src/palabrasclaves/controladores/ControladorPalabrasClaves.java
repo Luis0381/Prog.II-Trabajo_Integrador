@@ -103,7 +103,6 @@ public class ControladorPalabrasClaves implements IControladorPalabrasClaves {
     public void btnVolverClic(ActionEvent evt) {
         String[] botones = {"Si", "No"};
         int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea guardar los datos y volver a la pantalla de inicio?", "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
-
         if(respuesta == 0){
             GestorPalabrasClaves gesPalabrasClaves = GestorPalabrasClaves.crear();
             String resultado = gesPalabrasClaves.escribirArchivo();
@@ -111,9 +110,9 @@ public class ControladorPalabrasClaves implements IControladorPalabrasClaves {
             JOptionPane.showMessageDialog(ventana, resultado);
 
             if(resultado.equals("Se han guardado todas las palabras claves con EXITO!")){
-                this.ocultarVentana();
-            }
+            this.ocultarVentana();
         }
+    }
     }
 
     @Override

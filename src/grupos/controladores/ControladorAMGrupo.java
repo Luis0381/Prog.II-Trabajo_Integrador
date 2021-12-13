@@ -141,12 +141,38 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
 
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c)) { //sólo se aceptan letras, Enter, Del, Backspace y espacio
+            switch(c) {
+                case KeyEvent.VK_ENTER:
+                    this.btnGuardarClic(null); //no importa el evento en este caso
+                    break;
+                case KeyEvent.VK_BACK_SPACE:
+                case KeyEvent.VK_DELETE:
+                case KeyEvent.VK_SPACE:
+                    break;
+                default:
+                    evt.consume(); //consume el evento para que no sea procesado por la fuente
+            }
+        }
     }
 
     @Override
     public void txtDescripcionPresionarTecla(KeyEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c)) { //sólo se aceptan letras, Enter, Del, Backspace y espacio
+            switch(c) {
+                case KeyEvent.VK_ENTER:
+                    this.btnGuardarClic(null); //no importa el evento en este caso
+                    break;
+                case KeyEvent.VK_BACK_SPACE:
+                case KeyEvent.VK_DELETE:
+                case KeyEvent.VK_SPACE:
+                    break;
+                default:
+                    evt.consume(); //consume el evento para que no sea procesado por la fuente
+            }
+        }
     }
 
     @Override

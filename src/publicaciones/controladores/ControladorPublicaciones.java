@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-import palabrasclaves.modelos.GestorPalabrasClaves;
 import palabrasclaves.modelos.ModeloTablaPalabrasClaves;
 import palabrasclaves.modelos.PalabraClave;
 import publicaciones.modelos.GestorPublicaciones;
@@ -67,7 +66,7 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
         GestorAutores autores = GestorAutores.crear();
-        JOptionPane.showMessageDialog(ventana, "Usted esta logueado como: " + autores.verProfesores().get(0).verNombreCompleto());
+        JOptionPane.showMessageDialog(ventana, "Usted esta logueado como: " + autores.verProfesores().get(0).verNombreCompleto() + " (" + autores.verProfesores().get(0).verDni() +")");
     }
     
     public void ocultar(){
@@ -121,7 +120,7 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
     @Override
     public void btnModificarClic(ActionEvent evt) {
         int filaElegida = ventana.getTablaPublicaciones().getSelectedRow();
-        
+
         if(filaElegida != -1){
             String titulo = (String)ventana.getTablaPublicaciones().getValueAt(filaElegida, 0);
 
@@ -129,38 +128,33 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
             Publicacion publicacionElegida = gPublicaciones.verPublicacion(titulo);
 
             ControladorAMPublicacion modificar = ControladorAMPublicacion.crear();
-            //asigno fecha de publicacion
+            modificar.mostrarVentana(modificar.TITULO_MODIFICAR);
             modificar.getVentana().getTxtTitulo().setText(publicacionElegida.getTitulo());
             GregorianCalendar f = GregorianCalendar.from(publicacionElegida.getFechaPublicacion().atStartOfDay(ZoneId.systemDefault()));
             modificar.getVentana().getSelectorFecha().setCalendar(f);
-            //asigno fecha de publicacion
             modificar.getVentana().getTxtEnlace().setText(publicacionElegida.getEnlace());
             modificar.getVentana().getComboGrupo().setSelectedItem(publicacionElegida.getAutor().verGrupo().verNombre());
-            modificar.getVentana().getComboIdioma().setSelectedItem(publicacionElegida.getIdiomaPublicacion().verNombre());
+            modificar.getVentana().getComboIdioma().setSelectedItem(publicacionElegida.getIdiomaPublicacion().toString());
             modificar.getVentana().getComboLugar().setSelectedItem(publicacionElegida.getLugarPublicacion().verNombre());
             modificar.getVentana().getComboTipo().setSelectedItem(publicacionElegida.getTipoPublicacion().verNombre());
-            //Selecciono palabras claves de la publicacion
-            GestorPalabrasClaves gesPalabrasClaves = GestorPalabrasClaves.crear();
-            ModeloTablaPalabrasClaves mpc = new ModeloTablaPalabrasClaves();
+            ModeloTablaPalabrasClaves mt = (ModeloTablaPalabrasClaves)modificar.getVentana().getTablaPalabrasClave().getModel();
             ListSelectionModel modeloSeleccion = modificar.getVentana().getTablaPalabrasClave().getSelectionModel();
             for(PalabraClave palabraClave : publicacionElegida.getPalabrasClaves()) {
-                for(int fila = 0; fila < mpc.getRowCount(); fila++) {
-                    PalabraClave pc = gesPalabrasClaves.verPalabraClave(mpc.getValueAt(fila, 0).toString());
+                for(int fila = 0; fila < modificar.getVentana().getTablaPalabrasClave().getRowCount(); fila++) {
+                    PalabraClave pc = mt.verPalabraClave(fila);
                     if (palabraClave.equals(pc)) {
                         modeloSeleccion.addSelectionInterval(fila, fila);
                         break;
                     }
                 }
             }
-            //Selecciono palabras claves de la publicacion
             modificar.getVentana().getTxtResumen().setText(publicacionElegida.getResumen());
-            
-            modificar.mostrarVentana(modificar.TITULO_MODIFICAR);
         }
         else{
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ninguna publicacion");
         }
     }
+
 
     @Override
     public void btnBorrarClic(ActionEvent evt) {
