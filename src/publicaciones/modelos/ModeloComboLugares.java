@@ -15,7 +15,7 @@ public class ModeloComboLugares extends DefaultComboBoxModel {
 
     public ModeloComboLugares() {
         IGestorLugares gesLugares = GestorLugares.crear();
-        for (Lugar lugar : gesLugares.verLugares()) { //todos los lugares
+        for (Lugar lugar : gesLugares.verLugares()) {
             this.addElement(lugar);
         }
     }

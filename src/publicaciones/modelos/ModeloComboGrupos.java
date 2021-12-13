@@ -5,7 +5,6 @@
  */
 package publicaciones.modelos;
 
-import autores.modelos.Autor;
 import autores.modelos.GestorAutores;
 import autores.modelos.Profesor;
 import grupos.modelos.GestorGrupos;

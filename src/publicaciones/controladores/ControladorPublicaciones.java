@@ -5,6 +5,7 @@
  */
 package publicaciones.controladores;
 
+import autores.modelos.GestorAutores;
 import interfaces.IControladorPublicaciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -110,9 +111,11 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
     @Override
     public void btnNuevaClic(ActionEvent evt) {
         ControladorAMPublicacion nueva = ControladorAMPublicacion.crear();
-        
+        GestorAutores autores = GestorAutores.crear();
+        JOptionPane.showMessageDialog(ventana, "Está por crear una publicacion a nombre de: " + autores.verProfesores().get(0).verNombreCompleto());
         nueva.limpiar();
         nueva.mostrarVentana(nueva.TITULO_NUEVA);
+
     }
 
     @Override

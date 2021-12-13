@@ -68,10 +68,11 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
             this.ventana.getTxtTitulo().setEnabled(false);
         }
         GestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
+
         this.ventana.getComboGrupo().setModel(new ModeloComboGrupos());
         if(this.ventana.getComboGrupo().getItemCount() == 0 && titulo.equals(TITULO_NUEVA)){
             mostrar = false;
-            JOptionPane.showMessageDialog(ventana, "El proffesor logueado actualmente no posee ningun grupo.\nNo puede crear una publicacion.");
+            JOptionPane.showMessageDialog(ventana, "El profesor logueado actualmente no posee ningun grupo.\nNo puede crear una publicacion.");
         }
         this.ventana.getComboTipo().setModel(new ModeloComboTipos());
         this.ventana.getTablaPalabrasClave().setModel(new ModeloTablaPalabrasClaves());
