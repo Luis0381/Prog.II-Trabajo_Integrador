@@ -36,9 +36,9 @@ public class ControladorPrincipal {
     public static void main(String[] args) {
 
         GestorGrupos GesGrupos = GestorGrupos.crear();
-        System.out.println(GesGrupos.nuevoGrupo("Grupo 1", "Descripción 1"));
-        System.out.println(GesGrupos.nuevoGrupo("Grupo 2", "Descripción 2"));
-        System.out.println(GesGrupos.nuevoGrupo("Grupo 3", "Descripción 3"));
+        GesGrupos.nuevoGrupo("Grupo 1", "Descripción 1");
+        GesGrupos.nuevoGrupo("Grupo 2", "Descripción 2");
+        GesGrupos.nuevoGrupo("Grupo 3", "Descripción 3");
 
         GestorAutores GesAutores = GestorAutores.crear();
         GesAutores.nuevoAutor(1, "Medina Raed", "Luis", "1", "1", "1");
@@ -99,7 +99,7 @@ public class ControladorPrincipal {
         G1.agregarMiembro(GesAutores.verProfesores().get(2), Rol.COLABORADOR);
 
         GestorPublicaciones GesPublicaciones = GestorPublicaciones.crear();
-        System.out.println(GesPublicaciones.nuevaPublicacion("Título 1", new MiembroEnGrupo(profesor1, grupo1, Rol.ADMINISTRADOR), LocalDate.of(2020, 06, 24), tipo1 , idioma1 , lugar1 , palabrasClaves , "http" , "hola"));
+        GesPublicaciones.nuevaPublicacion("Título 1", new MiembroEnGrupo(profesor1, grupo1, Rol.ADMINISTRADOR), LocalDate.of(2020, 06, 24), tipo1 , idioma1 , lugar1 , palabrasClaves , "http" , "hola");
 
 
         asignarLookAndFeel("Nimbus");
