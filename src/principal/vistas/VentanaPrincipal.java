@@ -23,8 +23,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setTitle(controlador.TITULO);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        btnGrupos.setEnabled(false);
-        btnPublicaciones.setEnabled(false);
     }
 
     /**
@@ -195,6 +193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnPublicacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublicacionesActionPerformed
         // TODO add your handling code here:
+        controlador.btnPublicacionesClic(evt);
     }//GEN-LAST:event_btnPublicacionesActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

@@ -11,6 +11,7 @@ import principal.vistas.VentanaPrincipal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import publicaciones.controladores.ControladorPublicaciones;
 import tipos.controladores.ControladorTipos;
 
 /**
@@ -96,7 +97,8 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
 
     @Override
     public void btnPublicacionesClic(ActionEvent evt) {
-
+        ControladorPublicaciones publicaciones = ControladorPublicaciones.crear();
+        publicaciones.mostrarVentana();
     }
 
     /**
