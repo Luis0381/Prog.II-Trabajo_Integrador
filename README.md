@@ -1,4 +1,4 @@
-# Trabajo Practico Nº7 de Programación 2 - Grupo 1
+# Parcial Nº2 de Programación 2 - Grupo 1
 
 ## 📚 Enunciado
 
