@@ -96,7 +96,7 @@ public class GestorGrupos implements IGestorGrupos {
         if (gesAutores.hayAutoresConEsteGrupo(grupo))
             return "Hay autores que pertenecen a este grupo!";
         grupos.remove(grupo);
-        return "Autor removido con EXITO!";
+        return "Grupo removido con EXITO!";
     }
 
     @Override
