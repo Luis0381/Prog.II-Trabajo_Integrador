@@ -66,6 +66,8 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
         ventana.setTitle(TITULO);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        GestorAutores autores = GestorAutores.crear();
+        JOptionPane.showMessageDialog(ventana, "Usted esta logueado como: " + autores.verProfesores().get(0).verNombreCompleto());
     }
     
     public void ocultar(){
@@ -111,8 +113,6 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
     @Override
     public void btnNuevaClic(ActionEvent evt) {
         ControladorAMPublicacion nueva = ControladorAMPublicacion.crear();
-        GestorAutores autores = GestorAutores.crear();
-        JOptionPane.showMessageDialog(ventana, "Está por crear una publicacion a nombre de: " + autores.verProfesores().get(0).verNombreCompleto());
         nueva.limpiar();
         nueva.mostrarVentana(nueva.TITULO_NUEVA);
 
