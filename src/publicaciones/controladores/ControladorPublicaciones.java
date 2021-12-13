@@ -98,8 +98,6 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
         if(ventana.getTablaPublicaciones().getRowCount() == 0){
             ventana.getBtnBorrar().setEnabled(false);
             ventana.getBtnModificar().setEnabled(false);
-            ventana.getBtnBuscar().setEnabled(false);
-            ventana.getTxtTitulo().setEnabled(false);
         }
         else{
             ventana.getBtnBorrar().setEnabled(true);

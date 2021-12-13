@@ -6,26 +6,27 @@
 package publicaciones.modelos;
 
 import javax.swing.DefaultComboBoxModel;
+
+import interfaces.IGestorTipos;
 import tipos.modelos.GestorTipos;
 import tipos.modelos.Tipo;
 
 /**
- *
  * @author Usuario
  */
-public class ModeloComboTipos extends DefaultComboBoxModel{
-    public ModeloComboTipos(){
-        GestorTipos tipos = GestorTipos.crear();
-        
-        for(Tipo t: tipos.verTipos()){
-            this.addElement(t.verNombre());
+public class ModeloComboTipos extends DefaultComboBoxModel {
+    public ModeloComboTipos() {
+        IGestorTipos gesTipos = GestorTipos.crear();
+        for (Tipo tipo : gesTipos.verTipos()) { //todos los tipos
+            this.addElement(tipo);
         }
     }
-    
-    public Tipo obtenerTipo(){
-        GestorTipos tipos = GestorTipos.crear();
-        String eleccion = (String)this.getSelectedItem();
-        
-        return tipos.verTipo(eleccion);
+
+    public Tipo obtenerTipo() {
+        return (Tipo) this.getSelectedItem();
+    }
+
+    public void seleccionarTipo(Tipo tipo) {
+        this.setSelectedItem(tipo);
     }
 }

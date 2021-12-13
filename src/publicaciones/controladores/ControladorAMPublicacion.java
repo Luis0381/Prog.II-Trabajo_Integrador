@@ -22,6 +22,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
+
+import interfaces.IGestorPublicaciones;
 import palabrasclaves.modelos.GestorPalabrasClaves;
 import palabrasclaves.modelos.ModeloTablaPalabrasClaves;
 import palabrasclaves.modelos.PalabraClave;
@@ -65,7 +67,7 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
         else{
             this.ventana.getTxtTitulo().setEnabled(false);
         }
-        
+        GestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
         this.ventana.getComboGrupo().setModel(new ModeloComboGrupos());
         if(this.ventana.getComboGrupo().getItemCount() == 0 && titulo.equals(TITULO_NUEVA)){
             mostrar = false;
@@ -122,10 +124,12 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
         
         JOptionPane.showMessageDialog(ventana, resultado);
         
-        if(resultado.equals("Se creo y guardo la publicacion correctamente")){
+        if(resultado.equals(IGestorPublicaciones.EXITO)){
             this.ocultar();
             this.limpiar();
         }
+        ControladorPublicaciones publicaciones = ControladorPublicaciones.crear();
+        publicaciones.actualizarTablaPublicaciones();
     }
     
     private void modificarPublicacion(){
@@ -157,9 +161,11 @@ public class ControladorAMPublicacion implements IControladorAMPublicacion{
         
         JOptionPane.showMessageDialog(ventana, resultado);
         
-        if(resultado.equals("Se modifico la publicacion con exito")){
+        if(resultado.equals(IGestorPublicaciones.EXITO)){
             this.ocultar();
         }
+        ControladorPublicaciones publicaciones = ControladorPublicaciones.crear();
+        publicaciones.actualizarTablaPublicaciones();
     }
     
     @Override

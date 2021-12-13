@@ -6,26 +6,25 @@
 package publicaciones.modelos;
 
 import javax.swing.DefaultComboBoxModel;
+
+import interfaces.IGestorLugares;
 import lugares.modelos.GestorLugares;
 import lugares.modelos.Lugar;
 
-/**
- *
- * @author Usuario
- */
-public class ModeloComboLugares extends DefaultComboBoxModel{
-    public ModeloComboLugares(){
-        GestorLugares lugares = GestorLugares.crear();
-        
-        for(Lugar l: lugares.verLugares()){
-            this.addElement(l.verNombre());
+public class ModeloComboLugares extends DefaultComboBoxModel {
+
+    public ModeloComboLugares() {
+        IGestorLugares gesLugares = GestorLugares.crear();
+        for (Lugar lugar : gesLugares.verLugares()) { //todos los lugares
+            this.addElement(lugar);
         }
     }
-    
-    public Lugar obtenerLugar(){
-        GestorLugares lugares = GestorLugares.crear();
-        String eleccion = (String)this.getSelectedItem();
-        
-        return lugares.verLugar(eleccion);
+
+    public Lugar obtenerLugar() {
+        return (Lugar) this.getSelectedItem();
+    }
+
+    public void seleccionarLugar(Lugar lugar) {
+        this.setSelectedItem(lugar);
     }
 }

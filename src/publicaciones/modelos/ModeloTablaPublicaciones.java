@@ -1,65 +1,64 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package publicaciones.modelos;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.table.AbstractTableModel;
+import interfaces.IGestorPublicaciones;
 
-/**
- *
- * @author Usuario
- */
-public class ModeloTablaPublicaciones extends AbstractTableModel{
-    private List<String> nombreColumnas = new ArrayList<>();
-    private List<Publicacion> publicaciones = new ArrayList<>();
-    
-    public ModeloTablaPublicaciones(){
-        this.nombreColumnas.add("Titulo");
-        this.nombreColumnas.add("Autor");
-        this.nombreColumnas.add("Año");
-        
-        GestorPublicaciones gp = GestorPublicaciones.crear();
-        
-        this.publicaciones = gp.verPublicaciones();
+import javax.swing.table.AbstractTableModel;
+import java.util.Arrays;
+import java.util.List;
+
+public class ModeloTablaPublicaciones extends AbstractTableModel {
+    public static final String COLUMNA_TITULO = "Título";
+    public static final String COLUMNA_AUTOR = "Autor";
+    public static final String COLUMNA_ANIO = "Año";
+    //constantes para los nombres de las columnas 
+
+    private List<Publicacion> publicaciones;
+    //los datos los saca de GestorPublicaciones
+
+    private List<String> nombresColumnas = Arrays.asList(new String[] {COLUMNA_TITULO, COLUMNA_AUTOR, COLUMNA_ANIO});
+    //colección para guardar los nombres de las columnas
+
+    private IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
+
+    public ModeloTablaPublicaciones(String titulo) {
+        this.publicaciones = this.gesPublicaciones.buscarPublicaciones(titulo);
     }
-    
-    public ModeloTablaPublicaciones(String buscarTitulo){
-        this.nombreColumnas.add("Titulo");
-        this.nombreColumnas.add("Autor");
-        this.nombreColumnas.add("Año");
-        
-        GestorPublicaciones gp = GestorPublicaciones.crear();
-        
-        this.publicaciones = gp.buscarPublicaciones(buscarTitulo);
+
+    public ModeloTablaPublicaciones() {
+        this.publicaciones = this.gesPublicaciones.verPublicaciones();
     }
-    
+
     @Override
-    public int getRowCount() {
-        return this.publicaciones.size();
+    public Object getValueAt(int fila, int columna) {
+        Publicacion publicacion = this.publicaciones.get(fila);
+        switch (columna) {
+            case 0: return publicacion.getTitulo();
+            case 1: return publicacion.getAutor().verAutor().verNombreCompleto();
+            case 2: return publicacion.getFechaPublicacion().getYear();
+            default: return publicacion.getTitulo();
+        }
     }
 
     @Override
     public int getColumnCount() {
-        return this.nombreColumnas.size();
+        return this.nombresColumnas.size();
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Publicacion P = this.publicaciones.get(rowIndex);
-        switch(columnIndex){
-            case 0: return P.getTitulo();
-            case 1: return P.getAutor().verAutor().verApellidos() + ", " + P.getAutor().verAutor().verNombres();
-            case 2: return P.getFechaPublicacion().getYear();
-            default: return P.getTitulo();
-        }
+    public int getRowCount() {
+        return this.publicaciones.size();
     }
-    
     @Override
     public String getColumnName(int columna) {
-        return this.nombreColumnas.get(columna);
-    }  
+        return this.nombresColumnas.get(columna);
+    }
+
+    public Publicacion verPublicacion(int fila) {
+        try {
+            return this.publicaciones.get(fila);
+        }
+        catch(IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
 }

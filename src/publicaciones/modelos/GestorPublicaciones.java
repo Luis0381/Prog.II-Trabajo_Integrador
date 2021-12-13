@@ -33,49 +33,83 @@ public class GestorPublicaciones implements IGestorPublicaciones{
             instancia = new GestorPublicaciones();
         return instancia;
     }
-    
+
     @Override
     public String nuevaPublicacion(String titulo, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
-        if(titulo != null && !titulo.isEmpty() && miembroEnGrupo!=null && fechaPublicacion != null && tipo != null && idioma != null && lugar != null && palabrasClaves != null && !palabrasClaves.isEmpty() && enlace != null && !enlace.isEmpty() && resumen != null && !resumen.isEmpty()){
-            for(Publicacion p: publicaciones){
-                if(p.getTitulo().equals(titulo)){
-                    return "Ya existe una puiblicacion con el mismo titulo";
-                }
-            }
-            Publicacion p = new Publicacion(titulo, miembroEnGrupo, fechaPublicacion, tipo, idioma, lugar, palabrasClaves, enlace, resumen);
-            this.publicaciones.add(p);
-            return "Se creo y guardo la publicacion correctamente";
+        if(titulo == null || titulo.trim().isEmpty())
+            return ERROR_TITULO;
+
+        if (miembroEnGrupo == null || miembroEnGrupo.verGrupo() == null || miembroEnGrupo.verAutor() == null || miembroEnGrupo.verRol() == null)
+            return ERROR_MIEMBRO_EN_GRUPO;
+
+        if(fechaPublicacion == null)
+            return ERROR_FECHA;
+
+        if (tipo == null)
+            return ERROR_TIPO;
+
+        if (idioma== null)
+            return ERROR_IDIOMA;
+
+        if (lugar == null)
+            return ERROR_LUGAR;
+
+        if (palabrasClaves == null || palabrasClaves.isEmpty())
+            return ERROR_PALABRAS_CLAVES;
+
+        if (enlace == null || enlace.trim().isEmpty())
+            return ERROR_ENLACE;
+
+        if (resumen == null || resumen.trim().isEmpty())
+            return ERROR_RESUMEN;
+        else {
+            Publicacion publicacion = new Publicacion(titulo, miembroEnGrupo, fechaPublicacion, tipo, idioma, lugar, palabrasClaves, enlace, resumen);
+            if (this.publicaciones.contains(publicacion))
+                return PUBLICACIONES_DUPLICADAS;
+
+            this.publicaciones.add(publicacion);
+            return EXITO;
         }
-        else
-            return "No se pudo crear la publicacion debido a que esta mal algun atributo";
     }
 
     @Override
     public String modificarPublicacion(Publicacion publicacion, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
-        if(miembroEnGrupo!=null && fechaPublicacion != null && tipo != null && idioma != null && lugar != null && palabrasClaves != null && !palabrasClaves.isEmpty() && enlace != null && !enlace.isEmpty() && resumen != null && !resumen.isEmpty()){
-            publicacion.setAutor(miembroEnGrupo);
-            publicacion.setFechaPublicacion(fechaPublicacion);
-            publicacion.setTipoPublicacion(tipo);
-            publicacion.setIdiomaPublicacion(idioma);
-            publicacion.setLugarPublicacion(lugar);
-            publicacion.setPalabrasClaves(palabrasClaves);
-            publicacion.setEnlace(enlace);
-            publicacion.setResumen(resumen);
-            return "Se modifico la publicacion con exito";
-        }
-        else
-            return "No se modifico la publicacion debido a que los atributos no son validos";
-    }
+        if (!this.existeEstaPublicacion(publicacion))
+            return PUBLICACION_INEXISTENTE;
 
-    @Override
-    public boolean hayPublicacionesConEstaPalabraClave(PalabraClave palabraClave) {
-        for(Publicacion p: publicaciones){
-            for(PalabraClave pc: p.getPalabrasClaves()){
-                if(pc.equals(palabraClave))
-                    return true;
-            }
-        }
-        return false;
+        if (miembroEnGrupo == null || miembroEnGrupo.verGrupo() == null || miembroEnGrupo.verAutor() == null || miembroEnGrupo.verRol() == null)
+            return ERROR_MIEMBRO_EN_GRUPO;
+
+        if(fechaPublicacion == null)
+            return ERROR_FECHA;
+
+        if (tipo == null)
+            return ERROR_TIPO;
+
+        if (idioma== null)
+            return ERROR_IDIOMA;
+
+        if (lugar == null)
+            return ERROR_LUGAR;
+
+        if (palabrasClaves == null || palabrasClaves.isEmpty())
+            return ERROR_PALABRAS_CLAVES;
+
+        if (enlace == null || enlace.trim().isEmpty())
+            return ERROR_ENLACE;
+
+        if (resumen == null || resumen.trim().isEmpty())
+            return ERROR_RESUMEN;
+
+        publicacion.setAutor(miembroEnGrupo);
+        publicacion.setFechaPublicacion(fechaPublicacion);
+        publicacion.setTipoPublicacion(tipo);
+        publicacion.setIdiomaPublicacion(idioma);
+        publicacion.setLugarPublicacion(lugar);
+        publicacion.setPalabrasClaves(palabrasClaves);
+        publicacion.setEnlace(enlace);
+        publicacion.setResumen(resumen);
+        return EXITO;
     }
 
     @Override
@@ -166,5 +200,14 @@ public class GestorPublicaciones implements IGestorPublicaciones{
         }
         
         return publicacionBuscar;
+    }
+
+    @Override
+    public boolean hayPublicacionesConEstaPalabraClave(PalabraClave palabraClave) {
+        for(Publicacion p: publicaciones){
+            if(p.getPalabrasClaves().equals(palabraClave))
+                return true;
+        }
+        return false;
     }
 }

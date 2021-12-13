@@ -47,6 +47,13 @@ public abstract class Autor {
         }
     }
 
+    public String verNombreCompleto() {
+        if (this.dni == 0)
+            return this.apellidos;
+        else
+            return this.apellidos + ", " + this.nombres;
+    }
+
 
     public List<MiembroEnGrupo> verGrupos() {
         return miembrosEnGrupo;

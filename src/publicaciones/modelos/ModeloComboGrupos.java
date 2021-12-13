@@ -6,26 +6,30 @@
 package publicaciones.modelos;
 
 import autores.modelos.Autor;
+import autores.modelos.GestorAutores;
+import autores.modelos.Profesor;
+import grupos.modelos.GestorGrupos;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
+
 import javax.swing.DefaultComboBoxModel;
 
-/**
- *
- * @author Usuario
- */
-public class ModeloComboGrupos extends DefaultComboBoxModel {
+public class ModeloComboGrupos extends DefaultComboBoxModel{
+    public ModeloComboGrupos(){
+        GestorGrupos grupos = GestorGrupos.crear();
+        GestorAutores autores = GestorAutores.crear();
 
-    public ModeloComboGrupos() {
-        for(MiembroEnGrupo meg : obtenerGrupo().verMiembros())
-            this.addElement(meg.verGrupo());
+        Profesor p = autores.verProfesores().get(0);
+
+        for(MiembroEnGrupo mg: p.verGrupos()){
+            this.addElement(mg.verGrupo().verNombre());
+        }
     }
 
-    public Grupo obtenerGrupo() {
-        return (Grupo)this.getSelectedItem();
-    }
+    public Grupo obtenerGrupo(){
+        String eleccion = (String)this.getSelectedItem();
 
-    public void seleccionarGrupo(Grupo grupo) {
-        this.setSelectedItem(grupo);
+        GestorGrupos grupos = GestorGrupos.crear();
+        return grupos.verGrupo(eleccion);
     }
 }
