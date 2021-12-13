@@ -17,7 +17,7 @@ import javax.swing.DefaultComboBoxModel;
 public class ModeloComboGrupos extends DefaultComboBoxModel {
 
     public ModeloComboGrupos() {
-        for(MiembroEnGrupo meg : )
+        for(MiembroEnGrupo meg : obtenerGrupo().verMiembros())
             this.addElement(meg.verGrupo());
     }
 

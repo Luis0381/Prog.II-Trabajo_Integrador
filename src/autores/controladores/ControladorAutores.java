@@ -134,7 +134,7 @@ public class ControladorAutores implements IControladorAutores {
 
     @Override
     public void btnNuevoProfesorClic(ActionEvent evt) {
-        ControladorAMProfesor instancia = ControladorAMProfesor.crear();
+        ControladorAProfesor instancia = ControladorAProfesor.crear();
 
         javax.swing.JTextField txtDNi = instancia.getVentana().getTxtDNI();
         txtDNi.setEnabled(true);
@@ -143,7 +143,7 @@ public class ControladorAutores implements IControladorAutores {
 
     @Override
     public void btnNuevoAlumnoClic(ActionEvent evt) {
-        ControladorAMAlumno instancia = ControladorAMAlumno.crear();
+        ControladorAAlumno instancia = ControladorAAlumno.crear();
 
         javax.swing.JTextField txtDNi = instancia.getVentana().getTxtDNI();
         txtDNi.setEnabled(true);
@@ -152,71 +152,76 @@ public class ControladorAutores implements IControladorAutores {
 
     @Override
     public void btnModificarProfesorClic(ActionEvent evt) {
-        ControladorAMProfesor instancia = ControladorAMProfesor.crear();
+        javax.swing.JTable TablaProfesor = ventana.getTablaProfesores();
 
-        javax.swing.JTable TablaProfesores = ventana.getTablaProfesores();
+        int filaElegida = TablaProfesor.getSelectedRow();
 
-        int profesorElegido = TablaProfesores.getSelectedRow();
+        if(filaElegida != -1){
+            ControladorMProfesor controlModificarProfe = ControladorMProfesor.crear();
 
-        if (profesorElegido != -1) {
-            ControladorAMProfesor controlInstancia = ControladorAMProfesor.crear();
-
-            javax.swing.JTextField txtApellido = controlInstancia.getVentana().getTxtApellidos();
-            javax.swing.JTextField txtNombre = controlInstancia.getVentana().getTxtNombres();
-            javax.swing.JPasswordField passClave = controlInstancia.getVentana().getPassClave();
-            javax.swing.JComboBox comboCargos = controlInstancia.getVentana().getComboCargos();
-            javax.swing.JPasswordField passClaveRepetida = controlInstancia.getVentana().getPassClaveRepetida();
-            javax.swing.JTextField txtDNI = controlInstancia.getVentana().getTxtDNI();
+            javax.swing.JTable TablaGruposProfesor = controlModificarProfe.getVentana().getTablaGruposProfesor();
+            javax.swing.JTextField txtApellido = controlModificarProfe.getVentana().getTxtApellidos();
+            javax.swing.JTextField txtNombre = controlModificarProfe.getVentana().getTxtNombres();
+            javax.swing.JPasswordField passClave = controlModificarProfe.getVentana().getPassClave();
+            javax.swing.JComboBox comboCargos = controlModificarProfe.getVentana().getComboCargos();
+            javax.swing.JPasswordField passClaveRepetida = controlModificarProfe.getVentana().getPassClaveRepetida();
+            javax.swing.JTextField txtDNI = controlModificarProfe.getVentana().getTxtDNI();
 
             GestorAutores autores = GestorAutores.crear();
-            Profesor profesor = (Profesor) autores.verAutor(Integer.parseInt(TablaProfesores.getValueAt(profesorElegido, 0).toString()));
+            Profesor p = (Profesor)autores.verAutor(Integer.parseInt(TablaProfesor.getValueAt(filaElegida, 0).toString()));
 
-            txtDNI.setText(TablaProfesores.getValueAt(profesorElegido, 0).toString());
-            txtApellido.setText(profesor.verApellidos());
-            txtNombre.setText(profesor.verNombres());
-            comboCargos.setSelectedItem(profesor.verCargo());
-            passClave.setText(profesor.verClave());
-            passClaveRepetida.setText(profesor.verClave());
+            TablaGruposProfesor.setModel(new ModeloTablaGrupos(p));
+            txtDNI.setText(TablaProfesor.getValueAt(filaElegida, 0).toString());
+            txtApellido.setText(p.verApellidos());
+            txtNombre.setText(p.verNombres());
+            comboCargos.setSelectedItem(p.verCargo());
+            passClave.setText(p.verClave());
+            passClaveRepetida.setText(p.verClave());
 
             txtDNI.setEnabled(false);
 
-            instancia.mostrarVentana(instancia.TITULO_MODIFICAR);
-        } else {
+            controlModificarProfe.mostrarVentana(controlModificarProfe.TITULO_MODIFICAR);
+        }
+
+        else{
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun profesor");
         }
     }
 
     @Override
     public void btnModificarAlumnoClic(ActionEvent evt) {
-        ControladorAMAlumno instancia = ControladorAMAlumno.crear();
+        javax.swing.JTable TablaAlumno = ventana.getTablaAlumnos();
 
-        javax.swing.JTable TablaAlumnos = ventana.getTablaAlumnos();
+        int filaElegida = TablaAlumno.getSelectedRow();
 
-        int alumnoElegido = TablaAlumnos.getSelectedRow();
+        if(filaElegida != -1){
+            ControladorMAlumno controlAlumno = ControladorMAlumno.crear();
 
-        if (alumnoElegido != -1) {
-            ControladorAMAlumno controlInstancia = ControladorAMAlumno.crear();
-
-            javax.swing.JTextField txtApellido = controlInstancia.getVentana().getTxtApellidos();
-            javax.swing.JTextField txtNombre = controlInstancia.getVentana().getTxtNombres();
-            javax.swing.JPasswordField passClave = controlInstancia.getVentana().getPassClave();
-            javax.swing.JTextField txtCX = controlInstancia.getVentana().getTxtCX();
-            javax.swing.JPasswordField passClaveRepetida = controlInstancia.getVentana().getPassClaveRepetida();
-            javax.swing.JTextField txtDNI = controlInstancia.getVentana().getTxtDNI();
+            javax.swing.JTable TablaGruposAlumno = controlAlumno.getVentana().getTablaGruposAlumno();
+            javax.swing.JTextField txtApellido = controlAlumno.getVentana().getTxtApellidos();
+            javax.swing.JTextField txtNombre = controlAlumno.getVentana().getTxtNombres();
+            javax.swing.JPasswordField passClave = controlAlumno.getVentana().getPassClave();
+            javax.swing.JPasswordField passClaveRepetida = controlAlumno.getVentana().getPassClaveRepetida();
+            javax.swing.JTextField txtDNI = controlAlumno.getVentana().getTxtDNI();
+            javax.swing.JTextField txtCX = controlAlumno.getVentana().getTxtCX();
 
             GestorAutores autores = GestorAutores.crear();
-            Alumno alumno = (Alumno) autores.verAutor(Integer.parseInt(TablaAlumnos.getValueAt(alumnoElegido, 0).toString()));
+            Alumno a = (Alumno)autores.verAutor(Integer.parseInt(TablaAlumno.getValueAt(filaElegida, 0).toString()));
 
-            txtDNI.setText(TablaAlumnos.getValueAt(alumnoElegido, 0).toString());
-            txtApellido.setText(alumno.verApellidos());
-            txtNombre.setText(alumno.verNombres());
-            txtCX.setText(alumno.verCx());
-            passClave.setText(alumno.verClave());
-            passClaveRepetida.setText(alumno.verClave());
+            TablaGruposAlumno.setModel(new ModeloTablaGrupos(a));
+            txtDNI.setText(TablaAlumno.getValueAt(filaElegida, 0).toString());
+            txtApellido.setText(a.verApellidos());
+            txtNombre.setText(a.verNombres());
+            txtCX.setText(a.verCx());
+            passClave.setText(a.verClave());
+            passClaveRepetida.setText(a.verClave());
+
             txtDNI.setEnabled(false);
 
-            instancia.mostrarVentana(instancia.TITULO_MODIFICAR);
-        } else {
+            controlAlumno.mostrarVentana(controlAlumno.TITULO_MODIFICAR);
+        }
+
+        else{
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun alumno");
         }
     }

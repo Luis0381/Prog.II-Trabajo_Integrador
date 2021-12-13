@@ -3,6 +3,7 @@ package principal.controladores;
 
 
 import autores.controladores.ControladorAutores;
+import grupos.controladores.ControladorGrupos;
 import idiomas.controladores.ControladorIdiomas;
 import interfaces.IControladorPrincipal;
 import lugares.controladores.ControladorLugares;
@@ -86,7 +87,8 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
 
     @Override
     public void btnGruposClic(ActionEvent evt) {
-
+        ControladorGrupos grupos = ControladorGrupos.crear();
+        grupos.mostrar();
     }
 
     @Override

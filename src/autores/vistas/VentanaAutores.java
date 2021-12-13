@@ -27,13 +27,25 @@ public class VentanaAutores extends JDialog {
     public VentanaAutores(IControladorAutores controlador) {
         initComponents();
         this.controlador = controlador;
-        this.tablaAlumnos.setModel(modeloAlumno);
-        this.tablaProfesores.setModel(modeloProfesor);
-        this.btnBorrarProfesor.setEnabled(false);
-        this.btnBorrarAlumno.setEnabled(false);
-        this.btnModificarProfesor.setEnabled(false);
-        this.btnModificarAlumno.setEnabled(false);
         this.setTitle(controlador.TITULO);
+        this.tablaAlumnos.setModel(modeloAlumno);
+        if(this.tablaAlumnos.getRowCount() == 0){
+            this.btnModificarAlumno.setEnabled(false);
+            this.btnBorrarAlumno.setEnabled(false);
+        }
+        else{
+            this.btnModificarAlumno.setEnabled(true);
+            this.btnBorrarAlumno.setEnabled(true);
+        }
+        this.tablaProfesores.setModel(modeloProfesor);
+        if(this.tablaProfesores.getRowCount() == 0){
+            this.btnModificarProfesor.setEnabled(false);
+            this.btnBorrarProfesor.setEnabled(false);
+        }
+        else{
+            this.btnModificarProfesor.setEnabled(true);
+            this.btnBorrarProfesor.setEnabled(true);
+        }
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }

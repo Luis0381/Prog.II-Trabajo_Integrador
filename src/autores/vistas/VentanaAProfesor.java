@@ -6,24 +6,23 @@
 package autores.vistas;
 
 import autores.modelos.Alumno;
-import interfaces.IControladorAMAlumno;
+import autores.modelos.Cargo;
+import autores.modelos.ModeloComboCargos;
+import autores.modelos.Profesor;
+import interfaces.IControladorAMProfesor;
 
 import java.awt.Dialog;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class VentanaAMAlumno extends JDialog {
-    ArrayList<Alumno> alumnos = new ArrayList<>();
+public class VentanaAProfesor extends JDialog {
+    ArrayList<Profesor> profesores = new ArrayList<>();
 
-    private IControladorAMAlumno controlador;
+    private IControladorAMProfesor controlador;
 
-    /**
-     * Constructor
-     *
-     * @param ventanaPadre ventana padre
-     */
-    public VentanaAMAlumno(IControladorAMAlumno controlador) {
+    public VentanaAProfesor(IControladorAMProfesor controlador) {
         initComponents();
+        this.comboCargos.setModel(new ModeloComboCargos());
         this.controlador = controlador;
         this.setTitle(controlador.TITULO_NUEVO);
         this.setLocationRelativeTo(null);
@@ -39,6 +38,7 @@ public class VentanaAMAlumno extends JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtApellidos = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -47,21 +47,23 @@ public class VentanaAMAlumno extends JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtDNI = new javax.swing.JTextField();
-        txtCX = new javax.swing.JTextField();
         passClave = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
+        comboCargos = new javax.swing.JComboBox<>();
         btnCancelar = new javax.swing.JButton();
-        passClaveRepetida = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
+        passClaveRepetida = new javax.swing.JPasswordField();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Alumnos");
+        setTitle("Profesores");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Apellidos:");
 
-        txtApellidos.setToolTipText("Apellidos del alumno");
+        txtApellidos.setToolTipText("Apellidos del profesor");
         txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtApellidosKeyPressed(evt);
@@ -71,7 +73,7 @@ public class VentanaAMAlumno extends JDialog {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Nombres:");
 
-        txtNombres.setToolTipText("Nombres del alumno");
+        txtNombres.setToolTipText("Nombres del profesor");
         txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombresKeyPressed(evt);
@@ -89,27 +91,19 @@ public class VentanaAMAlumno extends JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("CX:");
+        jLabel3.setText("Cargo:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Documento:");
 
-        txtDNI.setToolTipText("Documento del alumno");
+        txtDNI.setToolTipText("Documento del profesor");
         txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDNIKeyPressed(evt);
             }
         });
 
-        txtCX.setToolTipText("CX del alumno");
-        txtCX.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtCX.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCXKeyPressed(evt);
-            }
-        });
-
-        passClave.setToolTipText("Clave del alumno");
+        passClave.setToolTipText("Clave del profesor");
         passClave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passClaveKeyPressed(evt);
@@ -129,78 +123,77 @@ public class VentanaAMAlumno extends JDialog {
             }
         });
 
-        passClaveRepetida.setToolTipText("Repetir clave del alumno");
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel7.setText("Repetir Clave: ");
+
+        passClaveRepetida.setToolTipText("Repetir clave del profesor");
         passClaveRepetida.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passClaveRepetidaKeyPressed(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel7.setText("Repetir Clave:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel2)
-                                                        .addComponent(jLabel1)
-                                                        .addComponent(jLabel4)
-                                                        .addComponent(jLabel3)
-                                                        .addComponent(jLabel6)
-                                                        .addComponent(jLabel7))
-                                                .addGap(28, 28, 28)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                                                        .addComponent(txtDNI)
-                                                        .addComponent(txtApellidos)
-                                                        .addComponent(txtCX)
-                                                        .addComponent(passClave)
-                                                        .addComponent(passClaveRepetida)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(btnGuardar)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnCancelar)))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboCargos, javax.swing.GroupLayout.Alignment.LEADING, 0, 326, Short.MAX_VALUE)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDNI)
+                    .addComponent(passClave)
+                    .addComponent(passClaveRepetida))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar)
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtCX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(passClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(passClaveRepetida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnCancelar)
-                                        .addComponent(btnGuardar))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(comboCargos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passClaveRepetida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,11 +223,6 @@ public class VentanaAMAlumno extends JDialog {
         controlador.txtNombresPresionarTecla(evt);
     }//GEN-LAST:event_txtNombresKeyPressed
 
-    private void txtCXKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCXKeyPressed
-        // TODO add your handling code here:
-        controlador.txtCXPresionarTecla(evt);
-    }//GEN-LAST:event_txtCXKeyPressed
-
     private void passClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passClaveKeyPressed
         // TODO add your handling code here:
         controlador.passClavePresionarTecla(evt);
@@ -245,11 +233,11 @@ public class VentanaAMAlumno extends JDialog {
         controlador.passRepetirClavePresionarTecla(evt);
     }//GEN-LAST:event_passClaveRepetidaKeyPressed
 
-    public IControladorAMAlumno getControlador() {
+    public IControladorAMProfesor getControlador() {
         return controlador;
     }
 
-    public void setControlador(IControladorAMAlumno controlador) {
+    public void setControlador(IControladorAMProfesor controlador) {
         this.controlador = controlador;
     }
 
@@ -269,6 +257,22 @@ public class VentanaAMAlumno extends JDialog {
         this.btnGuardar = btnGuardar;
     }
 
+    public JComboBox<String> getComboCargos() {
+        return comboCargos;
+    }
+
+    public void setComboCargos(JComboBox<String> comboCargos) {
+        this.comboCargos = comboCargos;
+    }
+
+    public JComboBox<String> getjComboBox1() {
+        return jComboBox1;
+    }
+
+    public void setjComboBox1(JComboBox<String> jComboBox1) {
+        this.jComboBox1 = jComboBox1;
+    }
+
     public JPasswordField getPassClave() {
         return passClave;
     }
@@ -283,14 +287,6 @@ public class VentanaAMAlumno extends JDialog {
 
     public void setTxtApellidos(JTextField txtApellidos) {
         this.txtApellidos = txtApellidos;
-    }
-
-    public JTextField getTxtCX() {
-        return txtCX;
-    }
-
-    public void setTxtCX(JTextField txtCX) {
-        this.txtCX = txtCX;
     }
 
     public JTextField getTxtDNI() {
@@ -320,6 +316,8 @@ public class VentanaAMAlumno extends JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> comboCargos;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -329,7 +327,6 @@ public class VentanaAMAlumno extends JDialog {
     private javax.swing.JPasswordField passClave;
     private javax.swing.JPasswordField passClaveRepetida;
     private javax.swing.JTextField txtApellidos;
-    private javax.swing.JTextField txtCX;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables

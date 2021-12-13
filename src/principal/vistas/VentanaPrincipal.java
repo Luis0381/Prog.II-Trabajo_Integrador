@@ -115,7 +115,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setText("Trabajo Practico Nº7 de Programación II - Grupo 1");
+        jLabel2.setText("Parcial Nº2 de Programación II - Grupo 1");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Thomas Mafut & Luis Medina Raed");
@@ -189,6 +189,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGruposActionPerformed
         // TODO add your handling code here
+        controlador.btnGruposClic(evt);
     }//GEN-LAST:event_btnGruposActionPerformed
 
     private void btnPublicacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublicacionesActionPerformed

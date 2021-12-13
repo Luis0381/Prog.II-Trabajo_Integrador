@@ -6,6 +6,7 @@ import grupos.modelos.Rol;
 
 import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -18,7 +19,7 @@ public abstract class Autor {
     private String nombres;
     private String clave;
     // Relacion entre clases
-    private ArrayList<MiembroEnGrupo> miembrosEnGrupo = new ArrayList<>();
+    private List<MiembroEnGrupo> miembrosEnGrupo = new ArrayList<>();
 
     // Constructor
     public Autor(int dni, String apellidos, String nombres, String clave) {
@@ -47,7 +48,7 @@ public abstract class Autor {
     }
 
 
-    public ArrayList<MiembroEnGrupo> verGrupos() {
+    public List<MiembroEnGrupo> verGrupos() {
         return miembrosEnGrupo;
     }
 
@@ -84,10 +85,14 @@ public abstract class Autor {
      * @param grupo grupo a quitar
      */
     public void quitarGrupo(Grupo grupo) {
-        for (MiembroEnGrupo unGrupo : miembrosEnGrupo) {
-            if (unGrupo.verGrupo().equals(grupo)) {
-                miembrosEnGrupo.remove(unGrupo);
-                grupo.quitarMiembro(this);
+        if (grupo != null) {
+            for(MiembroEnGrupo meg : this.miembrosEnGrupo) {
+                Grupo g = meg.verGrupo();
+                if(grupo.equals(g)) {
+                    this.miembrosEnGrupo.remove(meg);
+                    grupo.quitarMiembro(this);
+                    break;
+                }
             }
         }
     }

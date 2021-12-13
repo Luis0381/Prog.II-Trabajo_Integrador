@@ -1,8 +1,12 @@
 package autores.controladores;
 
-import autores.modelos.*;
-import autores.vistas.VentanaAMAlumno;
-import interfaces.IControladorAMAlumno;
+import autores.modelos.Cargo;
+import autores.modelos.GestorAutores;
+import autores.modelos.ModeloComboCargos;
+import autores.modelos.Profesor;
+import autores.vistas.VentanaAProfesor;
+import autores.vistas.VentanaMProfesor;
+import interfaces.IControladorAMProfesor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,23 +16,23 @@ import java.awt.event.WindowEvent;
 /**
  * @author Thomas Mafut & Luis Medina Raed
  */
-public class ControladorAMAlumno implements IControladorAMAlumno {
-    private static ControladorAMAlumno instancia;
-    private VentanaAMAlumno ventana;
+public class ControladorMProfesor implements IControladorAMProfesor {
+    private static ControladorMProfesor instancia;
+    private VentanaMProfesor ventana;
 
     /**
      * Constructor
      */
-    private ControladorAMAlumno() {
-        this.ventana = new VentanaAMAlumno(this);
+    private ControladorMProfesor() {
+        this.ventana = new VentanaMProfesor(this);
     }
 
     /**
-     * Crea una instancia de ControladorAMAlumno
+     * Crea una instancia de ControladorAMProfesor
      */
-    public static ControladorAMAlumno crear() {
+    public static ControladorMProfesor crear() {
         if (instancia == null)
-            instancia = new ControladorAMAlumno();
+            instancia = new ControladorMProfesor();
 
         return instancia;
     }
@@ -40,7 +44,7 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
      */
     public void mostrarVentana(String titulo) {
         if (ventana == null) {
-            ventana = new VentanaAMAlumno(this);
+            ventana = new VentanaMProfesor(this);
             ventana.setTitle(titulo);
         } else {
             ventana.setTitle(titulo);
@@ -53,6 +57,14 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
      */
     public void ocultarVentana() {
         ventana.setVisible(false);
+    }
+
+    public VentanaMProfesor getVentana() {
+        return ventana;
+    }
+
+    public void setVentana(VentanaMProfesor ventana) {
+        this.ventana = ventana;
     }
 
     /**
@@ -70,17 +82,36 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
     }
 
     /**
-     * Se encarga de la creacion de un alumno
+     * Se encarga de limpiar los datos ingresados de las celdas presentadas en la ventana
      */
-    public void nuevoAlumno() {
+    public void limpiarCeldas() {
         javax.swing.JTextField txtApellido = ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = ventana.getTxtNombres();
-        javax.swing.JTextField txtCX = ventana.getTxtCX();
+        javax.swing.JComboBox<String> comboCargos = ventana.getComboCargos();
+        javax.swing.JPasswordField passClave = ventana.getPassClave();
+        javax.swing.JPasswordField passClaveRepetida = ventana.getPassClaveRepetida();
+        javax.swing.JTextField txtDNI = ventana.getTxtDNI();
+        txtDNI.setText("");
+        txtApellido.setText("");
+        txtNombre.setText("");
+        passClave.setText("");
+        passClaveRepetida.setText("");
+        comboCargos.setSelectedItem(Cargo.ASOCIADO);
+    }
+
+    /**
+     * Se encarga de la creación de un profesor
+     */
+    public void nuevoProfesor() {
+        javax.swing.JTextField txtApellido = ventana.getTxtApellidos();
+        javax.swing.JTextField txtNombre = ventana.getTxtNombres();
+        javax.swing.JComboBox<String> comboCargos = ventana.getComboCargos();
         javax.swing.JPasswordField passClave = ventana.getPassClave();
         javax.swing.JPasswordField passClaveRepetida = ventana.getPassClaveRepetida();
         javax.swing.JTextField txtDNI = ventana.getTxtDNI();
 
-        String apellidos, nombres, clave, claveRepetida, cx;
+        String apellidos, nombres, clave, claveRepetida;
+        Cargo cargo;
 
         int dni = 0;
         if (!txtDNI.getText().trim().isEmpty()) {
@@ -92,89 +123,58 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
         nombres = txtNombre.getText().trim();
         clave = new String(passClave.getPassword());
         claveRepetida = new String(passClaveRepetida.getPassword());
-        cx = txtCX.getText().trim();
+        cargo = ((ModeloComboCargos) comboCargos.getModel()).obtenerCargo();
+
         GestorAutores gestorAutor = GestorAutores.crear();
-        String resultado = gestorAutor.nuevoAutor(dni, apellidos, nombres, cx, clave, claveRepetida);
+        String resultado = gestorAutor.nuevoAutor(dni, apellidos, nombres, cargo, clave, claveRepetida);
         JOptionPane.showMessageDialog(ventana, resultado);
 
-        if (resultado.equals("\n\tAlumno agregado de forma EXITOSA!")) {
+        if (resultado.equals("\n\tProfesor agregado de forma EXITOSA!")) {
             ocultarVentana();
             limpiarCeldas();
         }
 
         ControladorAutores controlAutor = ControladorAutores.crear();
-        controlAutor.actualizarTablaAlumnos();
+        controlAutor.actualizarTablaProfesores();
     }
 
     /**
-     * Se encarga de la modificacion de un alumno
+     * Se encarga de la modificacion de un profesor
      */
-    public void modificarAlumno() {
+    public void modificarProfesor() {
         javax.swing.JTextField txtApellido = ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = ventana.getTxtNombres();
-        javax.swing.JTextField txtCX = ventana.getTxtCX();
+        javax.swing.JComboBox<String> comboCargos = ventana.getComboCargos();
         javax.swing.JPasswordField passClave = ventana.getPassClave();
         javax.swing.JPasswordField passClaveRepetida = ventana.getPassClaveRepetida();
-        javax.swing.JTextField txtDNI = ventana.getTxtDNI();
 
-        int dni = 0;
-        if (!txtDNI.getText().trim().isEmpty()) {
-            if (isNumeric(txtDNI.getText().trim()))
-                dni = Integer.parseInt(txtDNI.getText().trim());
-        }
         String apellidos = txtApellido.getText().trim();
         String nombres = txtNombre.getText().trim();
         String clave = new String(passClave.getPassword());
         String claveRepetida = new String(passClaveRepetida.getPassword());
-        String cx = txtCX.getText().trim();
+        Cargo cargo = ((ModeloComboCargos) comboCargos.getModel()).obtenerCargo();
 
         GestorAutores gestorAutor = GestorAutores.crear();
 
-        String resultado = gestorAutor.modificarAutor(new Alumno(dni, apellidos, nombres, clave, cx), apellidos, nombres, cx, clave, claveRepetida);
+        String resultado = gestorAutor.modificarAutor(new Profesor(Integer.parseInt(ventana.getTxtDNI().getText().trim()), null, null, null, null), apellidos, nombres, cargo, clave, claveRepetida);
         JOptionPane.showMessageDialog(ventana, resultado);
 
-        if (resultado.equals("Datos del Alumno modificados de forma EXITOSA!")) {
+        if (resultado.equals("Datos de Profesor modificados de forma EXITOSA!")) {
             ocultarVentana();
             limpiarCeldas();
         }
-
         ControladorAutores controlAutor = ControladorAutores.crear();
-        controlAutor.actualizarTablaAlumnos();
+        controlAutor.actualizarTablaProfesores();
     }
 
-    public VentanaAMAlumno getVentana() {
-        return ventana;
-    }
-
-    public void setVentana(VentanaAMAlumno ventana) {
-        this.ventana = ventana;
-    }
-
-    /**
-     * Se encarga de limpiar los datos ingresados de las celdas presentadas en la ventana
-     */
-    public void limpiarCeldas() {
-        javax.swing.JPasswordField passClave = ventana.getPassClave();
-        javax.swing.JPasswordField passClaveRepetida = ventana.getPassClaveRepetida();
-        javax.swing.JTextField txtApellidos = ventana.getTxtApellidos();
-        javax.swing.JTextField txtCX = ventana.getTxtCX();
-        javax.swing.JTextField txtDNI = ventana.getTxtDNI();
-        javax.swing.JTextField txtNombres = ventana.getTxtNombres();
-        txtDNI.setText("");
-        txtCX.setText("");
-        txtApellidos.setText("");
-        txtNombres.setText("");
-        passClave.setText("");
-        passClaveRepetida.setText("");
-    }
 
     @Override
     public void btnGuardarClic(ActionEvent evt) {
-        if (ventana.getTitle().equals(IControladorAMAlumno.TITULO_NUEVO))
-            this.nuevoAlumno();
 
-        else if (ventana.getTitle().equals(IControladorAMAlumno.TITULO_MODIFICAR))
-            this.modificarAlumno();
+        if (ventana.getTitle().equals(IControladorAMProfesor.TITULO_NUEVO)) {
+            this.nuevoProfesor();
+        } else if (ventana.getTitle().equals(IControladorAMProfesor.TITULO_MODIFICAR))
+            this.modificarProfesor();
     }
 
     @Override
@@ -186,7 +186,6 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
     public void txtApellidosPresionarTecla(KeyEvent evt) {
         javax.swing.JTextField txtApellido = this.ventana.getTxtApellidos();
         javax.swing.JTextField txtNombre = this.ventana.getTxtNombres();
-
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtApellido.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(ventana, "Ingrese un apellido");
@@ -199,13 +198,14 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
     @Override
     public void txtNombresPresionarTecla(KeyEvent evt) {
         javax.swing.JTextField txtNombre = this.ventana.getTxtNombres();
-        javax.swing.JTextField txtCx = this.ventana.getTxtCX();
+        javax.swing.JComboBox comboBox = this.ventana.getComboCargos();
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtNombre.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(ventana, "Ingrese un nombre");
             } else {
-                txtCx.requestFocus();
+                comboBox.requestFocus();
+                comboBox.showPopup();
             }
         }
     }
@@ -225,27 +225,11 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
     }
 
     @Override
-    public void txtCXPresionarTecla(KeyEvent evt) {
-        javax.swing.JTextField txtCx = this.ventana.getTxtCX();
-        javax.swing.JPasswordField passClave = this.ventana.getPassClave();
-
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txtCx.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(ventana, "Ingrese un CX");
-            } else {
-                passClave.requestFocus();
-            }
-        }
-    }
-
-    @Override
     public void passClavePresionarTecla(KeyEvent evt) {
         javax.swing.JPasswordField passClave = this.ventana.getPassClave();
         javax.swing.JPasswordField passClaveRepetida = this.ventana.getPassClaveRepetida();
-
-        String claveGuardar = new String(passClave.getPassword());
-
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            JOptionPane.showMessageDialog(ventana, "Ingrese una clave");
             passClaveRepetida.requestFocus();
         }
     }
@@ -255,9 +239,8 @@ public class ControladorAMAlumno implements IControladorAMAlumno {
         javax.swing.JPasswordField passClaveRepetida = this.ventana.getPassClaveRepetida();
         javax.swing.JButton btnGuardar = this.ventana.getBtnGuardar();
 
-        String claveRepetida = new String(passClaveRepetida.getPassword());
-
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            JOptionPane.showMessageDialog(ventana, "Ingrese nuevamente la clave");
             btnGuardar.requestFocus();
             btnGuardar.doClick();
         }

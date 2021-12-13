@@ -2,8 +2,7 @@ package grupos.modelos;
 
 import autores.modelos.Autor;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 /**
  *
@@ -52,44 +51,28 @@ public class Grupo {
         return miembros;
     }
 
-//    public void agregarMiembro (Autor autor, Rol rol){
-//        MiembroEnGrupo unMiembroEnGrupo = new MiembroEnGrupo(autor, this, rol);
-//        if(this.tieneMiembros() == false){
-//            miembros = new ArrayList<>();
-//        }
-//        if (this.esSuperAdministradores()){
-//            if(!this.miembros.contains(unMiembroEnGrupo)){
-//                unMiembroEnGrupo.asignarRol(Rol.ADMINISTRADOR);
-//                this.miembros.add(unMiembroEnGrupo);
-//                autor.agregarGrupo(this,Rol.ADMINISTRADOR);
-//            }
-//        } else if (!this.miembros.contains(unMiembroEnGrupo)){
-//            this.miembros.add(unMiembroEnGrupo);
-//            autor.agregarGrupo(this,rol);
-//        }
-//    }
-    public void agregarMiembro(Autor autor, Rol rol) {
-
-        MiembroEnGrupo nuevoMiembro = new MiembroEnGrupo(autor, this, rol);
-
-        if(this.esSuperAdministradores()){
-            //nuevoMiembro.asignarRol(Rol.ADMINISTRADOR);
-            rol = Rol.ADMINISTRADOR;
-        }
-
-        if(!this.miembros.contains(nuevoMiembro)){
-            this.miembros.add(nuevoMiembro);
+public void agregarMiembro(Autor autor, Rol rol) {
+    if ((autor != null) && (rol != null)) {
+        MiembroEnGrupo meg;
+        meg = new MiembroEnGrupo(autor, this, rol);
+        if (!this.miembros.contains(meg)) {
+            this.miembros.add(meg);
             autor.agregarGrupo(this, rol);
         }
     }
+}
 
-    public void quitarMiembro(Autor miembro){
-            for(MiembroEnGrupo i: miembros){
-                 if(i.verAutor().equals(miembro)){
-                     miembros.remove(i);
-                     miembro.quitarGrupo(this);
-                 }
+    public void quitarMiembro(Autor miembro) {
+        if (miembro != null) {
+            for (MiembroEnGrupo meg : this.miembros) {
+                Autor m = meg.verAutor();
+                if (miembro.equals(m)) {
+                    this.miembros.remove(meg);
+                    miembro.quitarGrupo(this);
+                    break;
+                }
             }
+        }
     }
 
     public boolean esSuperAdministradores(){
@@ -136,5 +119,24 @@ public class Grupo {
     }
     public void asignarDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public void agregarMiembros(List<MiembroEnGrupo> miembros) {
+        if (miembros != null) {
+            for(MiembroEnGrupo meg : miembros) {
+                Autor miembro = meg.verAutor();
+                Rol rol = meg.verRol();
+                this.agregarMiembro(miembro, rol);
+            }
+        }
+    }
+
+    public void quitarMiembros(List<MiembroEnGrupo> miembros) {
+        if (miembros != null) {
+            for(MiembroEnGrupo meg : miembros) {
+                Autor miembro = meg.verAutor();
+                this.quitarMiembro(miembro);
+            }
+        }
     }
 }

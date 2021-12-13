@@ -1,9 +1,7 @@
 package grupos.controladores;
 
 import autores.controladores.ControladorAutores;
-import grupos.modelos.GestorGrupos;
-import grupos.modelos.Grupo;
-import grupos.modelos.ModeloTablaAutoresGrupos;
+import grupos.modelos.*;
 import grupos.vistas.VentanaAMGrupo;
 import interfaces.IControladorAMGrupo;
 
@@ -15,6 +13,7 @@ import java.awt.event.WindowEvent;
 public class ControladorAMGrupo implements IControladorAMGrupo {
     private static ControladorAMGrupo instancia;
     private VentanaAMGrupo ventana;
+    String nombreGrupo;
 
     private ControladorAMGrupo(){
         ventana = new VentanaAMGrupo(this);
@@ -35,8 +34,8 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
             this.ventana.setTitle(titulo);
             this.ventana.setVisible(true);
 
-            javax.swing.JButton btnModficarMiembros = this.ventana.getBtnModificar();
-            btnModficarMiembros.setEnabled(false);
+            javax.swing.JButton btnModificarMiembros = this.ventana.getBtnModificar();
+            btnModificarMiembros.setEnabled(false);
         }
         else if(titulo.equals(TITULO_MODIFICAR)){
             if(ventana == null){
@@ -46,10 +45,18 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
             this.ventana.gettablaMiembros().setModel(new ModeloTablaAutoresGrupos(g));
             this.ventana.setVisible(true);
 
-            javax.swing.JButton btnModficarMiembros = this.ventana.getBtnModificar();
-            btnModficarMiembros.setEnabled(true);
+            javax.swing.JButton btnModificarMiembros = this.ventana.getBtnModificar();
+            btnModificarMiembros.setEnabled(true);
         }
+        nombreGrupo=g.verNombre();
     }
+
+    public void actualizarTablaMiembros(){
+        javax.swing.JTable tablaMiembros = ventana.gettablaMiembros();
+        GestorGrupos gesGrupos = GestorGrupos.crear();
+        tablaMiembros.setModel(new ModeloTablaAutoresGrupos(gesGrupos.verGrupo(nombreGrupo)));
+    }
+
 
     public void ocultar(){
         this.ventana.setVisible(false);
@@ -119,16 +126,17 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
 
     @Override
     public void btnCancelarClic(ActionEvent evt) {
-        JOptionPane.showMessageDialog(ventana, "Se ha cancelado la operación");
+        JOptionPane.showMessageDialog(ventana, "Modificacion Cancelada!");
         this.ocultar();
     }
 
     @Override
     public void btnModificarMiembrosClic(ActionEvent evt) {
         javax.swing.JTextField txtNombre = ventana.getTxtNombre();
-
         GestorGrupos gesGrupos = GestorGrupos.crear();
         ControladorModificarMiembros modificarMiembros = ControladorModificarMiembros.crear();
+        modificarMiembros.mostrar(gesGrupos.verGrupo(txtNombre.getText().trim()));
+        actualizarTablaMiembros();
     }
 
     @Override

@@ -48,12 +48,27 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public String agregarMiembros(Grupo grupo, List<MiembroEnGrupo> miembros) {
-        return null;
+        if (!this.existeEsteGrupo(grupo))
+            return GRUPO_INEXISTENTE;
+
+        if (miembros == null)
+            return MIEMBROS_INEXISTENTES;
+
+        grupo.agregarMiembros(miembros);
+        return "Miembros Agregados con EXITO!";
     }
+
 
     @Override
     public String quitarMiembros(Grupo grupo, List<MiembroEnGrupo> miembros) {
-        return null;
+        if (!this.existeEsteGrupo(grupo))
+            return GRUPO_INEXISTENTE;
+
+        if (miembros == null)
+            return MIEMBROS_INEXISTENTES;
+
+        grupo.quitarMiembros(miembros);
+        return "Miembros removidos con EXITO!";
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ModeloTablaAutoresGrupos extends AbstractTableModel {
     }
 
     public ModeloTablaAutoresGrupos() {
-        this.nombresColumnas.add("Nombre");
+        this.nombresColumnas.add("Apellido");
         this.nombresColumnas.add("Rol");
     }
 
@@ -34,11 +34,11 @@ public class ModeloTablaAutoresGrupos extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        MiembroEnGrupo Meg = this.miembros.get(rowIndex);
+        MiembroEnGrupo meg = this.miembros.get(rowIndex);
         switch(columnIndex) {
-            case 0: return Meg.verAutor().verNombres();
-            case 1: return Meg.verRol();
-            default: return Meg.verAutor().verNombres();
+            case 0: return meg.verAutor().verApellidos()  + ", " + meg.verAutor().verNombres() + " (" + meg.verAutor().verDni() + ")";
+            case 1: return meg.verRol();
+            default: return meg.verAutor().verApellidos()  + ", " + meg.verAutor().verNombres() + " (" + meg.verAutor().verDni() + ")";
         }
     }
 

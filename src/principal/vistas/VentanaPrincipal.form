@@ -199,7 +199,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Trabajo Practico N&#xba;7 de Programaci&#xf3;n II - Grupo 1"/>
+        <Property name="text" type="java.lang.String" value="Parcial N&#xba;2 de Programaci&#xf3;n II - Grupo 1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
