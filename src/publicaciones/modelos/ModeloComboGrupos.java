@@ -10,6 +10,7 @@ import autores.modelos.Profesor;
 import grupos.modelos.GestorGrupos;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
+import idiomas.modelos.Idioma;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -30,5 +31,9 @@ public class ModeloComboGrupos extends DefaultComboBoxModel{
 
         GestorGrupos grupos = GestorGrupos.crear();
         return grupos.verGrupo(eleccion);
+    }
+
+    public void seleccionarGrupo(Grupo grupo) {
+        this.setSelectedItem(grupo);
     }
 }

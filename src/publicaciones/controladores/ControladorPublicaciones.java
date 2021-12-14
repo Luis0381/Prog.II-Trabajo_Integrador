@@ -133,10 +133,10 @@ public class ControladorPublicaciones implements IControladorPublicaciones{
             GregorianCalendar f = GregorianCalendar.from(publicacionElegida.getFechaPublicacion().atStartOfDay(ZoneId.systemDefault()));
             modificar.getVentana().getSelectorFecha().setCalendar(f);
             modificar.getVentana().getTxtEnlace().setText(publicacionElegida.getEnlace());
-            modificar.getVentana().getComboGrupo().setSelectedItem(publicacionElegida.getAutor().verGrupo().verNombre());
-            modificar.getVentana().getComboIdioma().setSelectedItem(publicacionElegida.getIdiomaPublicacion().toString());
-            modificar.getVentana().getComboLugar().setSelectedItem(publicacionElegida.getLugarPublicacion().verNombre());
-            modificar.getVentana().getComboTipo().setSelectedItem(publicacionElegida.getTipoPublicacion().verNombre());
+            modificar.getVentana().getComboGrupo().setSelectedItem(publicacionElegida.getAutor().verGrupo());
+            modificar.getVentana().getComboIdioma().setSelectedItem(publicacionElegida.getIdiomaPublicacion());
+            modificar.getVentana().getComboLugar().setSelectedItem(publicacionElegida.getLugarPublicacion());
+            modificar.getVentana().getComboTipo().setSelectedItem(publicacionElegida.getTipoPublicacion());
             ModeloTablaPalabrasClaves mt = (ModeloTablaPalabrasClaves)modificar.getVentana().getTablaPalabrasClave().getModel();
             ListSelectionModel modeloSeleccion = modificar.getVentana().getTablaPalabrasClave().getSelectionModel();
             for(PalabraClave palabraClave : publicacionElegida.getPalabrasClaves()) {

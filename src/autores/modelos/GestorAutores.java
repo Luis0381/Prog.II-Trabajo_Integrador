@@ -6,6 +6,7 @@ import grupos.modelos.MiembroEnGrupo;
 import interfaces.IGestorAutores;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -102,7 +103,7 @@ public class GestorAutores implements IGestorAutores {
             if (a instanceof Profesor)
                 profesores.add((Profesor) a);
         }
-
+        Collections.sort(profesores, new ComparatorApellidoyNombre());
         return profesores;
     }
 
@@ -173,7 +174,7 @@ public class GestorAutores implements IGestorAutores {
             if (a instanceof Alumno)
                 alumnos.add((Alumno) a);
         }
-
+        Collections.sort(alumnos, new ComparatorApellidoyNombre());
         return alumnos;
     }
 
@@ -192,6 +193,7 @@ public class GestorAutores implements IGestorAutores {
 
     @Override
     public ArrayList<Autor> verAutores() {
+        Collections.sort(autores, new ComparatorApellidoyNombre());
         return autores;
     }
 
@@ -239,6 +241,7 @@ public class GestorAutores implements IGestorAutores {
                 }
             }
         }
+        Collections.sort(alumnosBuscados, new ComparatorApellidoyNombre());
         return alumnosBuscados;
     }
 
@@ -253,6 +256,7 @@ public class GestorAutores implements IGestorAutores {
                 }
             }
         }
+        Collections.sort(profesoresBuscados, new ComparatorApellidoyNombre());
         return profesoresBuscados;
     }
 

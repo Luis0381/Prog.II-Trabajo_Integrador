@@ -1,7 +1,5 @@
 package principal.controladores;
 
-
-
 import autores.controladores.ControladorAutores;
 import grupos.controladores.ControladorGrupos;
 import idiomas.controladores.ControladorIdiomas;
@@ -22,16 +20,10 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
     private static ControladorVentanaPrincipal instancia;
     private VentanaPrincipal ventana;
 
-    /**
-     * Constructor
-     */
     private ControladorVentanaPrincipal() {
         this.ventana = new VentanaPrincipal(this);
     }
 
-    /**
-     * Crea una instancia de ControladorVentanaPrincipal
-     */
     public static ControladorVentanaPrincipal crear() {
         if (instancia == null)
             instancia = new ControladorVentanaPrincipal();
@@ -39,9 +31,6 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
         return instancia;
     }
 
-    /**
-     * Muestra la ventana
-     */
     public void mostrarVentana() {
         if (ventana == null)
             ventana = new VentanaPrincipal(this);
@@ -49,9 +38,6 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
             ventana.setVisible(true);
     }
 
-    /**
-     * Oculta la ventana
-     */
     public void ocultarVentana() {
         ventana.setVisible(false);
     }
@@ -68,11 +54,6 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
         lugares.mostrarVentana();
     }
 
-    /**
-     * Acción que se ejecuta cuando se selecciona el botón Autores
-     *
-     * @param evt evento
-     */
     @Override
     public void btnIdiomasClic(ActionEvent evt) {
         ControladorIdiomas idiomas = ControladorIdiomas.crear();
@@ -103,11 +84,6 @@ public class ControladorVentanaPrincipal implements IControladorPrincipal {
         publicaciones.mostrarVentana();
     }
 
-    /**
-     * Acción que se ejecuta cuando se selecciona el botón Salir
-     *
-     * @param evt evento
-     */
     @Override
     public void btnSalirClic(ActionEvent evt) {
         int opcion = JOptionPane.showOptionDialog(null, CONFIRMACION, TITULO, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Sí", "No"}, this);
