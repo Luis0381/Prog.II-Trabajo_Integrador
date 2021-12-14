@@ -1,8 +1,7 @@
 package grupos.modelos;
 
 /**
- *
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public enum Rol {
     ADMINISTRADOR, COLABORADOR

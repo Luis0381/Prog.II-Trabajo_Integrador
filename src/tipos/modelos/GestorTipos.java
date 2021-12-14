@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class GestorTipos implements IGestorTipos {
     private List<Tipo> tipos = new ArrayList<>();
     private static GestorTipos gestor;

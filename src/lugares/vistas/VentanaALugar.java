@@ -10,6 +10,9 @@ import interfaces.IControladorALugares;
 
 import javax.swing.*;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class VentanaALugar extends JDialog {
     private IControladorALugares controlador;
 

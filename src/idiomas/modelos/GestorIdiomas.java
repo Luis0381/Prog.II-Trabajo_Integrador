@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class GestorIdiomas implements IGestorIdiomas {
     private static List<Idioma> idiomas = new ArrayList<>();
     private static GestorIdiomas gestor;

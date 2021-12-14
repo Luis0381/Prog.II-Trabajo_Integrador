@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorIdiomas implements IControladorIdiomas {
     private static ControladorIdiomas instancia;
     private VentanaIdiomas ventana;

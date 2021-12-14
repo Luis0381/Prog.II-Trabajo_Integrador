@@ -3,7 +3,7 @@ package autores.modelos;
 import java.util.Objects;
 
 /**
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class Alumno extends Autor {
     // Variables de instancia  

@@ -1,6 +1,5 @@
 package grupos.controladores;
 
-import autores.controladores.ControladorAutores;
 import grupos.modelos.*;
 import grupos.vistas.VentanaAMGrupo;
 import interfaces.IControladorAMGrupo;
@@ -10,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorAMGrupo implements IControladorAMGrupo {
     private static ControladorAMGrupo instancia;
     private VentanaAMGrupo ventana;
@@ -142,17 +144,17 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) {
         char c = evt.getKeyChar();
-        if (!Character.isLetter(c)) { //sólo se aceptan letras, Enter, Del, Backspace y espacio
+        if (!Character.isLetter(c)) {
             switch(c) {
                 case KeyEvent.VK_ENTER:
-                    this.btnGuardarClic(null); //no importa el evento en este caso
+                    this.btnGuardarClic(null);
                     break;
                 case KeyEvent.VK_BACK_SPACE:
                 case KeyEvent.VK_DELETE:
                 case KeyEvent.VK_SPACE:
                     break;
                 default:
-                    evt.consume(); //consume el evento para que no sea procesado por la fuente
+                    evt.consume();
             }
         }
     }
@@ -160,24 +162,24 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
     @Override
     public void txtDescripcionPresionarTecla(KeyEvent evt) {
         char c = evt.getKeyChar();
-        if (!Character.isLetter(c)) { //sólo se aceptan letras, Enter, Del, Backspace y espacio
+        if (!Character.isLetter(c)) {
             switch(c) {
                 case KeyEvent.VK_ENTER:
-                    this.btnGuardarClic(null); //no importa el evento en este caso
+                    this.btnGuardarClic(null);
                     break;
                 case KeyEvent.VK_BACK_SPACE:
                 case KeyEvent.VK_DELETE:
                 case KeyEvent.VK_SPACE:
                     break;
                 default:
-                    evt.consume(); //consume el evento para que no sea procesado por la fuente
+                    evt.consume();
             }
         }
     }
 
     @Override
     public void ventanaObtenerFoco(WindowEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

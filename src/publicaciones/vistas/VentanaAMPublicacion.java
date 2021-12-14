@@ -15,17 +15,12 @@ import javax.swing.JTextField;
 import publicaciones.modelos.ModeloComboGrupos;
 
 /**
- *
- * @author Usuario
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class VentanaAMPublicacion extends javax.swing.JDialog {
     private IControladorAMPublicacion controlador;
-    /**
-     * Creates new form VentanaPublicaciones
-     */
     public VentanaAMPublicacion(IControladorAMPublicacion controlador) {
 
-        
         this.controlador = controlador;
         initComponents();
     }

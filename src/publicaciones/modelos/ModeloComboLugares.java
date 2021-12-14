@@ -11,6 +11,9 @@ import interfaces.IGestorLugares;
 import lugares.modelos.GestorLugares;
 import lugares.modelos.Lugar;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ModeloComboLugares extends DefaultComboBoxModel {
 
     public ModeloComboLugares() {
@@ -24,7 +27,4 @@ public class ModeloComboLugares extends DefaultComboBoxModel {
         return (Lugar) this.getSelectedItem();
     }
 
-    public void seleccionarLugar(Lugar lugar) {
-        this.setSelectedItem(lugar);
-    }
 }

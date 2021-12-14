@@ -36,8 +36,7 @@ import publicaciones.modelos.Publicacion;
 import publicaciones.vistas.VentanaAMPublicacion;
 
 /**
- *
- * @author Usuario
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ControladorAMPublicacion implements IControladorAMPublicacion{
     private static ControladorAMPublicacion instancia;

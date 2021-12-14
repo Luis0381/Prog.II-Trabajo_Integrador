@@ -6,6 +6,9 @@ import interfaces.IGestorIdiomas;
 
 import javax.swing.*;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ModeloComboIdiomas extends DefaultComboBoxModel {
 
     public ModeloComboIdiomas() {
@@ -19,7 +22,4 @@ public class ModeloComboIdiomas extends DefaultComboBoxModel {
         return (Idioma) this.getSelectedItem();
     }
 
-    public void seleccionarIdioma(Idioma idioma) {
-        this.setSelectedItem(idioma);
-    }
 }

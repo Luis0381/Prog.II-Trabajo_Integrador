@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorALugares implements IControladorALugares {
     private static ControladorALugares instancia;
     private VentanaALugar ventana;

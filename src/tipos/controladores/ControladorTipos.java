@@ -9,6 +9,9 @@ import tipos.modelos.GestorTipos;
 import tipos.modelos.ModeloTablaTipos;
 import tipos.vistas.VentanaTipos;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorTipos implements IControladorTipos {
     private static ControladorTipos instancia;
     private VentanaTipos ventana;

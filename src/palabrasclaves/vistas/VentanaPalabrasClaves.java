@@ -16,8 +16,7 @@ import palabrasclaves.modelos.GestorPalabrasClaves;
 import palabrasclaves.modelos.ModeloTablaPalabrasClaves;
 import tipos.modelos.GestorTipos;
 /**
- *
- * @author Thomas
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class VentanaPalabrasClaves extends JDialog {
     private IControladorPalabrasClaves controlador;

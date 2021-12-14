@@ -6,13 +6,15 @@ import grupos.modelos.ModeloTablaAutoresGrupos;
 import grupos.modelos.ModeloTablaGrupos;
 import grupos.vistas.VentanaGrupos;
 import interfaces.IControladorGrupos;
-import principal.controladores.ControladorVentanaPrincipal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorGrupos implements IControladorGrupos {
     private static ControladorGrupos instancia;
     private VentanaGrupos ventana;

@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class VentanaAMGrupo extends JDialog {
     private IControladorAMGrupo controlador;
     public VentanaAMGrupo(IControladorAMGrupo controlador) {

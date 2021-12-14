@@ -12,7 +12,7 @@ import tipos.modelos.GestorTipos;
 import tipos.modelos.Tipo;
 
 /**
- * @author Usuario
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloComboTipos extends DefaultComboBoxModel {
     public ModeloComboTipos() {
@@ -26,7 +26,4 @@ public class ModeloComboTipos extends DefaultComboBoxModel {
         return (Tipo) this.getSelectedItem();
     }
 
-    public void seleccionarTipo(Tipo tipo) {
-        this.setSelectedItem(tipo);
-    }
 }

@@ -7,6 +7,9 @@ import java.awt.event.KeyEvent;
 import tipos.modelos.GestorTipos;
 import tipos.vistas.VentanaATipo;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorATipos implements IControladorATipos {
     private static ControladorATipos instancia;
     private VentanaATipo ventana;

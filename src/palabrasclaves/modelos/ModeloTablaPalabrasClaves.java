@@ -4,6 +4,9 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ModeloTablaPalabrasClaves extends AbstractTableModel {
     private List<String> nombresColumnas = new ArrayList<>();
     private List<PalabraClave> palabrasClaves = new ArrayList<>();

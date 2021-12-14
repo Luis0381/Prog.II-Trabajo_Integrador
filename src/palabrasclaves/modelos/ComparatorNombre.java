@@ -2,6 +2,9 @@ package palabrasclaves.modelos;
 
 import java.util.Comparator;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ComparatorNombre implements Comparator<PalabraClave> {
 
     @Override

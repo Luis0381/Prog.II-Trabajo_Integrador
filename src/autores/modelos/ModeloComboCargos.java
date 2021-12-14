@@ -3,7 +3,7 @@ package autores.modelos;
 import javax.swing.*;
 
 /**
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloComboCargos extends DefaultComboBoxModel {
     /**

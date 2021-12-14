@@ -14,6 +14,9 @@ import idiomas.modelos.Idioma;
 
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ModeloComboGrupos extends DefaultComboBoxModel{
     public ModeloComboGrupos(){
         GestorGrupos grupos = GestorGrupos.crear();
@@ -33,7 +36,4 @@ public class ModeloComboGrupos extends DefaultComboBoxModel{
         return grupos.verGrupo(eleccion);
     }
 
-    public void seleccionarGrupo(Grupo grupo) {
-        this.setSelectedItem(grupo);
-    }
 }

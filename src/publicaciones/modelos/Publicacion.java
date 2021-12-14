@@ -16,8 +16,7 @@ import palabrasclaves.modelos.PalabraClave;
 import tipos.modelos.Tipo;
 
 /**
- *
- * @author Usuario
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class Publicacion {
     private String titulo;

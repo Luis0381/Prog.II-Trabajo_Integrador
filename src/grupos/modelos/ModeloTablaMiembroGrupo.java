@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ModeloTablaMiembroGrupo extends AbstractTableModel {
     public static final String COLUMNA_NOMBRE = "Nombre";
     public static final String COLUMNA_ROL = "Rol";

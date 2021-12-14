@@ -16,8 +16,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
- *
- * @author Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloTablaGrupos extends AbstractTableModel{
     private List<String> nombresColumnas = new ArrayList<>();

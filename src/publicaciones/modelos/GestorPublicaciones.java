@@ -14,14 +14,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lugares.modelos.Lugar;
-import palabrasclaves.modelos.GestorPalabrasClaves;
 import palabrasclaves.modelos.PalabraClave;
-import tipos.modelos.ComparatorNombre;
+import publicaciones.modelos.ComparatorNombre;
 import tipos.modelos.Tipo;
 
 /**
- *
- * @author Usuario
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class GestorPublicaciones implements IGestorPublicaciones{
     private List<Publicacion> publicaciones = new ArrayList<>();
@@ -162,7 +160,7 @@ public class GestorPublicaciones implements IGestorPublicaciones{
         if(this.publicaciones == null){
             this.publicaciones = new ArrayList<>();
         }
-        Collections.sort(publicaciones, new ComparadorNombrePublicacion());
+        Collections.sort(publicaciones, new ComparatorNombre());
         return this.publicaciones;
     }
 

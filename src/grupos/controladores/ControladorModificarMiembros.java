@@ -3,7 +3,6 @@ package grupos.controladores;
 import grupos.modelos.*;
 import grupos.vistas.VentanaModificarMiembros;
 import interfaces.IControladorModificarMiembros;
-import interfaces.IGestorGrupos;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -11,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorModificarMiembros implements IControladorModificarMiembros {
     private static ControladorModificarMiembros instancia;
     private VentanaModificarMiembros ventana;
@@ -100,9 +102,9 @@ public class ControladorModificarMiembros implements IControladorModificarMiembr
 
             String resultado = gesGrupos.quitarMiembros(gesGrupos.verGrupo(nombreGrupo), miembrosViejos);
 
-            if (resultado.equals("Miembros removidos con EXITO!")){ //se pudieron quitarle todos los miembros
+            if (resultado.equals("Miembros removidos con EXITO!")){
                 resultado = gesGrupos.agregarMiembros(gesGrupos.verGrupo(nombreGrupo), miembrosNuevos);
-                if (resultado.equals("Miembros Agregados con EXITO!")) { //se pudieron agregar los miembros nuevos
+                if (resultado.equals("Miembros Agregados con EXITO!")) {
                     ocultar();
                 }
                 else

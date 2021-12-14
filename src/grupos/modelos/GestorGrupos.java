@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class GestorGrupos implements IGestorGrupos {
     private static List<Grupo> grupos = new ArrayList<>();
     private static GestorGrupos gestor;

@@ -8,8 +8,7 @@ package tipos.modelos;
 import java.util.Comparator;
 
 /**
- *
- * @author Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ComparatorNombre implements Comparator<Tipo> {
 

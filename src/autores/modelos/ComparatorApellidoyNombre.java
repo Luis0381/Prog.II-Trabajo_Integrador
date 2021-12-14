@@ -2,6 +2,9 @@ package autores.modelos;
 
 import java.util.Comparator;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ComparatorApellidoyNombre implements Comparator<Autor> {
     @Override
     public int compare(Autor a1, Autor a2) {

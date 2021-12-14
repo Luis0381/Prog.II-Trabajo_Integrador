@@ -11,8 +11,7 @@ import interfaces.IControladorModificarMiembros;
 import javax.swing.*;
 
 /**
- *
- * @author Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class VentanaModificarMiembros extends javax.swing.JDialog {
     private IControladorModificarMiembros controlador;

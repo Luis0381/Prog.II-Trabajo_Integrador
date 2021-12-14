@@ -2,6 +2,9 @@ package grupos.modelos;
 
 import javax.swing.*;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ModeloComboRoles extends DefaultComboBoxModel {
     
     public ModeloComboRoles() {  

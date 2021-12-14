@@ -3,8 +3,7 @@ package lugares.modelos;
 import java.util.Objects;
 
 /**
- *
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class Lugar {
     // Variables de instancia

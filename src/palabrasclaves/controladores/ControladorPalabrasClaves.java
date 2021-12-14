@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorPalabrasClaves implements IControladorPalabrasClaves {
     private static ControladorPalabrasClaves instancia;
     private VentanaPalabrasClaves ventana;

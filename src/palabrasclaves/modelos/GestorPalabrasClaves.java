@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class GestorPalabrasClaves implements IGestorPalabrasClaves {
     private static List<PalabraClave> palabrasClaves = new ArrayList<>();
     private static GestorPalabrasClaves gestor;

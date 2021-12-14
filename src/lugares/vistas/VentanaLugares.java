@@ -13,8 +13,7 @@ import lugares.modelos.ModeloTablaLugares;
 import javax.swing.*;
 
 /**
- *
- * @author Thomas
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class VentanaLugares extends JDialog {
     private IControladorLugares controlador;

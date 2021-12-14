@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ControladorAPalabrasClaves implements IControladorAPalabrasClaves {
     private static ControladorAPalabrasClaves instancia;
     private VentanaAPalabrasClaves ventana;

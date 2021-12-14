@@ -24,8 +24,7 @@ import publicaciones.modelos.Publicacion;
 import publicaciones.vistas.VentanaPublicaciones;
 
 /**
- *
- * @author Usuario
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ControladorPublicaciones implements IControladorPublicaciones{
     private static ControladorPublicaciones instancia;

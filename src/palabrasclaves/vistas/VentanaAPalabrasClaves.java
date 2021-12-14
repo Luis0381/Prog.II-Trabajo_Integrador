@@ -10,6 +10,9 @@ import interfaces.IControladorATipos;
 
 import javax.swing.*;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class VentanaAPalabrasClaves extends JDialog {
     private IControladorAPalabrasClaves controlador;
 

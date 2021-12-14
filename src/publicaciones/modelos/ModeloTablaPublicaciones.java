@@ -6,6 +6,9 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ModeloTablaPublicaciones extends AbstractTableModel {
     public static final String COLUMNA_TITULO = "Título";
     public static final String COLUMNA_AUTOR = "Autor";

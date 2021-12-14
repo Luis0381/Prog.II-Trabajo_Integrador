@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 /**
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloTablaAlumnos extends AbstractTableModel {
     private ArrayList<String> nombresColumnas = new ArrayList<>();

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public abstract class Autor {
     // Variables de instancia 

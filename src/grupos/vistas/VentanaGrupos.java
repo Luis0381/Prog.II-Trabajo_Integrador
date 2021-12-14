@@ -16,8 +16,7 @@ import lugares.modelos.ModeloTablaLugares;
 import javax.swing.*;
 
 /**
- *
- * @author Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class VentanaGrupos extends javax.swing.JDialog {
 private IControladorGrupos controlador;

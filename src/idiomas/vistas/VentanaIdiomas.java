@@ -12,8 +12,7 @@ import interfaces.IControladorIdiomas;
 import javax.swing.*;
 
 /**
- *
- * @author Thomas
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class VentanaIdiomas extends JDialog {
     private IControladorIdiomas controlador;

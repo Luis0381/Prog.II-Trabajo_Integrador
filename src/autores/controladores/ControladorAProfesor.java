@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
 /**
- * @author Thomas Mafut & Luis Medina Raed
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ControladorAProfesor implements IControladorAMProfesor {
     private static ControladorAProfesor instancia;

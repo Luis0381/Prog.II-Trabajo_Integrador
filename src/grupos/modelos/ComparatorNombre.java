@@ -2,6 +2,9 @@ package grupos.modelos;
 
 import java.util.Comparator;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class ComparatorNombre implements Comparator<Grupo> {
 
     @Override

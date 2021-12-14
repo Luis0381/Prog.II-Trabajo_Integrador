@@ -13,6 +13,9 @@ import java.awt.Dialog;
 import java.util.ArrayList;
 import javax.swing.*;
 
+/**
+ * @author Medina Raed, Luis Eugenio & Mafut, Thomas
+ */
 public class VentanaAIdioma extends JDialog {
     private IControladorAIdiomas controlador;
 
