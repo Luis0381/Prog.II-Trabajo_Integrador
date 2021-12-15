@@ -51,7 +51,11 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
             javax.swing.JButton btnModificarMiembros = this.ventana.getBtnModificar();
             btnModificarMiembros.setEnabled(true);
         }
-        nombreGrupo = g.verNombre();
+        try {
+            nombreGrupo = g.verNombre();
+        }
+        catch(Exception e) {
+        }
     }
 
     public void actualizarTablaMiembros() {
