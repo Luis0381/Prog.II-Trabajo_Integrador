@@ -5,11 +5,13 @@
  */
 package autores.modelos;
 
+import grupos.modelos.ComparatorNombre;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +27,7 @@ public class ModeloTablaGrupos extends AbstractTableModel {
         for (MiembroEnGrupo mG : a.verGrupos()) {
             Grupos.add(mG.verGrupo());
         }
+        Collections.sort(Grupos, new ComparatorNombre());
     }
 
     @Override
