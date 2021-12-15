@@ -11,7 +11,7 @@ public class ModeloTablaGrupos extends AbstractTableModel {
     List<String> nombreColumnas = new ArrayList<>();
     List<Grupo> grupos = new ArrayList<Grupo>();
 
-    public ModeloTablaGrupos(){
+    public ModeloTablaGrupos() {
         this.nombreColumnas.add("Nombre");
         this.nombreColumnas.add("Descripcion");
 
@@ -20,7 +20,7 @@ public class ModeloTablaGrupos extends AbstractTableModel {
         this.grupos = gesGrupos.verGrupos();
     }
 
-    public ModeloTablaGrupos(String nombreBuscar){
+    public ModeloTablaGrupos(String nombreBuscar) {
         this.nombreColumnas.add("Nombre");
         this.nombreColumnas.add("Descripcion");
 
@@ -42,10 +42,13 @@ public class ModeloTablaGrupos extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Grupo g = this.grupos.get(rowIndex);
-        switch(columnIndex) {
-            case 0: return g.verNombre();
-            case 1: return g.verDescripcion();
-            default: return g.verNombre();
+        switch (columnIndex) {
+            case 0:
+                return g.verNombre();
+            case 1:
+                return g.verDescripcion();
+            default:
+                return g.verNombre();
         }
     }
 

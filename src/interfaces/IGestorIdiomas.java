@@ -7,22 +7,21 @@ package interfaces;
 
 import idiomas.modelos.Idioma;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Luis Medina Raed
  */
 public interface IGestorIdiomas {
-    public String nuevoIdioma(String nombre);
+    String nuevoIdioma(String nombre);
 
-    public Idioma verIdioma(String nombre);
+    Idioma verIdioma(String nombre);
 
-    public String borrarIdioma(Idioma idioma);
+    String borrarIdioma(Idioma idioma);
 
-    public List<Idioma> buscarIdiomas(String nombre);
+    List<Idioma> buscarIdiomas(String nombre);
 
-    public List<Idioma> verIdiomas();
+    List<Idioma> verIdiomas();
 
-    public boolean existeEsteIdioma(Idioma idioma);
+    boolean existeEsteIdioma(Idioma idioma);
 }

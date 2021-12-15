@@ -5,11 +5,11 @@
  */
 package publicaciones.modelos;
 
-import javax.swing.DefaultComboBoxModel;
-
 import interfaces.IGestorTipos;
 import tipos.modelos.GestorTipos;
 import tipos.modelos.Tipo;
+
+import javax.swing.*;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
@@ -17,7 +17,7 @@ import tipos.modelos.Tipo;
 public class ModeloComboTipos extends DefaultComboBoxModel {
     public ModeloComboTipos() {
         IGestorTipos gesTipos = GestorTipos.crear();
-        for (Tipo tipo : gesTipos.verTipos()) { //todos los tipos
+        for (Tipo tipo : gesTipos.verTipos()) {
             this.addElement(tipo);
         }
     }

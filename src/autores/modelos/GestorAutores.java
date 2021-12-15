@@ -13,7 +13,7 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class GestorAutores implements IGestorAutores {
-    private static ArrayList<Autor> autores = new ArrayList<>();
+    private static final ArrayList<Autor> autores = new ArrayList<>();
     private static GestorAutores gestor;
 
     /**

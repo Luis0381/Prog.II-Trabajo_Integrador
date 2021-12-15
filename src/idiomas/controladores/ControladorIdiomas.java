@@ -15,13 +15,13 @@ import java.awt.event.WindowEvent;
  */
 public class ControladorIdiomas implements IControladorIdiomas {
     private static ControladorIdiomas instancia;
-    private VentanaIdiomas ventana;
+    private final VentanaIdiomas ventana;
 
     private ControladorIdiomas() {
         this.ventana = new VentanaIdiomas(this);
     }
 
-    public static ControladorIdiomas crear(){
+    public static ControladorIdiomas crear() {
         if (instancia == null)
             instancia = new ControladorIdiomas();
         return instancia;
@@ -39,36 +39,26 @@ public class ControladorIdiomas implements IControladorIdiomas {
         this.ventana.setVisible(false);
     }
 
-    public void actualizarTablaIdiomas(){
+    public void actualizarTablaIdiomas() {
         javax.swing.JTable tablaIdiomas = this.ventana.getTablaIdiomas();
-        javax.swing.JButton btnBorrarIdioma= this.ventana.getBtnEliminar();
-        javax.swing.JButton btnBuscarIdioma= this.ventana.getBtnBuscar();
-        
+        javax.swing.JButton btnBorrarIdioma = this.ventana.getBtnEliminar();
+        javax.swing.JButton btnBuscarIdioma = this.ventana.getBtnBuscar();
+
         btnBuscarIdioma.setEnabled(true);
         tablaIdiomas.setModel(new ModeloTablaIdiomas());
 
-        if(tablaIdiomas.getRowCount() == 0){
-            btnBorrarIdioma.setEnabled(false);
-        }
-        else{
-            btnBorrarIdioma.setEnabled(true);
-        }
+        btnBorrarIdioma.setEnabled(tablaIdiomas.getRowCount() != 0);
     }
 
-    private void filtrarTablaIdiomas(String nombreFiltrar){
+    private void filtrarTablaIdiomas(String nombreFiltrar) {
         javax.swing.JTable tablaIdiomas = this.ventana.getTablaIdiomas();
         javax.swing.JButton btnBorrarIdioma = this.ventana.getBtnEliminar();
-        javax.swing.JButton btnBuscarIdioma= this.ventana.getBtnBuscar();
+        javax.swing.JButton btnBuscarIdioma = this.ventana.getBtnBuscar();
 
         tablaIdiomas.setModel(new ModeloTablaIdiomas(nombreFiltrar));
         btnBuscarIdioma.setEnabled(true);
 
-        if(tablaIdiomas.getRowCount() == 0){
-            btnBorrarIdioma.setEnabled(false);
-        }
-        else{
-            btnBorrarIdioma.setEnabled(true);
-        }
+        btnBorrarIdioma.setEnabled(tablaIdiomas.getRowCount() != 0);
     }
 
 
@@ -83,11 +73,11 @@ public class ControladorIdiomas implements IControladorIdiomas {
         javax.swing.JTable tablaIdiomas = this.ventana.getTablaIdiomas();
         int filaElegida = tablaIdiomas.getSelectedRow();
 
-        if(filaElegida != -1){
+        if (filaElegida != -1) {
             String[] botones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(ventana, IControladorIdiomas.CONFIRMACION, "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
 
-            if(respuesta == 0){
+            if (respuesta == 0) {
                 String nombre = tablaIdiomas.getValueAt(filaElegida, 0).toString();
 
                 GestorIdiomas gesIdiomas = GestorIdiomas.crear();
@@ -96,8 +86,7 @@ public class ControladorIdiomas implements IControladorIdiomas {
                 JOptionPane.showMessageDialog(ventana, resultado);
                 this.actualizarTablaIdiomas();
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun idioma");
         }
     }
@@ -107,13 +96,13 @@ public class ControladorIdiomas implements IControladorIdiomas {
         String[] botones = {"Si", "No"};
         int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea guardar los datos y volver a la pantalla de inicio?", "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
 
-        if(respuesta == 0){
+        if (respuesta == 0) {
             GestorIdiomas gesIdiomas = GestorIdiomas.crear();
             String resultado = gesIdiomas.escribirArchivo();
 
             JOptionPane.showMessageDialog(ventana, resultado);
 
-            if(resultado.equals("Se han guardado todas los idiomas con EXITO!")){
+            if (resultado.equals("Se han guardado todas los idiomas con EXITO!")) {
                 this.ocultarVentana();
             }
         }
@@ -137,7 +126,7 @@ public class ControladorIdiomas implements IControladorIdiomas {
 
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) {
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             javax.swing.JTextField txtNombre = this.ventana.getTxtNombre();
             javax.swing.JButton btnBuscar = this.ventana.getBtnBuscar();
 

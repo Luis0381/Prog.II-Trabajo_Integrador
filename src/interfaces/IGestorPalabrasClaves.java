@@ -5,24 +5,23 @@
  */
 package interfaces;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import palabrasclaves.modelos.PalabraClave;
+
+import java.util.List;
 
 /**
  * @author Luis Medina Raed
  */
 public interface IGestorPalabrasClaves {
-    public String nuevaPalabraClave(String nombre);
+    String nuevaPalabraClave(String nombre);
 
-    public PalabraClave verPalabraClave(String nombre);
+    PalabraClave verPalabraClave(String nombre);
 
-    public String borrarPalabraClave(PalabraClave palabraClave);
+    String borrarPalabraClave(PalabraClave palabraClave);
 
-    public List<PalabraClave> buscarPalabrasClaves(String nombre);
+    List<PalabraClave> buscarPalabrasClaves(String nombre);
 
-    public List<PalabraClave> verPalabrasClaves();
+    List<PalabraClave> verPalabrasClaves();
 
-    public boolean existeEstaPalabraClave(PalabraClave palabraClave);
+    boolean existeEstaPalabraClave(PalabraClave palabraClave);
 }

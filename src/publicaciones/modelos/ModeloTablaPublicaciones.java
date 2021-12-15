@@ -15,13 +15,13 @@ public class ModeloTablaPublicaciones extends AbstractTableModel {
     public static final String COLUMNA_ANIO = "Año";
     //constantes para los nombres de las columnas 
 
-    private List<Publicacion> publicaciones;
+    private final List<Publicacion> publicaciones;
     //los datos los saca de GestorPublicaciones
 
-    private List<String> nombresColumnas = Arrays.asList(new String[] {COLUMNA_TITULO, COLUMNA_AUTOR, COLUMNA_ANIO});
+    private final List<String> nombresColumnas = Arrays.asList(COLUMNA_TITULO, COLUMNA_AUTOR, COLUMNA_ANIO);
     //colección para guardar los nombres de las columnas
 
-    private IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
+    private final IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
 
     public ModeloTablaPublicaciones(String titulo) {
         this.publicaciones = this.gesPublicaciones.buscarPublicaciones(titulo);
@@ -35,10 +35,14 @@ public class ModeloTablaPublicaciones extends AbstractTableModel {
     public Object getValueAt(int fila, int columna) {
         Publicacion publicacion = this.publicaciones.get(fila);
         switch (columna) {
-            case 0: return publicacion.getTitulo();
-            case 1: return publicacion.getAutor().verAutor().verNombreCompleto();
-            case 2: return publicacion.getFechaPublicacion().getYear();
-            default: return publicacion.getTitulo();
+            case 0:
+                return publicacion.getTitulo();
+            case 1:
+                return publicacion.getAutor().verAutor().verNombreCompleto();
+            case 2:
+                return publicacion.getFechaPublicacion().getYear();
+            default:
+                return publicacion.getTitulo();
         }
     }
 
@@ -51,6 +55,7 @@ public class ModeloTablaPublicaciones extends AbstractTableModel {
     public int getRowCount() {
         return this.publicaciones.size();
     }
+
     @Override
     public String getColumnName(int columna) {
         return this.nombresColumnas.get(columna);
@@ -59,8 +64,7 @@ public class ModeloTablaPublicaciones extends AbstractTableModel {
     public Publicacion verPublicacion(int fila) {
         try {
             return this.publicaciones.get(fila);
-        }
-        catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }

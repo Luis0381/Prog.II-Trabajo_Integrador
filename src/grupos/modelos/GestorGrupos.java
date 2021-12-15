@@ -2,6 +2,7 @@ package grupos.modelos;
 
 import autores.modelos.GestorAutores;
 import interfaces.IGestorGrupos;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class GestorGrupos implements IGestorGrupos {
-    private static List<Grupo> grupos = new ArrayList<>();
+    private static final List<Grupo> grupos = new ArrayList<>();
     private static GestorGrupos gestor;
 
     private GestorGrupos() {
@@ -37,7 +38,7 @@ public class GestorGrupos implements IGestorGrupos {
 
     @Override
     public String modificarGrupo(Grupo grupo, String descripcion) {
-        if (this.existeEsteGrupo(grupo) && (descripcion != null)){
+        if (this.existeEsteGrupo(grupo) && (descripcion != null)) {
             if (descripcion.isEmpty()) {
                 descripcion = null;
             }
@@ -82,7 +83,7 @@ public class GestorGrupos implements IGestorGrupos {
     public Grupo verGrupo(String nombre) {
         if ((nombre == null) || (nombre.isEmpty()))
             return null;
-        for(Grupo a : grupos)
+        for (Grupo a : grupos)
             if (a.verNombre().equals(nombre))
                 return a;
         return null;
@@ -92,7 +93,7 @@ public class GestorGrupos implements IGestorGrupos {
     public boolean existeEsteGrupo(Grupo grupo) {
         if (grupo == null)
             return false;
-        for(Grupo a : grupos) {
+        for (Grupo a : grupos) {
             if (a.equals(grupo))
                 return true;
         }
@@ -121,7 +122,7 @@ public class GestorGrupos implements IGestorGrupos {
         if (nombre == null)
             return gruposBuscados;
 
-        for(Grupo grupo : grupos) {
+        for (Grupo grupo : grupos) {
             if (grupo.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
                 gruposBuscados.add(grupo);
         }

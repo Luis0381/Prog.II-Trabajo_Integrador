@@ -10,27 +10,25 @@ import autores.modelos.Profesor;
 import grupos.modelos.GestorGrupos;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
-import idiomas.modelos.Idioma;
 
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.*;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
-public class ModeloComboGrupos extends DefaultComboBoxModel{
-    public ModeloComboGrupos(){
-        GestorGrupos grupos = GestorGrupos.crear();
+public class ModeloComboGrupos extends DefaultComboBoxModel {
+    public ModeloComboGrupos() {
         GestorAutores autores = GestorAutores.crear();
 
         Profesor p = autores.verProfesores().get(0);
 
-        for(MiembroEnGrupo mg: p.verGrupos()){
+        for (MiembroEnGrupo mg : p.verGrupos()) {
             this.addElement(mg.verGrupo().verNombre());
         }
     }
 
-    public Grupo obtenerGrupo(){
-        String eleccion = (String)this.getSelectedItem();
+    public Grupo obtenerGrupo() {
+        String eleccion = (String) this.getSelectedItem();
 
         GestorGrupos grupos = GestorGrupos.crear();
         return grupos.verGrupo(eleccion);

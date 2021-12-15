@@ -1,8 +1,5 @@
 package idiomas.modelos;
 
-import idiomas.modelos.GestorIdiomas;
-import idiomas.modelos.Idioma;
-
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +8,7 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloTablaIdiomas extends AbstractTableModel {
-    private List<String> nombresColumnas = new ArrayList<>();
+    private final List<String> nombresColumnas = new ArrayList<>();
     private List<Idioma> idiomas = new ArrayList<>();
 
     public ModeloTablaIdiomas() {

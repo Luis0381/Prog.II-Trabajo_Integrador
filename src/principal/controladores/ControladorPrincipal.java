@@ -1,18 +1,16 @@
 package principal.controladores;
 
-import autores.modelos.*;
+import autores.modelos.Cargo;
+import autores.modelos.GestorAutores;
+import autores.modelos.Profesor;
 import grupos.modelos.GestorGrupos;
 import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
 import grupos.modelos.Rol;
 import idiomas.modelos.GestorIdiomas;
 import idiomas.modelos.Idioma;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import interfaces.*;
+import interfaces.IControladorPrincipal;
+import interfaces.IGestorPublicaciones;
 import lugares.modelos.GestorLugares;
 import lugares.modelos.Lugar;
 import palabrasclaves.modelos.GestorPalabrasClaves;
@@ -22,6 +20,9 @@ import tipos.modelos.GestorTipos;
 import tipos.modelos.Tipo;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas

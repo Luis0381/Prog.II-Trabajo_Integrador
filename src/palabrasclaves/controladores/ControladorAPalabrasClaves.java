@@ -3,6 +3,7 @@ package palabrasclaves.controladores;
 import interfaces.IControladorAPalabrasClaves;
 import palabrasclaves.modelos.GestorPalabrasClaves;
 import palabrasclaves.vistas.VentanaAPalabrasClaves;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -12,14 +13,14 @@ import java.awt.event.KeyEvent;
  */
 public class ControladorAPalabrasClaves implements IControladorAPalabrasClaves {
     private static ControladorAPalabrasClaves instancia;
-    private VentanaAPalabrasClaves ventana;
+    private final VentanaAPalabrasClaves ventana;
 
     private ControladorAPalabrasClaves() {
         this.ventana = new VentanaAPalabrasClaves(this);
     }
 
 
-    public static ControladorAPalabrasClaves crear(){
+    public static ControladorAPalabrasClaves crear() {
         if (instancia == null)
             instancia = new ControladorAPalabrasClaves();
 
@@ -44,7 +45,7 @@ public class ControladorAPalabrasClaves implements IControladorAPalabrasClaves {
         String resultado = gestorPalabrasClaves.nuevaPalabraClave(nombre);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Palabras claves añadidas con EXITO!")){
+        if (resultado.equals("Palabras claves añadidas con EXITO!")) {
             txtNombre.setText("");
             ControladorPalabrasClaves controlPalabrasClaves = ControladorPalabrasClaves.crear();
             controlPalabrasClaves.actualizarTablaPalabrasClaves();
@@ -62,10 +63,9 @@ public class ControladorAPalabrasClaves implements IControladorAPalabrasClaves {
         JButton btnGuardar = this.ventana.getBtnGuardar();
         JButton btnCancelar = this.ventana.getBtnCancelar();
 
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnGuardar.doClick();
-        }
-        else if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             btnCancelar.doClick();
         }
     }

@@ -156,7 +156,7 @@ public class ControladorAutores implements IControladorAutores {
 
         int filaElegida = TablaProfesor.getSelectedRow();
 
-        if(filaElegida != -1){
+        if (filaElegida != -1) {
             ControladorMProfesor controlModificarProfe = ControladorMProfesor.crear();
 
             javax.swing.JTable TablaGruposProfesor = controlModificarProfe.getVentana().getTablaGruposProfesor();
@@ -168,7 +168,7 @@ public class ControladorAutores implements IControladorAutores {
             javax.swing.JTextField txtDNI = controlModificarProfe.getVentana().getTxtDNI();
 
             GestorAutores autores = GestorAutores.crear();
-            Profesor p = (Profesor)autores.verAutor(Integer.parseInt(TablaProfesor.getValueAt(filaElegida, 0).toString()));
+            Profesor p = (Profesor) autores.verAutor(Integer.parseInt(TablaProfesor.getValueAt(filaElegida, 0).toString()));
 
             TablaGruposProfesor.setModel(new ModeloTablaGrupos(p));
             txtDNI.setText(TablaProfesor.getValueAt(filaElegida, 0).toString());
@@ -181,9 +181,7 @@ public class ControladorAutores implements IControladorAutores {
             txtDNI.setEnabled(false);
 
             controlModificarProfe.mostrarVentana(controlModificarProfe.TITULO_MODIFICAR);
-        }
-
-        else{
+        } else {
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun profesor");
         }
     }
@@ -194,7 +192,7 @@ public class ControladorAutores implements IControladorAutores {
 
         int filaElegida = TablaAlumno.getSelectedRow();
 
-        if(filaElegida != -1){
+        if (filaElegida != -1) {
             ControladorMAlumno controlAlumno = ControladorMAlumno.crear();
 
             javax.swing.JTable TablaGruposAlumno = controlAlumno.getVentana().getTablaGruposAlumno();
@@ -206,7 +204,7 @@ public class ControladorAutores implements IControladorAutores {
             javax.swing.JTextField txtCX = controlAlumno.getVentana().getTxtCX();
 
             GestorAutores autores = GestorAutores.crear();
-            Alumno a = (Alumno)autores.verAutor(Integer.parseInt(TablaAlumno.getValueAt(filaElegida, 0).toString()));
+            Alumno a = (Alumno) autores.verAutor(Integer.parseInt(TablaAlumno.getValueAt(filaElegida, 0).toString()));
 
             TablaGruposAlumno.setModel(new ModeloTablaGrupos(a));
             txtDNI.setText(TablaAlumno.getValueAt(filaElegida, 0).toString());
@@ -219,9 +217,7 @@ public class ControladorAutores implements IControladorAutores {
             txtDNI.setEnabled(false);
 
             controlAlumno.mostrarVentana(controlAlumno.TITULO_MODIFICAR);
-        }
-
-        else{
+        } else {
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun alumno");
         }
     }

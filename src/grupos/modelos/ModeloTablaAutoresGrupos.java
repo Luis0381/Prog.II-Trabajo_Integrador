@@ -8,15 +8,15 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloTablaAutoresGrupos extends AbstractTableModel {
-    private List<String> nombresColumnas = new ArrayList<>();
+    private final List<String> nombresColumnas = new ArrayList<>();
     private List<MiembroEnGrupo> miembros = new ArrayList<>();
 
     public ModeloTablaAutoresGrupos(Grupo g) {
         this.nombresColumnas.add("Nombre");
         this.nombresColumnas.add("Rol");
 
-        if(g.verMiembros() != null){
-            this.miembros = g.verMiembros() ;
+        if (g.verMiembros() != null) {
+            this.miembros = g.verMiembros();
         }
     }
 
@@ -38,10 +38,13 @@ public class ModeloTablaAutoresGrupos extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         MiembroEnGrupo meg = this.miembros.get(rowIndex);
-        switch(columnIndex) {
-            case 0: return meg.verAutor().verApellidos()  + ", " + meg.verAutor().verNombres() + " (" + meg.verAutor().verDni() + ")";
-            case 1: return meg.verRol();
-            default: return meg.verAutor().verApellidos()  + ", " + meg.verAutor().verNombres() + " (" + meg.verAutor().verDni() + ")";
+        switch (columnIndex) {
+            case 0:
+                return meg.verAutor().verApellidos() + ", " + meg.verAutor().verNombres() + " (" + meg.verAutor().verDni() + ")";
+            case 1:
+                return meg.verRol();
+            default:
+                return meg.verAutor().verApellidos() + ", " + meg.verAutor().verNombres() + " (" + meg.verAutor().verDni() + ")";
         }
     }
 

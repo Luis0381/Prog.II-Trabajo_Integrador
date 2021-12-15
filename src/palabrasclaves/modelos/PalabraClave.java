@@ -8,18 +8,21 @@ import java.util.Objects;
 public class PalabraClave {
     // Variables de instancia
     private String nombre;
+
     // Constructor
     public PalabraClave(String nombre) {
         this.nombre = nombre;
     }
+
     // Metodos
-    public void mostrarPalabraClave(){
+    public void mostrarPalabraClave() {
         System.out.println(this.nombre);
     }
 
     public String toString() {
         return nombre;
     }
+
     // equals() & hashCode()
     @Override
     public int hashCode() {

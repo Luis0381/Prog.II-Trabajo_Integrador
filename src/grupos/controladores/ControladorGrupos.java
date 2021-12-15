@@ -23,8 +23,8 @@ public class ControladorGrupos implements IControladorGrupos {
         ventana = new VentanaGrupos(this);
     }
 
-    public static ControladorGrupos crear(){
-        if(instancia == null)
+    public static ControladorGrupos crear() {
+        if (instancia == null)
             instancia = new ControladorGrupos();
         return instancia;
     }
@@ -33,20 +33,19 @@ public class ControladorGrupos implements IControladorGrupos {
         return ventana;
     }
 
-    public void mostrar(){
-        if(ventana==null){
+    public void mostrar() {
+        if (ventana == null) {
             ventana = new VentanaGrupos(this);
-        }
-        else{
+        } else {
             ventana.setVisible(true);
         }
     }
 
-    public void ocultar(){
+    public void ocultar() {
         ventana.setVisible(false);
     }
 
-    public void actualizarTablaGrupos(){
+    public void actualizarTablaGrupos() {
         javax.swing.JTable tablaGrupos = ventana.getTablaGrupos();
         tablaGrupos.setModel(new ModeloTablaGrupos());
 
@@ -54,30 +53,24 @@ public class ControladorGrupos implements IControladorGrupos {
         javax.swing.JButton btnBuscar = ventana.getBtnBuscar();
         javax.swing.JButton btnBorrar = ventana.getBtnBorrar();
 
-        if(tablaGrupos.getRowCount() == 0){
+        if (tablaGrupos.getRowCount() == 0) {
             btnModificar.setEnabled(false);
             btnBuscar.setEnabled(false);
             btnBorrar.setEnabled(false);
-        }
-        else{
+        } else {
             btnModificar.setEnabled(true);
             btnBuscar.setEnabled(true);
             btnBorrar.setEnabled(true);
         }
     }
 
-    public void filtrarTablaGrupos(String nombreFiltrar){
+    public void filtrarTablaGrupos(String nombreFiltrar) {
         javax.swing.JTable tablaGrupos = ventana.getTablaGrupos();
         tablaGrupos.setModel(new ModeloTablaGrupos(nombreFiltrar));
 
         javax.swing.JButton btnModificar = ventana.getBtnModificar();
 
-        if(tablaGrupos.getRowCount() == 0){
-            btnModificar.setEnabled(false);
-        }
-        else{
-            btnModificar.setEnabled(true);
-        }
+        btnModificar.setEnabled(tablaGrupos.getRowCount() != 0);
     }
 
     @Override
@@ -95,7 +88,7 @@ public class ControladorGrupos implements IControladorGrupos {
 
         int filaElegida = tablaGrupos.getSelectedRow();
 
-        if(filaElegida != -1){
+        if (filaElegida != -1) {
             ControladorAMGrupo modificarGrupo = ControladorAMGrupo.crear();
 
             String nombreGrupoElegido = tablaGrupos.getValueAt(filaElegida, 0).toString();
@@ -113,8 +106,7 @@ public class ControladorGrupos implements IControladorGrupos {
             txtDescripcion.setText(g.verDescripcion());
 
             modificarGrupo.mostrar(modificarGrupo.TITULO_MODIFICAR, g);
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun grupo");
         }
     }
@@ -125,11 +117,11 @@ public class ControladorGrupos implements IControladorGrupos {
 
         int filaElegida = tablaGrupos.getSelectedRow();
 
-        if(filaElegida != -1){
+        if (filaElegida != -1) {
             String[] botones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea eliminar la publicacion elegida?", "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
 
-            if(respuesta == 0){
+            if (respuesta == 0) {
                 String nombreGrupoElegido = tablaGrupos.getValueAt(filaElegida, 0).toString();
 
                 GestorGrupos gGrupos = GestorGrupos.crear();
@@ -138,12 +130,10 @@ public class ControladorGrupos implements IControladorGrupos {
 
                 actualizarTablaGrupos();
                 JOptionPane.showMessageDialog(ventana, resultado);
+            } else {
+                JOptionPane.showMessageDialog(ventana, "Operacion cancelada con EXITO!");
             }
-            else{
-                JOptionPane.showMessageDialog(ventana, "Se ha cancelado la operacion");
-            }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun grupo");
         }
     }
@@ -168,7 +158,7 @@ public class ControladorGrupos implements IControladorGrupos {
 
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) {
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             javax.swing.JTextField txtNombre = this.ventana.getTxtNombre();
             javax.swing.JButton btnBuscarGrupo = this.ventana.getBtnBuscar();
 

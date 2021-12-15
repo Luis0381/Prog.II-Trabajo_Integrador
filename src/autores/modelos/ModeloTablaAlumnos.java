@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloTablaAlumnos extends AbstractTableModel {
-    private ArrayList<String> nombresColumnas = new ArrayList<>();
+    private final ArrayList<String> nombresColumnas = new ArrayList<>();
     private ArrayList<Alumno> alumnos = new ArrayList<>();
 
     /**

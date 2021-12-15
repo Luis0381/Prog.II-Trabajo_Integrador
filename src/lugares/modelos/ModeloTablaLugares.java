@@ -9,7 +9,7 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloTablaLugares extends AbstractTableModel {
-    private List<String> nombresColumnas = new ArrayList<>();
+    private final List<String> nombresColumnas = new ArrayList<>();
     private List<Lugar> lugares = new ArrayList<>();
 
     public ModeloTablaLugares() {

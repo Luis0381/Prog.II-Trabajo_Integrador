@@ -13,14 +13,14 @@ import java.awt.event.KeyEvent;
  */
 public class ControladorAIdiomas implements IControladorAIdiomas {
     private static ControladorAIdiomas instancia;
-    private VentanaAIdioma ventana;
+    private final VentanaAIdioma ventana;
 
     private ControladorAIdiomas() {
         this.ventana = new VentanaAIdioma(this);
     }
 
 
-    public static ControladorAIdiomas crear(){
+    public static ControladorAIdiomas crear() {
         if (instancia == null)
             instancia = new ControladorAIdiomas();
 
@@ -45,7 +45,7 @@ public class ControladorAIdiomas implements IControladorAIdiomas {
         String resultado = gesIdiomas.nuevoIdioma(nombre);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Idioma agregado de forma EXITOSA!")){
+        if (resultado.equals("Idioma agregado de forma EXITOSA!")) {
             txtNombre.setText("");
             ControladorIdiomas controlIdioma = ControladorIdiomas.crear();
             controlIdioma.actualizarTablaIdiomas();
@@ -63,10 +63,9 @@ public class ControladorAIdiomas implements IControladorAIdiomas {
         javax.swing.JButton btnGuardar = this.ventana.getBtnGuardar();
         javax.swing.JButton btnCancelar = this.ventana.getBtnCancelar();
 
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnGuardar.doClick();
-        }
-        else if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             btnCancelar.doClick();
         }
     }

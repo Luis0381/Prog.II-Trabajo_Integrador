@@ -9,44 +9,43 @@ import autores.modelos.Autor;
 import grupos.modelos.MiembroEnGrupo;
 import idiomas.modelos.Idioma;
 import interfaces.IGestorPublicaciones;
+import lugares.modelos.Lugar;
+import palabrasclaves.modelos.PalabraClave;
+import tipos.modelos.Tipo;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lugares.modelos.Lugar;
-import palabrasclaves.modelos.PalabraClave;
-import publicaciones.modelos.ComparatorNombre;
-import tipos.modelos.Tipo;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
-public class GestorPublicaciones implements IGestorPublicaciones{
-    private List<Publicacion> publicaciones = new ArrayList<>();
+public class GestorPublicaciones implements IGestorPublicaciones {
     private static GestorPublicaciones instancia;
-    
+    private List<Publicacion> publicaciones = new ArrayList<>();
 
-    public static GestorPublicaciones crear(){
-        if(instancia == null)
+    public static GestorPublicaciones crear() {
+        if (instancia == null)
             instancia = new GestorPublicaciones();
         return instancia;
     }
 
     @Override
     public String nuevaPublicacion(String titulo, MiembroEnGrupo miembroEnGrupo, LocalDate fechaPublicacion, Tipo tipo, Idioma idioma, Lugar lugar, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
-        if(titulo == null || titulo.trim().isEmpty())
+        if (titulo == null || titulo.trim().isEmpty())
             return ERROR_TITULO;
 
         if (miembroEnGrupo == null || miembroEnGrupo.verGrupo() == null || miembroEnGrupo.verAutor() == null || miembroEnGrupo.verRol() == null)
             return ERROR_MIEMBRO_EN_GRUPO;
 
-        if(fechaPublicacion == null)
+        if (fechaPublicacion == null)
             return ERROR_FECHA;
 
         if (tipo == null)
             return ERROR_TIPO;
 
-        if (idioma== null)
+        if (idioma == null)
             return ERROR_IDIOMA;
 
         if (lugar == null)
@@ -78,13 +77,13 @@ public class GestorPublicaciones implements IGestorPublicaciones{
         if (miembroEnGrupo == null || miembroEnGrupo.verGrupo() == null || miembroEnGrupo.verAutor() == null || miembroEnGrupo.verRol() == null)
             return ERROR_MIEMBRO_EN_GRUPO;
 
-        if(fechaPublicacion == null)
+        if (fechaPublicacion == null)
             return ERROR_FECHA;
 
         if (tipo == null)
             return ERROR_TIPO;
 
-        if (idioma== null)
+        if (idioma == null)
             return ERROR_IDIOMA;
 
         if (lugar == null)
@@ -112,8 +111,8 @@ public class GestorPublicaciones implements IGestorPublicaciones{
 
     @Override
     public boolean hayPublicacionesConEsteLugar(Lugar lugar) {
-        for(Publicacion p: publicaciones){
-            if(p.getLugarPublicacion().equals(lugar))
+        for (Publicacion p : publicaciones) {
+            if (p.getLugarPublicacion().equals(lugar))
                 return true;
         }
         return false;
@@ -121,8 +120,8 @@ public class GestorPublicaciones implements IGestorPublicaciones{
 
     @Override
     public boolean hayPublicacionesConEsteIdioma(Idioma idioma) {
-        for(Publicacion p: publicaciones){
-            if(p.getIdiomaPublicacion().equals(idioma))
+        for (Publicacion p : publicaciones) {
+            if (p.getIdiomaPublicacion().equals(idioma))
                 return true;
         }
         return false;
@@ -130,8 +129,8 @@ public class GestorPublicaciones implements IGestorPublicaciones{
 
     @Override
     public boolean hayPublicacionesConEsteTipo(Tipo tipo) {
-        for(Publicacion p: publicaciones){
-            if(p.getTipoPublicacion().equals(tipo))
+        for (Publicacion p : publicaciones) {
+            if (p.getTipoPublicacion().equals(tipo))
                 return true;
         }
         return false;
@@ -139,8 +138,8 @@ public class GestorPublicaciones implements IGestorPublicaciones{
 
     @Override
     public boolean hayPublicacionesConEsteAutor(Autor autor) {
-        for(Publicacion p: publicaciones){
-            if(p.getAutor().equals(autor))
+        for (Publicacion p : publicaciones) {
+            if (p.getAutor().equals(autor))
                 return true;
         }
         return false;
@@ -148,8 +147,8 @@ public class GestorPublicaciones implements IGestorPublicaciones{
 
     @Override
     public boolean existeEstaPublicacion(Publicacion publicacion) {
-        for(Publicacion p: publicaciones){
-            if(p.equals(publicacion))
+        for (Publicacion p : publicaciones) {
+            if (p.equals(publicacion))
                 return true;
         }
         return false;
@@ -157,7 +156,7 @@ public class GestorPublicaciones implements IGestorPublicaciones{
 
     @Override
     public List<Publicacion> verPublicaciones() {
-        if(this.publicaciones == null){
+        if (this.publicaciones == null) {
             this.publicaciones = new ArrayList<>();
         }
         Collections.sort(publicaciones, new ComparatorNombre());
@@ -165,18 +164,18 @@ public class GestorPublicaciones implements IGestorPublicaciones{
     }
 
     public Publicacion verPublicacion(String titulo) {
-        for(Publicacion p: publicaciones){
-            if(p.getTitulo().equals(titulo))
+        for (Publicacion p : publicaciones) {
+            if (p.getTitulo().equals(titulo))
                 return p;
         }
         return null;
     }
-    
+
     @Override
     public String borrarPublicacion(Publicacion publicacion) {
-        if(this.existeEstaPublicacion(publicacion)){
-            for(Publicacion p: this.publicaciones){
-                if(p.equals(publicacion)){
+        if (this.existeEstaPublicacion(publicacion)) {
+            for (Publicacion p : this.publicaciones) {
+                if (p.equals(publicacion)) {
                     this.publicaciones.remove(p);
                     return "Se ha eliminado la publicacion buscada";
                 }
@@ -188,22 +187,22 @@ public class GestorPublicaciones implements IGestorPublicaciones{
     @Override
     public List<Publicacion> buscarPublicaciones(String titulo) {
         List<Publicacion> publicacionBuscar = new ArrayList<>();
-        
-        for(Publicacion p: this.publicaciones){
-            if(p.getTitulo().contains(titulo)){
-                if(p.getTitulo().compareTo(titulo) >= 0){
+
+        for (Publicacion p : this.publicaciones) {
+            if (p.getTitulo().contains(titulo)) {
+                if (p.getTitulo().compareTo(titulo) >= 0) {
                     publicacionBuscar.add(p);
                 }
             }
         }
-        
+
         return publicacionBuscar;
     }
 
     @Override
     public boolean hayPublicacionesConEstaPalabraClave(PalabraClave palabraClave) {
-        for(Publicacion p: publicaciones){
-            if(p.getPalabrasClaves().equals(palabraClave))
+        for (Publicacion p : publicaciones) {
+            if (p.getPalabrasClaves().equals(palabraClave))
                 return true;
         }
         return false;

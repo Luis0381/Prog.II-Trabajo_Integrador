@@ -5,24 +5,23 @@
  */
 package interfaces;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tipos.modelos.Tipo;
+
+import java.util.List;
 
 /**
  * @author Luis Medina Raed
  */
 public interface IGestorTipos {
-    public String nuevoTipo(String nombre);
+    String nuevoTipo(String nombre);
 
-    public List<Tipo> verTipos();
+    List<Tipo> verTipos();
 
-    public Tipo verTipo(String nombre);
+    Tipo verTipo(String nombre);
 
-    public String borrarTipo(Tipo tipo);
+    String borrarTipo(Tipo tipo);
 
-    public List<Tipo> buscarTipos(String nombre);
+    List<Tipo> buscarTipos(String nombre);
 
-    public boolean existeEsteTipo(Tipo tipo);
+    boolean existeEsteTipo(Tipo tipo);
 }

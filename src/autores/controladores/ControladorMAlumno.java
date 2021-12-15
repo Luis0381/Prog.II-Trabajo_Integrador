@@ -1,7 +1,7 @@
 package autores.controladores;
 
-import autores.modelos.*;
-import autores.vistas.VentanaAAlumno;
+import autores.modelos.Alumno;
+import autores.modelos.GestorAutores;
 import autores.vistas.VentanaMAlumno;
 import interfaces.IControladorAMAlumno;
 
@@ -35,6 +35,20 @@ public class ControladorMAlumno implements IControladorAMAlumno {
     }
 
     /**
+     * Verifica si una string es numerica
+     *
+     * @param cadena String que queremos verificar si es numerica
+     */
+    private static boolean isNumeric(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    /**
      * Muestra la ventana asignandole un titulo
      *
      * @param titulo Titulo de la ventana
@@ -54,20 +68,6 @@ public class ControladorMAlumno implements IControladorAMAlumno {
      */
     public void ocultarVentana() {
         ventana.setVisible(false);
-    }
-
-    /**
-     * Verifica si una string es numerica
-     *
-     * @param cadena String que queremos verificar si es numerica
-     */
-    private static boolean isNumeric(String cadena) {
-        try {
-            Integer.parseInt(cadena);
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
     }
 
     /**

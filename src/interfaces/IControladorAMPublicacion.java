@@ -7,46 +7,51 @@ package interfaces;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 
-public interface IControladorAMPublicacion {    
-    public static final String TITULO_NUEVA = "Nueva publicación"; 
-    public static final String TITULO_MODIFICAR = "Modificar publicación"; 
-    
+public interface IControladorAMPublicacion {
+    String TITULO_NUEVA = "Nueva publicación";
+    String TITULO_MODIFICAR = "Modificar publicación";
+
     /**
      * Acción a ejecutar cuando se selecciona el botón Guardar
+     *
      * @param evt evento
-     */                        
-    public void btnGuardarClic(ActionEvent evt);
+     */
+    void btnGuardarClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Cancelar
-     * @param evt evento
-     */                        
-    public void btnCancelarClic(ActionEvent evt);
-           
-    /**
-     * Acción a ejecutar cuando se presiona una tecla en el campo txtTitulo
+     *
      * @param evt evento
      */
-    public void txtTituloPresionarTecla(KeyEvent evt);         
+    void btnCancelarClic(ActionEvent evt);
+
+    /**
+     * Acción a ejecutar cuando se presiona una tecla en el campo txtTitulo
+     *
+     * @param evt evento
+     */
+    void txtTituloPresionarTecla(KeyEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Todas Las Palabras Claves
+     *
      * @param evt evento
-     */                        
-    public void btnTodasLasPalabrasClavesClic(ActionEvent evt);
-    
+     */
+    void btnTodasLasPalabrasClavesClic(ActionEvent evt);
+
     /**
      * Acción a ejecutar cuando se selecciona el botón Ninguna Palabra Clave
+     *
      * @param evt evento
-     */                        
-    public void btnNingunaPalabraClaveClic(ActionEvent evt);
-    
+     */
+    void btnNingunaPalabraClaveClic(ActionEvent evt);
+
     /**
      * Acción a ejecutar cuando se selecciona el botón Abrir
+     *
      * @param evt evento
-     */                        
-    public void btnAbrirClic(ActionEvent evt);
-    
+     */
+    void btnAbrirClic(ActionEvent evt);
+
 }

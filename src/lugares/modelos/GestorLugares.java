@@ -13,10 +13,9 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class GestorLugares implements IGestorLugares {
-    private static List<Lugar> lugares = new ArrayList<>();
-    private static GestorLugares gestor;
-
+    private static final List<Lugar> lugares = new ArrayList<>();
     private static final String NOMBRE_ARCHIVO = "Lugares.txt";
+    private static GestorLugares gestor;
 
     private GestorLugares() {
         this.leerArchivo();
@@ -29,57 +28,53 @@ public class GestorLugares implements IGestorLugares {
         return gestor;
     }
 
-    private String leerArchivo(){
+    private String leerArchivo() {
         File file = this.obtenerArchivoLugar();
         if (file != null) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String cadena;
-                while((cadena = br.readLine()) != null) {
+                while ((cadena = br.readLine()) != null) {
                     Lugar a = new Lugar(cadena);
                     this.verLugares().add(a);
                 }
                 Collections.sort(lugares, new lugares.modelos.ComparatorNombre());
                 return "Se leyo  el archivo correctamente";
-            }
-            catch(NullPointerException | IOException ioe) {
+            } catch (NullPointerException | IOException ioe) {
                 return "No se pudo leer el archivo";
             }
-        }
-        else
+        } else
             return "No se pudo crear el archivo";
     }
 
-    public String escribirArchivo(){
+    public String escribirArchivo() {
         try {
             FileWriter fw = new FileWriter(NOMBRE_ARCHIVO);
-            if(!this.verLugares().isEmpty()){
-                for(Lugar a: this.verLugares()){
+            if (!this.verLugares().isEmpty()) {
+                for (Lugar a : this.verLugares()) {
                     fw.write(a.verNombre());
                     fw.write("\n");
                 }
             }
             fw.close();
             return "Se han guardado todos los lugares con EXITO!";
-        }
-        catch(IOException e1) {
+        } catch (IOException e1) {
             return "ERROR al guardar los datos";
         }
     }
 
-    private File obtenerArchivoLugar(){
+    private File obtenerArchivoLugar() {
         File file = new File(NOMBRE_ARCHIVO);
         try {
             if (!file.exists())
                 file.createNewFile();
             return file;
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             return null;
         }
     }
 
     @Override
-    public String nuevoLugar(String nombre){
+    public String nuevoLugar(String nombre) {
         Lugar nuevoLugar = new Lugar(nombre);
 
         if (lugares.contains(nuevoLugar) || nombre == null || nombre.trim().isEmpty()) {
@@ -136,7 +131,7 @@ public class GestorLugares implements IGestorLugares {
         List<Lugar> lugaresBuscados = new ArrayList<>();
         if (nombre == null)
             return lugaresBuscados;
-        for(Lugar lugar : lugares) {
+        for (Lugar lugar : lugares) {
             if (lugar.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
                 lugaresBuscados.add(lugar);
         }

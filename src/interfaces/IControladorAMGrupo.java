@@ -12,43 +12,49 @@ import java.awt.event.WindowEvent;
 /**
  * Interfaz para el controlador de Altas y Modificaciones de grupos
  */
-public interface IControladorAMGrupo {    
-    public static final String TITULO_NUEVO = "Nuevo grupo"; 
-    public static final String TITULO_MODIFICAR = "Modificar grupo"; 
-    
+public interface IControladorAMGrupo {
+    String TITULO_NUEVO = "Nuevo grupo";
+    String TITULO_MODIFICAR = "Modificar grupo";
+
     /**
      * Acción a ejecutar cuando se selecciona el botón Guardar
+     *
      * @param evt evento
-     */                        
-    public void btnGuardarClic(ActionEvent evt);
+     */
+    void btnGuardarClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Cancelar
+     *
      * @param evt evento
-     */                        
-    public void btnCancelarClic(ActionEvent evt);
-        
+     */
+    void btnCancelarClic(ActionEvent evt);
+
     /**
      * Acción a ejecutar cuando se selecciona el botón Modificar Miembros
+     *
      * @param evt evento
-     */                        
-    public void btnModificarMiembrosClic(ActionEvent evt);        
-    
+     */
+    void btnModificarMiembrosClic(ActionEvent evt);
+
     /**
      * Acción a ejecutar cuando se presiona una tecla en el campo txtNombre
+     *
      * @param evt evento
      */
-    public void txtNombrePresionarTecla(KeyEvent evt); 
-    
+    void txtNombrePresionarTecla(KeyEvent evt);
+
     /**
      * Acción a ejecutar cuando se presiona una tecla en el campo txtDescripcion
+     *
      * @param evt evento
      */
-    public void txtDescripcionPresionarTecla(KeyEvent evt);
-    
+    void txtDescripcionPresionarTecla(KeyEvent evt);
+
     /**
      * Acción a ejecutar cuando la ventana obtiene el foco
+     *
      * @param evt evento
      */
-    public void ventanaObtenerFoco(WindowEvent evt);
+    void ventanaObtenerFoco(WindowEvent evt);
 }

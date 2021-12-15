@@ -46,10 +46,7 @@ public class Alumno extends Autor {
                 return false;
             }
             final Alumno other = (Alumno) obj;
-            if (!Objects.equals(this.cx, other.cx)) {
-                return false;
-            }
-            return true;
+            return Objects.equals(this.cx, other.cx);
         } else
             return true;
     }

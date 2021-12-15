@@ -5,24 +5,23 @@
  */
 package interfaces;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lugares.modelos.Lugar;
+
+import java.util.List;
 
 /**
  * @author Luis Medina Raed
  */
 public interface IGestorLugares {
-    public String nuevoLugar(String nombre);
+    String nuevoLugar(String nombre);
 
-    public Lugar verLugar(String nombre);
+    Lugar verLugar(String nombre);
 
-    public String borrarLugar(Lugar lugar);
+    String borrarLugar(Lugar lugar);
 
-    public List<Lugar> buscarLugares(String nombre);
+    List<Lugar> buscarLugares(String nombre);
 
-    public List<Lugar> verLugares();
+    List<Lugar> verLugares();
 
-    public boolean existeEsteLugar(Lugar lugar);
+    boolean existeEsteLugar(Lugar lugar);
 }

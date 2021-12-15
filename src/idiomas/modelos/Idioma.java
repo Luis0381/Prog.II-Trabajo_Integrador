@@ -8,19 +8,23 @@ import java.util.Objects;
 public class Idioma {
     // Variables de instancia
     private String nombre;
+
     // Relacion entre clases
     // Constructor
     public Idioma(String nombre) {
         this.nombre = nombre;
     }
+
     // Metodos
     @Override
     public String toString() {
         return nombre;
     }
-    public void mostrarIdioma(){
+
+    public void mostrarIdioma() {
         System.out.println(this.nombre);
     }
+
     // equals() & hashCode()
     @Override
     public int hashCode() {
@@ -28,6 +32,7 @@ public class Idioma {
         hash = 53 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -40,15 +45,14 @@ public class Idioma {
             return false;
         }
         final Idioma other = (Idioma) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.nombre, other.nombre);
     }
+
     // Getters & Setters
     public String verNombre() {
         return nombre;
     }
+
     public void asignarNombre(String nombre) {
         this.nombre = nombre;
     }

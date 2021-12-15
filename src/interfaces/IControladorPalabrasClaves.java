@@ -5,48 +5,48 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
 public interface IControladorPalabrasClaves {
-    public static final String TITULO = "Palabras Claves";
-    public static final String CONFIRMACION = "¿Desea borrar la palabra clave especificada?";
+    String TITULO = "Palabras Claves";
+    String CONFIRMACION = "¿Desea borrar la palabra clave especificada?";
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Nueva
      *
      * @param evt evento
      */
-    public void btnNuevoClic(ActionEvent evt);
+    void btnNuevoClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Borrar
      *
      * @param evt evento
      */
-    public void btnEliminarClic(ActionEvent evt);
+    void btnEliminarClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Volver
      *
      * @param evt evento
      */
-    public void btnVolverClic(ActionEvent evt);
+    void btnVolverClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Buscar
      *
      * @param evt evento
      */
-    public void btnBuscarClic(ActionEvent evt);
+    void btnBuscarClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando la ventana obtiene el foco
      *
      * @param evt evento
      */
-    public void ventanaObtenerFoco(WindowEvent evt);
+    void ventanaObtenerFoco(WindowEvent evt);
 
     /**
      * Acción a ejecutar cuando se presiona una tecla en el campo txtNombre
      *
      * @param evt evento
      */
-    public void txtNombrePresionarTecla(KeyEvent evt);
+    void txtNombrePresionarTecla(KeyEvent evt);
 }

@@ -14,14 +14,14 @@ import java.awt.event.KeyEvent;
  */
 public class ControladorALugares implements IControladorALugares {
     private static ControladorALugares instancia;
-    private VentanaALugar ventana;
+    private final VentanaALugar ventana;
 
     private ControladorALugares() {
         this.ventana = new VentanaALugar(this);
     }
 
 
-    public static ControladorALugares crear(){
+    public static ControladorALugares crear() {
         if (instancia == null)
             instancia = new ControladorALugares();
 
@@ -46,7 +46,7 @@ public class ControladorALugares implements IControladorALugares {
         String resultado = gesLugares.nuevoLugar(nombre);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Lugar agregado de forma EXITOSA!")){
+        if (resultado.equals("Lugar agregado de forma EXITOSA!")) {
             txtNombre.setText("");
             ControladorLugares controlLugar = ControladorLugares.crear();
             controlLugar.actualizarTablaLugares();
@@ -64,10 +64,9 @@ public class ControladorALugares implements IControladorALugares {
         javax.swing.JButton btnGuardar = this.ventana.getBtnGuardar();
         javax.swing.JButton btnCancelar = this.ventana.getBtnCancelar();
 
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnGuardar.doClick();
-        }
-        else if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             btnCancelar.doClick();
         }
     }

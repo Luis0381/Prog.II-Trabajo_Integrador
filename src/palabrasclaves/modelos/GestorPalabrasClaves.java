@@ -3,8 +3,6 @@ package palabrasclaves.modelos;
 import interfaces.IGestorPalabrasClaves;
 import interfaces.IGestorPublicaciones;
 import publicaciones.modelos.GestorPublicaciones;
-import tipos.modelos.Tipo;
-
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,10 +13,9 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class GestorPalabrasClaves implements IGestorPalabrasClaves {
-    private static List<PalabraClave> palabrasClaves = new ArrayList<>();
-    private static GestorPalabrasClaves gestor;
-
+    private static final List<PalabraClave> palabrasClaves = new ArrayList<>();
     private static final String NOMBRE_ARCHIVO = "PalabrasClaves.txt";
+    private static GestorPalabrasClaves gestor;
 
     private GestorPalabrasClaves() {
         this.leerArchivo();
@@ -31,51 +28,47 @@ public class GestorPalabrasClaves implements IGestorPalabrasClaves {
         return gestor;
     }
 
-    private File obtenerArchivoPalabrasClaves(){
+    private File obtenerArchivoPalabrasClaves() {
         File file = new File(NOMBRE_ARCHIVO);
         try {
             if (!file.exists())
                 file.createNewFile();
             return file;
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             return null;
         }
     }
 
-    private String leerArchivo(){
+    private String leerArchivo() {
         File file = this.obtenerArchivoPalabrasClaves();
         if (file != null) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String cadena;
-                while((cadena = br.readLine()) != null) {
+                while ((cadena = br.readLine()) != null) {
                     PalabraClave a = new PalabraClave(cadena);
                     this.verPalabrasClaves().add(a);
                 }
                 Collections.sort(palabrasClaves, new palabrasclaves.modelos.ComparatorNombre());
                 return "Se leyo  el archivo correctamente";
-            }
-            catch(NullPointerException | IOException ioe) {
+            } catch (NullPointerException | IOException ioe) {
                 return "No se pudo leer el archivo";
             }
-        }
-        else
+        } else
             return "No se pudo crear el archivo";
     }
 
-    public String escribirArchivo(){
+    public String escribirArchivo() {
         try {
             FileWriter fw = new FileWriter(NOMBRE_ARCHIVO);
-            if(!this.verPalabrasClaves().isEmpty()){
-                for(PalabraClave a: this.verPalabrasClaves()){
+            if (!this.verPalabrasClaves().isEmpty()) {
+                for (PalabraClave a : this.verPalabrasClaves()) {
                     fw.write(a.verNombre());
                     fw.write("\n");
                 }
             }
             fw.close();
             return "Se han guardado todas las palabras claves con EXITO!";
-        }
-        catch(IOException e1) {
+        } catch (IOException e1) {
             return "ERROR al guardar los datos";
         }
     }

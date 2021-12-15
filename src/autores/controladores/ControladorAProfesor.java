@@ -37,6 +37,20 @@ public class ControladorAProfesor implements IControladorAMProfesor {
     }
 
     /**
+     * Verifica si una string es numerica
+     *
+     * @param cadena String que queremos verificar si es numerica
+     */
+    private static boolean isNumeric(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    /**
      * Muestra la ventana asignandole un titulo
      *
      * @param titulo Titulo de la ventana
@@ -64,20 +78,6 @@ public class ControladorAProfesor implements IControladorAMProfesor {
 
     public void setVentana(VentanaAProfesor ventana) {
         this.ventana = ventana;
-    }
-
-    /**
-     * Verifica si una string es numerica
-     *
-     * @param cadena String que queremos verificar si es numerica
-     */
-    private static boolean isNumeric(String cadena) {
-        try {
-            Integer.parseInt(cadena);
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
     }
 
     /**

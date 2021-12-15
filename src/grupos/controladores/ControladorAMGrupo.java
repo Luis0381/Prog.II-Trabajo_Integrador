@@ -1,6 +1,8 @@
 package grupos.controladores;
 
-import grupos.modelos.*;
+import grupos.modelos.GestorGrupos;
+import grupos.modelos.Grupo;
+import grupos.modelos.ModeloTablaAutoresGrupos;
 import grupos.vistas.VentanaAMGrupo;
 import interfaces.IControladorAMGrupo;
 
@@ -14,23 +16,23 @@ import java.awt.event.WindowEvent;
  */
 public class ControladorAMGrupo implements IControladorAMGrupo {
     private static ControladorAMGrupo instancia;
-    private VentanaAMGrupo ventana;
     String nombreGrupo;
+    private VentanaAMGrupo ventana;
 
-    private ControladorAMGrupo(){
+    private ControladorAMGrupo() {
         ventana = new VentanaAMGrupo(this);
     }
 
-    public static ControladorAMGrupo crear(){
-        if(instancia == null){
+    public static ControladorAMGrupo crear() {
+        if (instancia == null) {
             instancia = new ControladorAMGrupo();
         }
         return instancia;
     }
 
-    public void mostrar(String titulo, Grupo g){
-        if(titulo.equals(TITULO_NUEVO)){
-            if(ventana == null){
+    public void mostrar(String titulo, Grupo g) {
+        if (titulo.equals(TITULO_NUEVO)) {
+            if (ventana == null) {
                 ventana = new VentanaAMGrupo(this);
             }
             this.ventana.setTitle(titulo);
@@ -38,9 +40,8 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
 
             javax.swing.JButton btnModificarMiembros = this.ventana.getBtnModificar();
             btnModificarMiembros.setEnabled(false);
-        }
-        else if(titulo.equals(TITULO_MODIFICAR)){
-            if(ventana == null){
+        } else if (titulo.equals(TITULO_MODIFICAR)) {
+            if (ventana == null) {
                 ventana = new VentanaAMGrupo(this);
             }
             this.ventana.setTitle(titulo);
@@ -50,21 +51,21 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
             javax.swing.JButton btnModificarMiembros = this.ventana.getBtnModificar();
             btnModificarMiembros.setEnabled(true);
         }
-        nombreGrupo=g.verNombre();
+        nombreGrupo = g.verNombre();
     }
 
-    public void actualizarTablaMiembros(){
+    public void actualizarTablaMiembros() {
         javax.swing.JTable tablaMiembros = ventana.gettablaMiembros();
         GestorGrupos gesGrupos = GestorGrupos.crear();
         tablaMiembros.setModel(new ModeloTablaAutoresGrupos(gesGrupos.verGrupo(nombreGrupo)));
     }
 
 
-    public void ocultar(){
+    public void ocultar() {
         this.ventana.setVisible(false);
     }
 
-    public void limpiar(){
+    public void limpiar() {
         javax.swing.JTextField txtNombre = this.ventana.getTxtNombre();
         javax.swing.JTextField txtDescripcion = this.ventana.getTxtDescripcion();
 
@@ -76,7 +77,7 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
         return ventana;
     }
 
-    private void nuevoGrupo(){
+    private void nuevoGrupo() {
         javax.swing.JTextField txtDescripcion = ventana.getTxtDescripcion();
         javax.swing.JTextField txtNombre = ventana.getTxtNombre();
 
@@ -87,7 +88,7 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
         String resultado = gesGrupos.nuevoGrupo(nombre, descripcion);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Grupo agregado de forma EXITOSA!")){
+        if (resultado.equals("Grupo agregado de forma EXITOSA!")) {
             limpiar();
             ocultar();
         }
@@ -96,7 +97,7 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
         controlGrupos.actualizarTablaGrupos();
     }
 
-    private void modificarGrupo(){
+    private void modificarGrupo() {
         javax.swing.JTextField txtDescripcion = ventana.getTxtDescripcion();
         javax.swing.JTextField txtNombre = ventana.getTxtNombre();
 
@@ -107,7 +108,7 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
         String resultado = gesGrupos.modificarGrupo(gesGrupos.verGrupo(nombre), descripcion);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Grupo modificado de forma EXITOSA!")){
+        if (resultado.equals("Grupo modificado de forma EXITOSA!")) {
             limpiar();
             ocultar();
         }
@@ -118,10 +119,9 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
 
     @Override
     public void btnGuardarClic(ActionEvent evt) {
-        if(ventana.getTitle().equals(TITULO_NUEVO)){
+        if (ventana.getTitle().equals(TITULO_NUEVO)) {
             nuevoGrupo();
-        }
-        else{
+        } else {
             modificarGrupo();
         }
     }
@@ -145,7 +145,7 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
     public void txtNombrePresionarTecla(KeyEvent evt) {
         char c = evt.getKeyChar();
         if (!Character.isLetter(c)) {
-            switch(c) {
+            switch (c) {
                 case KeyEvent.VK_ENTER:
                     this.btnGuardarClic(null);
                     break;
@@ -163,7 +163,7 @@ public class ControladorAMGrupo implements IControladorAMGrupo {
     public void txtDescripcionPresionarTecla(KeyEvent evt) {
         char c = evt.getKeyChar();
         if (!Character.isLetter(c)) {
-            switch(c) {
+            switch (c) {
                 case KeyEvent.VK_ENTER:
                     this.btnGuardarClic(null);
                     break;

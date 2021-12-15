@@ -1,25 +1,26 @@
 package tipos.controladores;
 
 import interfaces.IControladorATipos;
+import tipos.modelos.GestorTipos;
+import tipos.vistas.VentanaATipo;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import tipos.modelos.GestorTipos;
-import tipos.vistas.VentanaATipo;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ControladorATipos implements IControladorATipos {
     private static ControladorATipos instancia;
-    private VentanaATipo ventana;
+    private final VentanaATipo ventana;
 
     private ControladorATipos() {
         this.ventana = new VentanaATipo(this);
     }
 
 
-    public static ControladorATipos crear(){
+    public static ControladorATipos crear() {
         if (instancia == null)
             instancia = new ControladorATipos();
 
@@ -44,7 +45,7 @@ public class ControladorATipos implements IControladorATipos {
         String resultado = gesTipos.nuevoTipo(nombre);
 
         JOptionPane.showMessageDialog(ventana, resultado);
-        if(resultado.equals("Tipo agregado de forma EXITOSA!")){
+        if (resultado.equals("Tipo agregado de forma EXITOSA!")) {
             txtNombre.setText("");
             ControladorTipos controlTipo = ControladorTipos.crear();
             controlTipo.actualizarTablaTipos();
@@ -62,10 +63,9 @@ public class ControladorATipos implements IControladorATipos {
         javax.swing.JButton btnGuardar = this.ventana.getBtnGuardar();
         javax.swing.JButton btnCancelar = this.ventana.getBtnCancelar();
 
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnGuardar.doClick();
-        }
-        else if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             btnCancelar.doClick();
         }
     }

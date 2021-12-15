@@ -7,11 +7,11 @@ import interfaces.IControladorPrincipal;
 import lugares.controladores.ControladorLugares;
 import palabrasclaves.controladores.ControladorPalabrasClaves;
 import principal.vistas.VentanaPrincipal;
+import publicaciones.controladores.ControladorPublicaciones;
+import tipos.controladores.ControladorTipos;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import publicaciones.controladores.ControladorPublicaciones;
-import tipos.controladores.ControladorTipos;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas

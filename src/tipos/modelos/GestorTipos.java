@@ -2,13 +2,9 @@ package tipos.modelos;
 
 import interfaces.IGestorPublicaciones;
 import interfaces.IGestorTipos;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import publicaciones.modelos.GestorPublicaciones;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +13,9 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class GestorTipos implements IGestorTipos {
-    private List<Tipo> tipos = new ArrayList<>();
-    private static GestorTipos gestor;
-    
     private static final String NOMBRE_ARCHIVO = "Tipos.txt";
+    private static GestorTipos gestor;
+    private final List<Tipo> tipos = new ArrayList<>();
 
     private GestorTipos() {
         this.leerArchivo();
@@ -32,52 +27,48 @@ public class GestorTipos implements IGestorTipos {
 
         return gestor;
     }
-    
-        private String leerArchivo(){
+
+    private String leerArchivo() {
         File file = this.obtenerArchivoIdioma();
         if (file != null) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String cadena;
-                while((cadena = br.readLine()) != null) {
+                while ((cadena = br.readLine()) != null) {
                     Tipo a = new Tipo(cadena);
                     this.verTipos().add(a);
                 }
                 Collections.sort(tipos, new ComparatorNombre());
                 return "Se leyo  el archivo correctamente";
-            }
-            catch(NullPointerException | IOException ioe) {
+            } catch (NullPointerException | IOException ioe) {
                 return "No se pudo leer el archivo";
             }
-        }
-        else
+        } else
             return "No se pudo crear el archivo";
     }
 
-    public String escribirArchivo(){
+    public String escribirArchivo() {
         try {
             FileWriter fw = new FileWriter(NOMBRE_ARCHIVO);
-            if(!this.verTipos().isEmpty()){
-                for(Tipo a: this.verTipos()){
+            if (!this.verTipos().isEmpty()) {
+                for (Tipo a : this.verTipos()) {
                     fw.write(a.verNombre());
                     fw.write("\n");
                 }
             }
             fw.close();
             return "Se han guardado todas los tipos con EXITO!";
-        }
-        catch(IOException e1) {
+        } catch (IOException e1) {
             return "ERROR al guardar los datos";
         }
     }
 
-    private File obtenerArchivoIdioma(){
+    private File obtenerArchivoIdioma() {
         File file = new File(NOMBRE_ARCHIVO);
         try {
             if (!file.exists())
                 file.createNewFile();
             return file;
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -103,7 +94,7 @@ public class GestorTipos implements IGestorTipos {
     public Tipo verTipo(String nombre) {
         if ((nombre == null) || (nombre.isEmpty()))
             return null;
-        for(Tipo tipo : this.tipos) {
+        for (Tipo tipo : this.tipos) {
             if (tipo.verNombre().equalsIgnoreCase(nombre.trim()))
                 return tipo;
         }
@@ -114,7 +105,7 @@ public class GestorTipos implements IGestorTipos {
     public String borrarTipo(Tipo tipo) {
         if (!this.existeEsteTipo(tipo))
             return "Este tipo no existe!";
-        IGestorPublicaciones gesPublicaciones= GestorPublicaciones.crear();
+        IGestorPublicaciones gesPublicaciones = GestorPublicaciones.crear();
         if (gesPublicaciones.hayPublicacionesConEsteTipo(tipo))
             return "Hay al menos una publicacion con este tipo!";
         this.tipos.remove(tipo);
@@ -126,7 +117,7 @@ public class GestorTipos implements IGestorTipos {
         List<Tipo> tiposBuscados = new ArrayList<>();
         if (nombre == null)
             return tiposBuscados;
-        for(Tipo tipo : this.tipos) {
+        for (Tipo tipo : this.tipos) {
             if (tipo.verNombre().toLowerCase().contains(nombre.toLowerCase().trim()))
                 tiposBuscados.add(tipo);
         }
@@ -138,8 +129,8 @@ public class GestorTipos implements IGestorTipos {
     public boolean existeEsteTipo(Tipo tipo) {
         if (tipo == null)
             return false;
-       
-        for(Tipo t : this.tipos) {
+
+        for (Tipo t : this.tipos) {
             if (t.equals(tipo))
                 return true;
         }

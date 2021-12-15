@@ -15,13 +15,13 @@ import java.awt.event.WindowEvent;
  */
 public class ControladorLugares implements IControladorLugares {
     private static ControladorLugares instancia;
-    private VentanaLugares ventana;
+    private final VentanaLugares ventana;
 
     private ControladorLugares() {
         this.ventana = new VentanaLugares(this);
     }
 
-    public static ControladorLugares crear(){
+    public static ControladorLugares crear() {
         if (instancia == null)
             instancia = new ControladorLugares();
         return instancia;
@@ -39,36 +39,26 @@ public class ControladorLugares implements IControladorLugares {
         this.ventana.setVisible(false);
     }
 
-    public void actualizarTablaLugares(){
+    public void actualizarTablaLugares() {
         javax.swing.JTable tablaLugares = this.ventana.getTablaLugares();
-        javax.swing.JButton btnBorrarLugar= this.ventana.getBtnEliminar();
+        javax.swing.JButton btnBorrarLugar = this.ventana.getBtnEliminar();
         javax.swing.JButton btnBuscarLugar = this.ventana.getBtnBuscar();
 
         btnBuscarLugar.setEnabled(true);
         tablaLugares.setModel(new ModeloTablaLugares());
 
-        if(tablaLugares.getRowCount() == 0){
-            btnBorrarLugar.setEnabled(false);
-        }
-        else{
-            btnBorrarLugar.setEnabled(true);
-        }
+        btnBorrarLugar.setEnabled(tablaLugares.getRowCount() != 0);
     }
 
-    private void filtrarTablaLugares(String nombreFiltrar){
+    private void filtrarTablaLugares(String nombreFiltrar) {
         javax.swing.JTable tablaLugares = this.ventana.getTablaLugares();
-        javax.swing.JButton btnBorrarLugar= this.ventana.getBtnEliminar();
+        javax.swing.JButton btnBorrarLugar = this.ventana.getBtnEliminar();
         javax.swing.JButton btnBuscarLugar = this.ventana.getBtnBuscar();
 
         tablaLugares.setModel(new ModeloTablaLugares(nombreFiltrar));
         btnBuscarLugar.setEnabled(true);
 
-        if(tablaLugares.getRowCount() == 0){
-            btnBorrarLugar.setEnabled(false);
-        }
-        else{
-            btnBorrarLugar.setEnabled(true);
-        }
+        btnBorrarLugar.setEnabled(tablaLugares.getRowCount() != 0);
     }
 
     @Override
@@ -82,11 +72,11 @@ public class ControladorLugares implements IControladorLugares {
         javax.swing.JTable tablaLugares = this.ventana.getTablaLugares();
         int filaElegida = tablaLugares.getSelectedRow();
 
-        if(filaElegida != -1){
+        if (filaElegida != -1) {
             String[] botones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(ventana, IControladorLugares.CONFIRMACION, "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
 
-            if(respuesta == 0){
+            if (respuesta == 0) {
                 String nombre = tablaLugares.getValueAt(filaElegida, 0).toString();
 
                 GestorLugares gesLugares = GestorLugares.crear();
@@ -95,8 +85,7 @@ public class ControladorLugares implements IControladorLugares {
                 JOptionPane.showMessageDialog(ventana, resultado);
                 this.actualizarTablaLugares();
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningun Lugar");
         }
     }
@@ -106,13 +95,13 @@ public class ControladorLugares implements IControladorLugares {
         String[] botones = {"Si", "No"};
         int respuesta = JOptionPane.showOptionDialog(ventana, "¿Desea guardar los datos y volver a la pantalla de inicio?", "Elija Una Opcion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, botones, botones[0]);
 
-        if(respuesta == 0){
+        if (respuesta == 0) {
             GestorLugares gesLugares = GestorLugares.crear();
             String resultado = gesLugares.escribirArchivo();
 
             JOptionPane.showMessageDialog(ventana, resultado);
 
-            if(resultado.equals("Se han guardado todos los lugares con EXITO!")){
+            if (resultado.equals("Se han guardado todos los lugares con EXITO!")) {
                 this.ocultarVentana();
             }
         }
@@ -136,7 +125,7 @@ public class ControladorLugares implements IControladorLugares {
 
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) {
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             javax.swing.JTextField txtNombre = this.ventana.getTxtNombre();
             javax.swing.JButton btnBuscar = this.ventana.getBtnBuscar();
 

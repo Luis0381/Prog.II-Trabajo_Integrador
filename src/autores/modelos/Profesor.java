@@ -1,10 +1,5 @@
 package autores.modelos;
 
-import grupos.modelos.MiembroEnGrupo;
-
-import java.util.ArrayList;
-import java.util.Objects;
-
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */

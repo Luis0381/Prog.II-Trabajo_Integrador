@@ -4,10 +4,8 @@ import grupos.modelos.Grupo;
 import grupos.modelos.MiembroEnGrupo;
 import grupos.modelos.Rol;
 
-import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
@@ -93,9 +91,9 @@ public abstract class Autor {
      */
     public void quitarGrupo(Grupo grupo) {
         if (grupo != null) {
-            for(MiembroEnGrupo meg : this.miembrosEnGrupo) {
+            for (MiembroEnGrupo meg : this.miembrosEnGrupo) {
                 Grupo g = meg.verGrupo();
-                if(grupo.equals(g)) {
+                if (grupo.equals(g)) {
                     this.miembrosEnGrupo.remove(meg);
                     grupo.quitarMiembro(this);
                     break;
@@ -122,10 +120,7 @@ public abstract class Autor {
     public boolean tieneGrupos() {
         if (this.miembrosEnGrupo == null)
             return false;
-        else if (this.miembrosEnGrupo.isEmpty())
-            return false;
-        else
-            return true;
+        else return !this.miembrosEnGrupo.isEmpty();
     }
 
     // equals() & hashCode()

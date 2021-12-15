@@ -8,7 +8,7 @@ import java.util.List;
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
  */
 public class ModeloTablaPalabrasClaves extends AbstractTableModel {
-    private List<String> nombresColumnas = new ArrayList<>();
+    private final List<String> nombresColumnas = new ArrayList<>();
     private List<PalabraClave> palabrasClaves = new ArrayList<>();
 
     public ModeloTablaPalabrasClaves() {
@@ -50,7 +50,7 @@ public class ModeloTablaPalabrasClaves extends AbstractTableModel {
         return this.nombresColumnas.get(columna);
     }
 
-    public PalabraClave verPalabraClave(int fila){
+    public PalabraClave verPalabraClave(int fila) {
         GestorPalabrasClaves GPC = GestorPalabrasClaves.crear();
 
         return GPC.verPalabraClave(getValueAt(fila, 0).toString());

@@ -7,13 +7,13 @@ package publicaciones.modelos;
 
 import grupos.modelos.MiembroEnGrupo;
 import idiomas.modelos.Idioma;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import lugares.modelos.Lugar;
 import palabrasclaves.modelos.PalabraClave;
 import tipos.modelos.Tipo;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
@@ -24,20 +24,11 @@ public class Publicacion {
     private String enlace;
     private String resumen;
     private List<PalabraClave> palabrasClaves;
-
-    public List<PalabraClave> getPalabrasClaves() {
-        return palabrasClaves;
-    }
-
-    public void setPalabrasClaves(List<PalabraClave> palabrasClaves) {
-        this.palabrasClaves = palabrasClaves;
-    }
     private MiembroEnGrupo autor;
     private Lugar lugarPublicacion;
     private Idioma idiomaPublicacion;
     private Tipo tipoPublicacion;
-
-    protected Publicacion(String titulo, MiembroEnGrupo autor, LocalDate fechaPublicacion,Tipo tipoPublicacion, Idioma idiomaPublicacion,Lugar lugarPublicacion, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
+    protected Publicacion(String titulo, MiembroEnGrupo autor, LocalDate fechaPublicacion, Tipo tipoPublicacion, Idioma idiomaPublicacion, Lugar lugarPublicacion, List<PalabraClave> palabrasClaves, String enlace, String resumen) {
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
         this.enlace = enlace;
@@ -47,6 +38,14 @@ public class Publicacion {
         this.lugarPublicacion = lugarPublicacion;
         this.idiomaPublicacion = idiomaPublicacion;
         this.tipoPublicacion = tipoPublicacion;
+    }
+
+    public List<PalabraClave> getPalabrasClaves() {
+        return palabrasClaves;
+    }
+
+    public void setPalabrasClaves(List<PalabraClave> palabrasClaves) {
+        this.palabrasClaves = palabrasClaves;
     }
 
     public MiembroEnGrupo getAutor() {
@@ -112,28 +111,28 @@ public class Publicacion {
     public void setTipoPublicacion(Tipo tipoPublicacion) {
         this.tipoPublicacion = tipoPublicacion;
     }
-    
-    public void verPalabrasClaves(){
+
+    public void verPalabrasClaves() {
         System.out.println("Palabras Claves");
         System.out.println("---------------");
-        for(PalabraClave pc: palabrasClaves){
+        for (PalabraClave pc : palabrasClaves) {
             System.out.println("\t" + pc.toString());
         }
     }
-    
-    public void mostrar(){
+
+    public void mostrar() {
         System.out.println("Titulo: " + this.titulo);
-        System.out.println("Autor: " + this.autor.verAutor().verApellidos() +", " + this.autor.verAutor().verNombres());
+        System.out.println("Autor: " + this.autor.verAutor().verApellidos() + ", " + this.autor.verAutor().verNombres());
         System.out.println("Grupo: " + this.autor.verAutor().verNombres());
         System.out.println("Rol: " + this.autor.verRol().toString());
-        System.out.println("Fecha de Publicacion: "+ this.fechaPublicacion.getDayOfMonth()+"/"+this.fechaPublicacion.getMonthValue()+"/"+this.fechaPublicacion.getYear());
-        System.out.println("Tipo: "+this.tipoPublicacion.toString());
-        System.out.println("Idioma: "+this.idiomaPublicacion.toString());
-        System.out.println("Lugar: "+this.lugarPublicacion.toString());
+        System.out.println("Fecha de Publicacion: " + this.fechaPublicacion.getDayOfMonth() + "/" + this.fechaPublicacion.getMonthValue() + "/" + this.fechaPublicacion.getYear());
+        System.out.println("Tipo: " + this.tipoPublicacion.toString());
+        System.out.println("Idioma: " + this.idiomaPublicacion.toString());
+        System.out.println("Lugar: " + this.lugarPublicacion.toString());
         verPalabrasClaves();
-        System.out.println("Enlace: "+this.enlace);
-        System.out.println("Enlace: "+this.resumen);
-    }   
+        System.out.println("Enlace: " + this.enlace);
+        System.out.println("Enlace: " + this.resumen);
+    }
 
     @Override
     public int hashCode() {
@@ -154,9 +153,6 @@ public class Publicacion {
             return false;
         }
         final Publicacion other = (Publicacion) obj;
-        if (!Objects.equals(this.titulo, other.titulo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.titulo, other.titulo);
     }
 }

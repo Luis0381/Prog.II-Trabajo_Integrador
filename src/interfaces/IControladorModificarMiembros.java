@@ -7,31 +7,35 @@ package interfaces;
 
 import java.awt.event.ActionEvent;
 
-public interface IControladorModificarMiembros {    
-    public static final String TITULO = "Modificar miembros"; 
-    public static final String CONFIRMACION = "¿Confirma que desea modificar los miembros de este grupo?"; 
-    
+public interface IControladorModificarMiembros {
+    String TITULO = "Modificar miembros";
+    String CONFIRMACION = "¿Confirma que desea modificar los miembros de este grupo?";
+
     /**
-     * Acción a ejecutar cuando se selecciona el botón Todos 
+     * Acción a ejecutar cuando se selecciona el botón Todos
+     *
      * @param evt evento
-     */                        
-    public void btnTodosClic(ActionEvent evt);
-    
+     */
+    void btnTodosClic(ActionEvent evt);
+
     /**
-     * Acción a ejecutar cuando se selecciona el botón Ninguno 
+     * Acción a ejecutar cuando se selecciona el botón Ninguno
+     *
      * @param evt evento
-     */                        
-    public void btnNingunoClic(ActionEvent evt);
-        
+     */
+    void btnNingunoClic(ActionEvent evt);
+
     /**
      * Acción a ejecutar cuando se selecciona el botón Aceptar
+     *
      * @param evt evento
-     */                        
-    public void btnAceptarClic(ActionEvent evt);
+     */
+    void btnAceptarClic(ActionEvent evt);
 
     /**
      * Acción a ejecutar cuando se selecciona el botón Cancelar
+     *
      * @param evt evento
-     */                        
-    public void btnCancelarClic(ActionEvent evt);
+     */
+    void btnCancelarClic(ActionEvent evt);
 }

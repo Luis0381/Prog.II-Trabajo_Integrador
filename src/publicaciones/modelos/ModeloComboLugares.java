@@ -5,11 +5,11 @@
  */
 package publicaciones.modelos;
 
-import javax.swing.DefaultComboBoxModel;
-
 import interfaces.IGestorLugares;
 import lugares.modelos.GestorLugares;
 import lugares.modelos.Lugar;
+
+import javax.swing.*;
 
 /**
  * @author Medina Raed, Luis Eugenio & Mafut, Thomas
